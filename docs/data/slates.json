@@ -1,0 +1,21 @@
+{
+  "defaultSlateId": "2026-thanksgiving",
+  "repoUrl": "https://github.com/TheScottyB/nfl-game-scout",
+  "pagesUrl": "https://thescottyb.github.io/nfl-game-scout/",
+  "slates": [
+    {
+      "id": "2026-thanksgiving",
+      "title": "Thanksgiving 2026 Tripleheader",
+      "subtitle": "Week 12 · Thursday, Nov 26, 2026",
+      "file": "data/2026-thanksgiving.json",
+      "badge": "Active Slate"
+    },
+    {
+      "id": "2026-week11-archive",
+      "title": "Week 11 Primetime Receipts",
+      "subtitle": "SNF Mexico City (35-10 + 71-yd Free Kick) & MNF",
+      "file": "data/2026-week11-archive.json",
+      "badge": "Receipts & Grading"
+    }
+  ]
+}

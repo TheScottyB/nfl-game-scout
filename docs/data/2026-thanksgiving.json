@@ -1,0 +1,616 @@
+{
+  "slateId": "2026-thanksgiving",
+  "title": "Thanksgiving 2026 Tripleheader — Multi-Model Arena",
+  "subtitle": "All 3 Thursday matchups scouted across win scripts, physics, refs, 30-day sentiment, full GM-to-assistant org charts, and freak-play calls.",
+  "season": 2026,
+  "week": "Week 12 (Thanksgiving)",
+  "updatedAtUtc": "2026-11-24T00:32:16Z",
+  "games": [
+    {
+      "id": "bears-at-lions",
+      "label": "Thanksgiving Early · 1:00 PM ET",
+      "away": {
+        "abbr": "CHI",
+        "name": "Chicago Bears",
+        "record": "8-2",
+        "color": "#C83803",
+        "avgAge": 26.4,
+        "qb": "Caleb Williams (~1,700+ pass yds, 10 TDs in 7-8 games after managing early-season right hamstring strain; fully back)",
+        "kicker": {
+          "name": "Cairo Santos",
+          "careerLong": 58,
+          "ceiling": "59-60 yds indoors",
+          "note": "Hit 58-yard career long vs. Washington on Oct 20, 2026."
+        }
+      },
+      "home": {
+        "abbr": "DET",
+        "name": "Detroit Lions",
+        "record": "8-2",
+        "color": "#0076B6",
+        "avgAge": 26.0,
+        "qb": "Jared Goff (~67% comp, 2,700+ pass yds, 20 TDs, 4 INTs through 10 games)",
+        "kicker": {
+          "name": "Jake Bates",
+          "age": 27,
+          "careerLong": 59,
+          "ceiling": "60-61 yds indoors",
+          "note": "Career long 59 yds set Nov 23, 2025; zero indoor wind."
+        }
+      },
+      "kickoffUtc": "2026-11-26T18:00:00Z",
+      "broadcast": "CBS / Paramount+",
+      "venue": {
+        "stadium": "Ford Field",
+        "city": "Detroit, MI",
+        "surface": "Indoor Turf",
+        "elevationFt": 600,
+        "quirk": "Controlled indoor dome fast track; zero weather interference plus high-decibel crowd noise on visiting cadences."
+      },
+      "odds": {
+        "spread": "Bears -2.5",
+        "moneyline": "CHI -135 / DET +115",
+        "total": "55.5"
+      },
+      "weather": {
+        "summary": "Indoor Dome (70°F controlled, 0 mph wind)",
+        "tempF": 70,
+        "wind": "0 mph (Dome)",
+        "precipChance": "0%",
+        "physicsNote": "Fast indoor turf adds ~1-2 yds kicking stability and removes wind/cold variance from a 55.5-total shootout."
+      },
+      "injuries": {
+        "away": [
+          "Caleb Williams managed an early-season right hamstring strain (Week 2) but is fully integrated after Chicago's bye and Week 11 win (21-13 over NO).",
+          "Short-week Thursday practice designations pending Wednesday final report."
+        ],
+        "home": [
+          "Detroit shook off earlier November Germany-trip jet lag with a 31-21 Week 11 win over Tampa Bay.",
+          "Slight roster youth edge (26.0 vs 26.4 avg age) helps short-week recovery."
+        ]
+      },
+      "referee": {
+        "headRef": "Shawn Hochuli",
+        "flagsPerGame": "13.2-14.5 accepted penalties/gm (vs ~12.5 NFL avg)",
+        "yardsPerGame": "110+ yds/gm",
+        "tendencies": [
+          "Strict interior line-of-scrimmage policing: Offensive Holding and False Starts lead crew calls.",
+          "Above-average DPI & illegal contact rate downfield.",
+          "High-leverage late-game whistles; multi-year career Under lean (>55%)."
+        ],
+        "tonightImpact": "In a noisy indoor stadium filled with trick formations and ex-Lions coaches, Hochuli's strict pre-snap & illegal-formation eye is a red-zone landmine."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "Ben Johnson's offensive familiarity with Detroit's defensive core and personnel tendencies gives Chicago immediate early-down play-calling answers.",
+            "Caleb Williams' off-script mobility stretches Kelvin Sheppard's front seven when indoor coverage breaks down.",
+            "8-2 defensive momentum under DC Dennis Allen (held New Orleans to 13 pts in Week 11)."
+          ],
+          "how": [
+            "Protect the snap count against Ford Field noise to avoid Hochuli false starts on 3rd-and-short.",
+            "Force Jared Goff off his spot with Dennis Allen's disguised pressures before WR timing routes develop.",
+            "Win explosive plays cleanly without red-zone formation penalties stalling drives into field goals."
+          ]
+        },
+        "home": {
+          "why": [
+            "Jared Goff is operating at peak efficiency (67% comp, 20 TDs, 4 INTs) inside a zero-wind dome.",
+            "Detroit holds the trench continuity edge behind OL coach/run coordinator Hank Fraley and slight youth advantage (26.0 avg age) on a short week.",
+            "Dan Campbell's home 4th-down aggression turns 50/50 midfield drives into extended TD marches."
+          ],
+          "how": [
+            "Establish early-down rushing balance behind Hank Fraley's OL to keep Chicago's pass rush honest.",
+            "Convert short-yardage 4th downs to keep Caleb Williams off the turf and drain Chicago's defense.",
+            "Capitalize on Hochuli's high DPI rate with vertical shots when Chicago leans too aggressively into press coverage."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 4.0,
+        "homeScore": 4.5,
+        "awayTrajectory": "Surging Contender",
+        "homeTrajectory": "Euphoric Juggernaut",
+        "awayVibe": "National breakout hype around Ben Johnson returning to Detroit with an 8-2 Bears squad; confident locker room shifting from rebuild to NFC North crown contender.",
+        "homeVibe": "Tight, battle-tested locker room riding a 31-21 win over Tampa Bay and perennial NFC powerhouse belief at Ford Field.",
+        "awayBeat": "Beat writers spotlight Ben Johnson, Antwaan Randle El, and J.T. Barrett coming back to Ford Field tied 8-2 atop the division.",
+        "homeBeat": "Detroit discourse treats Thanksgiving at Ford Field as a statement showcase under Dan Campbell & OC Drew Petzing.",
+        "marketSplit": "Heavy public ticket volume on Detroit home chalk/dog value; sharp early money eyeing Chicago -2.5.",
+        "contrarianTakeaway": "Both fanbases sit near euphoric highs (+4.0 vs +4.5); sharp Bears action (+2.5 favorite on the road) signals respect for Ben Johnson's counter-punches against his former building."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Ryan Poles (GM), Jeff King (Asst. GM)",
+            "homeStaff": "Brad Holmes (EVP/GM), Ray Agnew (Asst. GM), Dwayne Joseph (VP), Chris Grier / John Dorsey / Chris Spielman (Advisors)",
+            "edge": "DET",
+            "impact": "Detroit's multi-year trench drafting and seasoned executive bench provide slight depth resilience on a short week."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Ben Johnson (HC), Press Taylor (OC), Dennis Allen (DC), Richard Hightower (STC)",
+            "homeStaff": "Dan Campbell (HC), Drew Petzing (OC), Kelvin Sheppard (DC), Dave Fipp (STC)",
+            "edge": "Even",
+            "impact": "Mastermind student-vs-mentor duel: Johnson + Dennis Allen chess match against Campbell, Drew Petzing, and Kelvin Sheppard."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Antwaan Randle El (AHC/WR), J.T. Barrett (QB), Eric Studesville (RB), Jim Dray (TE), Al Harris (DB/Pass), Jeremy Garrett (DL)",
+            "homeStaff": "Scottie Montgomery (Assoc HC/WR), Jim O'Neil (AHC/S), Mike Kafka (Pass), Hank Fraley (Run/OL), Mark Brunell (QB), Tashard Choice (RB), Steve Oliver (TE), Kacy Rodgers (DL/Run), Deshea Townsend (DB/Pass), Shaun Dion Hamilton (LB)",
+            "edge": "DET",
+            "impact": "Detroit's trench and coordinator-pedigree room (Fraley, Kafka, Kacy Rodgers, Mark Brunell) holds a clear structural experience edge."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Kyle DeVan (Asst OL), Bill Johnson (Sr Def Asst), Matt Giordano (Asst DB), Kevin Koch (Asst LB), Cannon Matthews (Nickels), Anthony Blevins (Asst ST), Will Lawing (Off Analyst), Matt Aponte / Isaiah Ford / Zach Cable (QC)",
+            "homeStaff": "David Shaw (Pass Specialist), Bruce Gradkowski (Asst WR), Dan Skipper & Marques Tuiasosopo (Off Assts), David Corrao (Sr Def Asst/OLB), Jett Modkins (Asst ST), Caleb Collins / August Mangin (Def Assts), Justin Mesa / Dré Thompson (QC)",
+            "edge": "Even",
+            "impact": "Both benches are loaded with specialized trick-play & pass-game analysts—especially former eligible-tackle Dan Skipper now on Detroit's staff."
+          }
+        ],
+        "crossStaffTells": [
+          "Bears HC Ben Johnson, AHC/WR Antwaan Randle El, and QB Coach J.T. Barrett all came directly from Detroit's offensive staff and return to Ford Field tied 8-2.",
+          "Detroit moved legendary eligible-tackle trick-play weapon Dan Skipper onto the offensive coaching staff, guaranteeing heavy-package mind games."
+        ],
+        "hiddenMismatch": "DET Run Game/OL Coach Hank Fraley vs. CHI DL Coach Jeremy Garrett & Sr. Def. Asst. Bill Johnson — if Fraley controls interior fits, Goff stays clean and Campbell dictates tempo."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini",
+          "modelLabel": "Gemini (Antigravity)",
+          "status": "locked",
+          "publishedAtUtc": "2026-11-24T00:32:16Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
+          "winnerAbbr": "DET",
+          "projectedScore": { "away": 27, "home": 30 },
+          "spreadLean": "Lions +2.5",
+          "totalLean": "Over 55.5",
+          "primaryKey": "Hank Fraley's OL winning interior control so Goff stays clean in a zero-wind dome while Campbell steals an extra possession on 4th down.",
+          "refCall": "Shawn Hochuli (13.2-14.5 flags/gm) — strict pre-snap/illegal-formation whistle threatens trick sets and boosts late-game DPI leverage.",
+          "sentimentEdge": "CHI +4.0 vs DET +4.5 — razor-thin euphoria parity; home crowd noise breaks ties on short-week cadence.",
+          "hiddenMismatch": "DET Run Game/OL Hank Fraley vs. CHI DL Jeremy Garrett & Bill Johnson.",
+          "surpriseCall": {
+            "title": "Eligible-Tackle / Non-QB Trick-Play War + Hochuli Reporting Flag Chaos",
+            "detail": "With ex-Lions Ben Johnson & former QB-WR Antwaan Randle El facing Dan Campbell & Offensive Assistant Dan Skipper in a 55.5-total dome game refereed by line-of-scrimmage stickler Shawn Hochuli, expect a Non-QB Touchdown Pass (WR/RB/OL gadget) OR a crucial Hochuli illegal-formation/reporting flag wiping out a red-zone trick play.",
+            "ingredients": [
+              "Ben Johnson, Antwaan Randle El & J.T. Barrett returning to Ford Field vs. Dan Campbell & Dan Skipper",
+              "Zero-wind 55.5-total indoor shootout encouraging red-zone deception",
+              "Shawn Hochuli's strict pre-snap / line-of-scrimmage flag profile"
+            ],
+            "probability": "~14%"
+          },
+          "bonusSleeper": {
+            "title": "Twin 55+ Yard Dome Walk-Up Field Goals Late",
+            "detail": "Cairo Santos (58 career long) and Jake Bates (59 career long) both drill 55+ yard indoor field goals inside the final 4 minutes.",
+            "probability": "~11%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude",
+          "modelLabel": "Claude (Claude Desktop)",
+          "status": "pending",
+          "publishedAtUtc": null,
+          "receiptUrl": null,
+          "winnerAbbr": null,
+          "projectedScore": null,
+          "spreadLean": "Awaiting Claude Desktop run",
+          "totalLean": "Pending",
+          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
+          "refCall": "Pending",
+          "sentimentEdge": "Pending",
+          "hiddenMismatch": "Pending",
+          "surpriseCall": null,
+          "bonusSleeper": null,
+          "grade": null
+        }
+      ],
+      "result": null
+    },
+    {
+      "id": "eagles-at-cowboys",
+      "label": "Thanksgiving Afternoon · 4:30 PM ET",
+      "away": {
+        "abbr": "PHI",
+        "name": "Philadelphia Eagles",
+        "record": "3-7",
+        "color": "#004C54",
+        "avgAge": 26.4,
+        "qb": "Tanner McKee (starting after Jalen Hurts placed on season-ending IR with blood clots in October; 933 pass yds pre-injury)",
+        "kicker": {
+          "name": "Jake Elliott",
+          "careerLong": 61,
+          "ceiling": "62-63 yds indoors",
+          "note": "Career long 61 yds (accomplished twice vs. NYG & MIN)."
+        }
+      },
+      "home": {
+        "abbr": "DAL",
+        "name": "Dallas Cowboys",
+        "record": "5-6",
+        "color": "#041E42",
+        "avgAge": 26.5,
+        "qb": "Dak Prescott (2,724 pass yds, 64.1% comp through 10 games; coming off 5-TD 51-30 win over Tennessee; hand tag but full participant)",
+        "kicker": {
+          "name": "Brandon Aubrey",
+          "age": 31,
+          "careerLong": 65,
+          "ceiling": "67-69 yds indoors",
+          "note": "65-yd career long; zero wind inside AT&T Stadium puts Cam Little's 68-yd NFL record in reach."
+        }
+      },
+      "kickoffUtc": "2026-11-26T21:30:00Z",
+      "broadcast": "FOX / FOX One / Tubi",
+      "venue": {
+        "stadium": "AT&T Stadium",
+        "city": "Arlington, TX",
+        "surface": "Retractable Roof Turf",
+        "elevationFt": 615,
+        "quirk": "Notorious late-November west-wall sunset glare blasts low across the field during Q2/Q3 on 3:30 PM CT Thanksgiving kickoffs."
+      },
+      "odds": {
+        "spread": "Cowboys -8.5",
+        "moneyline": "DAL -450 / PHI +350",
+        "total": "47.5"
+      },
+      "weather": {
+        "summary": "Indoor Climate + Low West Sunset Glare (Q2/Q3)",
+        "tempF": 72,
+        "wind": "0 mph (Indoor)",
+        "precipChance": "0%",
+        "physicsNote": "Zero wind for Brandon Aubrey's 65+ yd range, while low late-afternoon sun beams straight through the west glass onto punt/pass tracking."
+      },
+      "injuries": {
+        "away": [
+          "QB Jalen Hurts OUT for season (blood clots, IR) — Tanner McKee starts.",
+          "CBs Quinyon Mitchell (hamstring) & Jonathan Jones (ankle) missed early-week practice ahead of CeeDee Lamb & George Pickens.",
+          "RB Saquon Barkley leads ground attack (371 rush yds) despite nagging midseason bumps."
+        ],
+        "home": [
+          "QB Dak Prescott (hand) full participant; cleared to start.",
+          "TE Jake Ferguson (knee/ankle), OL Tyler Booker (ankle), LB Jaishawn Barham (hip/groin), LB Dee Winters (knee) held out of Monday walkthrough.",
+          "S P.J. Locke (concussion) & WR Jonathan Mingo (ankle) returned to limited work."
+        ]
+      },
+      "referee": {
+        "headRef": "Adrian Hill",
+        "flagsPerGame": "12.7-13+ accepted penalties/gm (above NFL avg)",
+        "yardsPerGame": "105+ yds/gm",
+        "tendencies": [
+          "Among the highest rates in the NFL for Defensive Pass Interference (DPI) and Offensive Holding.",
+          "Tight enforcement on line-of-scrimmage alignment and false starts.",
+          "Drive-stalling holding calls historically tilt multi-year totals tighter unless DPI hands out free red-zone yards."
+        ],
+        "tonightImpact": "DPI-happy Adrian Hill is worst-case officiating for a banged-up Eagles secondary (Mitchell & Jones hurt) trying to trail CeeDee Lamb and George Pickens."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "Vic Fangio's defense keeps Philadelphia competitive in low-margin grinders (just beat Pittsburgh 19-16).",
+            "Dallas already surrendered 584 yards to SF and stripped DC Christian Parker of play-calling in November (handing calls to Mike Pettine); Saquon Barkley can test Dallas' front.",
+            "Eagles +8.5 attracts sharp contrarian value if Dallas injuries at LB (Barham/Winters) and OL (Booker) soften the middle."
+          ],
+          "how": [
+            "Feed Saquon Barkley behind Chris Kuper's OL to shorten the game and keep Tanner McKee out of 3rd-and-long.",
+            "Have Fangio disguise coverages against Dak Prescott and force a sun-glare or turnover swing for defensive points.",
+            "Avoid downfield grabbing penalties against Adrian Hill's DPI-heavy crew."
+          ]
+        },
+        "home": {
+          "why": [
+            "Massive QB disparity: Dak Prescott (5 TDs last week, 2,724 yds) vs. backup Tanner McKee.",
+            "CeeDee Lamb & George Pickens already helped Dallas beat Philly 38-21 on Oct 26, now facing an injured Eagles CB room under DPI-happy Adrian Hill.",
+            "Brandon Aubrey (65-yd career long) gives Dallas automatic 3 points anywhere past the Philly 47-yard line."
+          ],
+          "how": [
+            "Attack Philly's compromised cornerbacks vertically early with Lamb and Pickens to draw chunk plays or Adrian Hill DPI flags.",
+            "Let Mike Pettine's defense stack the box against Saquon Barkley and dare Tanner McKee to beat man coverage.",
+            "Lean on Aubrey to cash every stalled midfield drive into long-range field goals."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": -2.0,
+        "homeScore": 1.5,
+        "awayTrajectory": "Grinding / Survive-and-Advance",
+        "homeTrajectory": "Volatile Spark",
+        "awayVibe": "Somber after losing Jalen Hurts to season-ending blood clots, yet gritty locker-room pride rallying behind Vic Fangio's defense after edging PIT 19-16.",
+        "homeVibe": "Emotional whiplash: panic peaked after SF dropped 584 yards and Christian Parker lost play-calling, then swung back positive after Prescott's 5-TD 51-30 outburst vs. Tennessee.",
+        "awayBeat": "Philly beat focused on trench grit, McKee game management, and Mitchell/Jones secondary alarm bells.",
+        "homeBeat": "Dallas talk radio buzzing over Mike Pettine's defensive takeover, Prescott's 5-TD surge, and sweeping Philly.",
+        "marketSplit": "Public handle heavy on Dallas (-8.5) after the 51-30 explosion; contrarian sharps eyeballing Eagles +8.5.",
+        "contrarianTakeaway": "Dallas' +1.5 bounce obscures real LB/OL walkthrough absences, making the -8.5 hook vulnerable to a late Fangio defense backdoor if Philly plays clean."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Howie Roseman (EVP/GM), Jon Ferrari & Adam Berry (Asst GMs), Dom DiSandro (Sr Advisor)",
+            "homeStaff": "Jerry Jones (Owner/GM), Stephen Jones (COO/VP), Will McClay (VP Player Personnel)",
+            "edge": "PHI",
+            "impact": "Roseman's roster craftsmanship keeps Philly competitive defensively, though Hurts' season-ending IR stint stretches backup QB depth."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Nick Sirianni (HC), Sean Mannion (OC), Vic Fangio (DC), Michael Clay (STC)",
+            "homeStaff": "Brian Schottenheimer (HC), Klayton Adams (OC), Christian Parker (DC - play-calling stripped), Mike Pettine (Sr Def Asst / Play-caller), Nick Sorensen (STC)",
+            "edge": "Even",
+            "impact": "Vic Fangio's defensive mastery offsets Dallas' coaching shake-up, while Klayton Adams/Schottenheimer match up well with McKee-led Philly offense."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Chris Kuper (OL), Jemal Singleton (RB/AHC), Aaron Moorehead (WR), Parks Frazier (QB), Ryan Mahaffey (Run/TE), Josh Grizzard (Off Pass), Clint Hurtt (AHC/DL), Joe Kasper (Def Pass), Mike Pellegrino (Sec), Roy Anderson (CB), Bobby King (ILB), Jeremiah Washburn (DE/OLB)",
+            "homeStaff": "Ken Dorsey (Pass Specialist), Steve Shimko (QB), Junior Adams (WR), Derrick Foster (RB), Lunda Wells (TE), Conor Riley (OL), Derrick Ansley (Def Pass/DB), Ryan Smith (Sec), Marcus Dixon (DL), Scott Symons (ILB), Chidera Uzo-Diribe (OLB)",
+            "edge": "DAL",
+            "impact": "Ken Dorsey + Junior Adams scheming Lamb & Pickens holds a decisive edge if Roy Anderson's CB room lacks Mitchell and Jones."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Greg Austin (Asst OL), Jerrod Johnson (Sr Off Analyst), Tyler Scudder (Asst LB), Joe Pannunzio (Asst ST), Tyler Brown (ST Asst), Beyah Rasool / Allen Smith (Def Assts), Eric Dickerson / Montgomery VanGorder (Off Assts)",
+            "homeStaff": "Mike Pettine (Play-caller), Brandon Jordan (Pass Rush Consultant), Will Grier (Off Asst), Stephen Bravo-Brown (Asst WR), Jamel Mutunga (Asst RB), Kyle Fuller (Asst OL/QC), Demeitre Brim (Asst DL), Robert Muschamp (Asst Sec), J.J. Clark (Asst LB), Carlos Polk (Asst ST), Ryan Feder (Game Mgmt)",
+            "edge": "DAL",
+            "impact": "Pettine's veteran mid-season defensive rescue + Ryan Feder's game management + Brandon Jordan's pass-rush work give Dallas extra short-week polish."
+          }
+        ],
+        "crossStaffTells": [
+          "Cowboys DC Christian Parker is a direct Vic Fangio protégé from both Denver and Philadelphia (former Eagles Def. Pass Game Coord./DBs) — Fangio publicly defended Parker after his November demotion, and Parker knows Philly's checks cold."
+        ],
+        "hiddenMismatch": "DAL WR Coach Junior Adams & Pass Game Specialist Ken Dorsey vs. PHI CB Coach Roy Anderson & Secondary Coach Mike Pellegrino — an injured Eagles corner room facing Lamb/Pickens under DPI-happy Adrian Hill."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini",
+          "modelLabel": "Gemini (Antigravity)",
+          "status": "locked",
+          "publishedAtUtc": "2026-11-24T00:32:16Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
+          "winnerAbbr": "DAL",
+          "projectedScore": { "away": 20, "home": 31 },
+          "spreadLean": "Cowboys -8.5",
+          "totalLean": "Over 47.5",
+          "primaryKey": "Prescott, Lamb, and Pickens exploiting a banged-up Eagles CB room (Mitchell/Jones) while Tanner McKee struggles to match Dallas' explosive pace.",
+          "refCall": "Adrian Hill (top-tier DPI & holding rate) — forces Philly's recovering CBs to choose between clean separation or drive-extending flags.",
+          "sentimentEdge": "PHI -2.0 vs DAL +1.5 — Dallas riding Prescott's 5-TD bounce-back; Philly fighting hard with defense despite Hurts IR shock.",
+          "hiddenMismatch": "DAL WR Junior Adams & Ken Dorsey vs. PHI CB Roy Anderson & Mike Pellegrino.",
+          "surpriseCall": {
+            "title": "West-Wall 3:30 PM Sun-Glare Turnover + Brandon Aubrey 66-69 Yd NFL-Record-Threat FG",
+            "detail": "Late-November sunset beams directly through AT&T Stadium's west glass wall during Q2/Q3 (triggering a sun-blinded drop or muffed punt), AND Adrian Hill's DPI whistles tee up Brandon Aubrey (65-yd career long, zero wind) for a 66-69 yard field-goal attempt tying or breaking Cam Little's 68-yd NFL record.",
+            "ingredients": [
+              "4:30 PM ET / 3:30 PM CT late-November AT&T Stadium west-wall sun glare angle",
+              "Brandon Aubrey's 65-yard career long in zero-wind indoor conditions",
+              "Adrian Hill's high-DPI officiating speeding up late-half field-goal range"
+            ],
+            "probability": "~9% (Record FG) / ~12% (Sun-glare muff)"
+          },
+          "bonusSleeper": {
+            "title": "Vic Fangio Defense Scores a Non-Offensive TD",
+            "detail": "With Philly down Tanner McKee's upside, Fangio baits Prescott into a pick-six or Mike Pettine chaos allows a scoop-and-score to keep the +8.5 cover sweaty.",
+            "probability": "~11%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude",
+          "modelLabel": "Claude (Claude Desktop)",
+          "status": "pending",
+          "publishedAtUtc": null,
+          "receiptUrl": null,
+          "winnerAbbr": null,
+          "projectedScore": null,
+          "spreadLean": "Awaiting Claude Desktop run",
+          "totalLean": "Pending",
+          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
+          "refCall": "Pending",
+          "sentimentEdge": "Pending",
+          "hiddenMismatch": "Pending",
+          "surpriseCall": null,
+          "bonusSleeper": null,
+          "grade": null
+        }
+      ],
+      "result": null
+    },
+    {
+      "id": "chiefs-at-bills",
+      "label": "Thanksgiving Night · 8:20 PM ET",
+      "away": {
+        "abbr": "KC",
+        "name": "Kansas City Chiefs",
+        "record": "8-2",
+        "color": "#E31837",
+        "avgAge": 25.7,
+        "qb": "Patrick Mahomes (8-2 after 34-7 Week 11 rout of Arizona; newly complemented by top-tier rushing attack led by Kenneth Walker III)",
+        "kicker": {
+          "name": "Harrison Butker",
+          "age": 31,
+          "careerLong": 62,
+          "ceiling": "58-60 yds in 35°F air",
+          "note": "Career long 62 yds was literally set against Buffalo (Oct 16, 2022), though cold damp air shaves ~2-3 yds."
+        }
+      },
+      "home": {
+        "abbr": "BUF",
+        "name": "Buffalo Bills",
+        "record": "9-1",
+        "color": "#00338D",
+        "avgAge": 26.2,
+        "qb": "Josh Allen (9-1 atop AFC East after 26-9 Week 11 win over Miami; battling KC for AFC #1 seed tiebreaker)",
+        "kicker": {
+          "name": "Tyler Bass",
+          "careerLong": 61,
+          "ceiling": "58-59 yds at Highmark",
+          "note": "Career long 61 yds (Nov 3, 2024 vs. Miami); familiar with Orchard Park lake-effect breezes."
+        }
+      },
+      "kickoffUtc": "2026-11-27T01:20:00Z",
+      "broadcast": "NBC / Peacock",
+      "venue": {
+        "stadium": "Highmark Stadium",
+        "city": "Orchard Park, NY",
+        "surface": "Outdoor Turf",
+        "elevationFt": 600,
+        "quirk": "Deafening prime-time cold-weather crowd with AFC #1 seed tiebreaker stakes."
+      },
+      "odds": {
+        "spread": "Bills -2.5 (some books -3)",
+        "moneyline": "BUF -154 / KC +129",
+        "total": "50.5"
+      },
+      "weather": {
+        "summary": "35-38°F, Chance Light Rain/Drizzle, 3-10 mph wind",
+        "tempF": 36,
+        "wind": "3-10 mph",
+        "precipChance": "Light rain/drizzle chance",
+        "physicsNote": "Cold, dense 35°F damp air trims ~2-3 yds from deep field goals and slicks the ball, giving extra value to downhill ground attacks."
+      },
+      "injuries": {
+        "away": [
+          "Chiefs enter Thanksgiving relatively healthy following a 34-7 blowout over Arizona (standard short-week maintenance)."
+        ],
+        "home": [
+          "WR DJ Moore hyperextended left knee vs. Miami, returned to finish, and insists he is ready for Thursday.",
+          "Monitoring CB Christian Benford, TE Dalton Kincaid, and LB Dorian Williams on the compressed Thursday turnaround."
+        ]
+      },
+      "referee": {
+        "headRef": "Alex Kemp",
+        "flagsPerGame": "12.5-12.7 accepted penalties/gm (near NFL avg)",
+        "yardsPerGame": "98-105 yds/gm",
+        "tendencies": [
+          "League-high hotspot for Delay of Game and pre-snap operational clock infractions.",
+          "Lenient on minor downfield Illegal Contact — lets DBs and WRs play physically unless blatant DPI occurs.",
+          "Balanced pacing overall unless crowd noise triggers clock mismanagement."
+        ],
+        "tonightImpact": "Watch the play clock: Kemp's Delay of Game hair-trigger inside loud Orchard Park directly tests KC's road cadence and first-year HC Joe Brady's clock operation."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "KC owns the NFL's 3rd-youngest roster (25.7 avg age vs. 26.2), built to stay fresher on short-week Thursday travel.",
+            "Eric Bieniemy's 2026 return + RB Coach DeMarco Murray + Kenneth Walker III gave KC an explosive rushing engine that stresses Jim Leonhard's lighter front.",
+            "Andy Reid + Steve Spagnuolo + Dave Toub hold massive prime-time situational experience over Buffalo's restructured 2026 staff."
+          ],
+          "how": [
+            "Hammer Kenneth Walker III downhill early in 35°F drizzle to neutralize Highmark crowd volume and set up Mahomes play-action.",
+            "Let Steve Spagnuolo mix late-clock blitz looks to force Josh Allen out of rhythm.",
+            "Manage the 40-second clock crisply to dodge Alex Kemp's signature Delay of Game flags."
+          ]
+        },
+        "home": {
+          "why": [
+            "Josh Allen is playing MVP-caliber dual-threat football for a 9-1 squad chasing the AFC #1 seed tiebreaker at home.",
+            "Alex Kemp lets corners play physical downfield (lenient illegal contact), helping Buffalo's secondary challenge KC receivers.",
+            "Orchard Park crowd noise + cold rain boosts Buffalo's home operational edge if Benford and Kincaid suit up."
+          ],
+          "how": [
+            "Front-seven discipline from Terrance Jamison & John Egorugwu to force KC into predictable 3rd-and-medium passing situations.",
+            "Use Josh Allen's designed runs and quick perimeter touches (if DJ Moore is full-go) to keep Spagnuolo's blitzes off balance.",
+            "Stay clean on play-clock operations under Joe Brady/Pete Carmichael Jr. to steal late-half field position."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 3.5,
+        "homeScore": 4.5,
+        "awayTrajectory": "Poised / Reinvented",
+        "homeTrajectory": "Electric / #1-Seed Fever",
+        "awayVibe": "Quiet, confident swagger as Bieniemy, DeMarco Murray, and Kenneth Walker III transformed KC from pass-only into a physical two-way menace (34-7 rout of ARI).",
+        "homeVibe": "Bills Mafia at fever pitch at 9-1 under newly promoted HC Joe Brady and MVP-pace Josh Allen; eyeing the #1 seed over KC.",
+        "awayBeat": "KC coverage focused on Kenneth Walker III's explosive ground boost and Reid/Spagnuolo short-week mastery.",
+        "homeBeat": "Buffalo buzz centers on DJ Moore's gutsy knee return, Jim Leonhard's run-stopping test, and exorcising KC tiebreaker demons.",
+        "marketSplit": "Heavy two-way public handle on Mahomes/Allen primetime; sharp money balancing Buffalo -2.5 home chalk with KC ground-game dog appeal.",
+        "contrarianTakeaway": "Public loves Buffalo's 9-1 home momentum (+4.5), while KC's #3-youngest roster (25.7) and reinvented ground game give Andy Reid quiet underdog value."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Brett Veach (GM), Chris Shea & Mike Bradway (Asst GMs)",
+            "homeStaff": "Brandon Beane (Pres. of Ops / GM), Terrance Gray (Asst GM)",
+            "edge": "Even",
+            "impact": "Two top-shelf roster builders: Veach rebuilt KC's youth (25.7 avg) & run game with Kenneth Walker III; Beane promoted Brady and added DJ Moore."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Andy Reid (HC), Eric Bieniemy (OC), Steve Spagnuolo (DC), Dave Toub (AHC/STC)",
+            "homeStaff": "Joe Brady (HC), Pete Carmichael Jr. (OC), Jim Leonhard (DC), Jeff Rodgers (STC)",
+            "edge": "KC",
+            "impact": "Hall-of-Fame continuity (Reid/Spagnuolo/Toub + returning Bieniemy) tests first-year HC Joe Brady & new DC Jim Leonhard in a #1-seed pressure cooker."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Joe Bleymaier (Pass), David Girardi (QB), DeMarco Murray (RB), Chad O'Shea (WR), Tom Melvin (TE), Andy Heck (OL), Joe Cullen (DL), Brendan Daly & Matt House (LB), Dave Merritt (DB), Andre Curtis (S)",
+            "homeStaff": "Rob Boras (Run/TE), Bo Hardegree (QB), Drew Terrell (WR), Kelly Skipper (RB), Pat Meyer (OL), Terrance Jamison (DL), Bobby April III (OLB), John Egorugwu (ILB), Jay Valai (CB), Joe Danna (S)",
+            "edge": "KC",
+            "impact": "Andy Heck + DeMarco Murray + Dave Merritt give Kansas City battle-tested teaching edges in cold prime-time trench battles."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Dan Williams (Asst QB), Corey Matthaei (Asst OL), Terry Bradden Jr. (Asst DL), Porter Ellett (Asst ST), Nate Pagan (Off QC), Chris Orr / CJ Cox (Def QC)",
+            "homeStaff": "John Fox (Sr Advisor), Jason Rebrovich (Sr Def Asst), DJ Mangas & Marc Lubick (Pass Specialists), Kyle Shurmur (Asst QB), Austin Gund (Asst OL), Milli Wilson & Trace McSorley (Off Assts), Turner West (Asst ST), Alvin Vaughn / Conor Raad / Craig Robertson (Def QC)",
+            "edge": "Even",
+            "impact": "Buffalo offset Brady's youth by surrounding him with veteran advisor John Fox and clever offensive assistants like Trace McSorley."
+          }
+        ],
+        "crossStaffTells": [
+          "Eric Bieniemy returned to KC as OC in 2026 (after coaching Bears RBs in 2025) alongside new RB coach DeMarco Murray, giving KC unfamiliar downhill run wrinkles against first-year Bills DC Jim Leonhard.",
+          "Bills offensive assistant Trace McSorley and QB coach Bo Hardegree mirror mobile-QB concepts around Josh Allen."
+        ],
+        "hiddenMismatch": "KC RB Coach DeMarco Murray & OL Coach Andy Heck vs. BUF DL Coach Terrance Jamison & ILB Coach John Egorugwu — KC's surging rushing attack vs. Buffalo's revamped front in 35°F damp Orchard Park."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini",
+          "modelLabel": "Gemini (Antigravity)",
+          "status": "locked",
+          "publishedAtUtc": "2026-11-24T00:32:16Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
+          "winnerAbbr": "BUF",
+          "projectedScore": { "away": 24, "home": 27 },
+          "spreadLean": "Bills -2.5",
+          "totalLean": "Over 50.5",
+          "primaryKey": "Josh Allen answering KC's DeMarco Murray/Kenneth Walker III ground attack while physical Bills CBs benefit from Alex Kemp letting hand-fighting breathe.",
+          "refCall": "Alex Kemp (league hotspot for Delay of Game) — clock/cadence errors in loud Orchard Park threaten both offenses late.",
+          "sentimentEdge": "KC +3.5 vs BUF +4.5 — Buffalo #1-seed fever at Highmark vs. poised, youthful (25.7 avg) Chiefs.",
+          "hiddenMismatch": "KC RB DeMarco Murray & OL Andy Heck vs. BUF DL Terrance Jamison & ILB John Egorugwu.",
+          "surpriseCall": {
+            "title": "Alex Kemp Play-Clock Chaos + Cold-Weather 55+ Yard Kick Drama (Reverse 13 Seconds)",
+            "detail": "Alex Kemp's crew leads the league in strict Delay of Game / operational clock infractions inside a roaring 35°F damp Highmark Stadium with first-year HC Joe Brady managing endgame tempo vs. Andy Reid — look for a 4th-quarter Delay of Game or forced timeout that stretches a game-deciding kick into a heavy-air 55+ yard drama (Butker or Bass, maybe off an upright!).",
+            "ingredients": [
+              "Alex Kemp's league-high Delay of Game & operational clock enforcement",
+              "35-38°F damp Orchard Park heavy air trimming ~2-3 yds off 60+ yd kickers (Butker/Bass)",
+              "First-year HC Joe Brady vs. Andy Reid in an AFC #1-seed tiebreaker thriller"
+            ],
+            "probability": "~10%"
+          },
+          "bonusSleeper": {
+            "title": "KC Heavy-Set Kenneth Walker III / Mahomes Red-Zone Pitch-Pass Trick TD",
+            "detail": "KC exploits Jim Leonhard's aggressive run-fit pursuit off heavy personnel with a red-zone shovel or pitch trick touchdown.",
+            "probability": "~9%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude",
+          "modelLabel": "Claude (Claude Desktop)",
+          "status": "pending",
+          "publishedAtUtc": null,
+          "receiptUrl": null,
+          "winnerAbbr": null,
+          "projectedScore": null,
+          "spreadLean": "Awaiting Claude Desktop run",
+          "totalLean": "Pending",
+          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
+          "refCall": "Pending",
+          "sentimentEdge": "Pending",
+          "hiddenMismatch": "Pending",
+          "surpriseCall": null,
+          "bonusSleeper": null,
+          "grade": null
+        }
+      ],
+      "result": null
+    }
+  ]
+}

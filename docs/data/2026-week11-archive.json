@@ -1,0 +1,370 @@
+{
+  "slateId": "2026-week11-archive",
+  "title": "Week 11 Primetime Receipts & Grading",
+  "subtitle": "Origin slate that sparked NFL Game Scout: SNF Mexico City (35-10 + 71-yard Fair-Catch Free Kick!) and MNF Bengals at Commanders.",
+  "season": 2026,
+  "week": "Week 11 (SNF & MNF)",
+  "updatedAtUtc": "2026-11-24T00:32:16Z",
+  "games": [
+    {
+      "id": "vikings-at-49ers-mexico",
+      "label": "Week 11 SNF · Mexico City Receipt",
+      "away": {
+        "abbr": "MIN",
+        "name": "Minnesota Vikings",
+        "record": "7-2 (pregame)",
+        "color": "#4F2683",
+        "avgAge": 26.6,
+        "qb": "Kirk Cousins (2nd start back in Minnesota after deadline trade; Kyler Murray out w/ hamstring)",
+        "kicker": {
+          "name": "Will Reichard",
+          "careerLong": 62,
+          "ceiling": "68-70 yds at Mexico City altitude",
+          "note": "Attempted a 71-yard fair-catch free kick at 0:03 Q2 that traveled dead center and fell 1 yard short."
+        }
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco 49ers",
+        "record": "8-1 (pregame)",
+        "color": "#AA0000",
+        "avgAge": 26.9,
+        "qb": "Brock Purdy (10/12, 166 yds, 3 TDs, 158.3 RTG in 1st half alone)",
+        "kicker": {
+          "name": "Eddy Piñeiro",
+          "careerLong": 59,
+          "ceiling": "64-66 yds at Mexico City altitude",
+          "note": "Converted all 5 PATs in 35-10 win."
+        }
+      },
+      "kickoffUtc": "2026-11-23T01:20:00Z",
+      "broadcast": "NBC / Peacock",
+      "venue": {
+        "stadium": "Estadio Banorte (Estadio Azteca)",
+        "city": "Mexico City, Mexico",
+        "surface": "Grass",
+        "elevationFt": 7350,
+        "quirk": "7,350+ ft elevation adds +6-8 yds kicking carry and taxes recovery between snaps; SF acclimated all week in Colorado Springs while MIN stayed in a custom facility chamber."
+      },
+      "odds": {
+        "spread": "49ers -3.5",
+        "moneyline": "SF -174 / MIN +146",
+        "total": "46.5"
+      },
+      "weather": {
+        "summary": "58-62°F, Partly Cloudy, 1-3 mph calm wind",
+        "tempF": 60,
+        "wind": "1-3 mph",
+        "precipChance": "Slight drizzle risk",
+        "physicsNote": "Calm wind + thin 7,350-ft air unlocked 70-yard field-goal carry."
+      },
+      "injuries": {
+        "away": [
+          "QB Kyler Murray (hamstring), WR Jordan Addison (thumb), CB Isaiah Rodgers (quad), S Jay Ward (knee) all INACTIVE; S Theo Jackson injured in Q2."
+        ],
+        "home": [
+          "LB Dre Greenlaw (neck) INACTIVE; WR Mike Evans (Achilles) & WR Deebo Samuel ACTIVE."
+        ]
+      },
+      "referee": {
+        "headRef": "Alex Moore (#124)",
+        "flagsPerGame": "16.7 accepted penalties/gm (141 yds/gm; +4.3 vs NFL avg)",
+        "yardsPerGame": "141 yds/gm",
+        "tendencies": [
+          "Strict rule-enforcer on offensive/defensive holding, false starts, and roughing the passer.",
+          "Swallows whistle slightly in final 2 minutes."
+        ],
+        "tonightImpact": "Flags spiked in late Q2 (16-yd Purdy intentional grounding + SF holding wiping out 47-yd punt return), directly creating the 71-yd fair-catch free-kick window."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "Brian Flores' #1 scoring defense (14.0 PPG) forcing Purdy into turnovers.",
+            "Kirk Cousins rekindling Justin Jefferson targets without Dre Greenlaw in the middle."
+          ],
+          "how": [
+            "Keep score under 20, control clock with Aaron Jones & Jordan Mason, avoid 3rd-and-long vs Bosa/Buckner."
+          ]
+        },
+        "home": {
+          "why": [
+            "Mike Evans & Deebo Samuel returning alongside George Kittle & CMC vs. Minnesota's depleted DBs (Rodgers & Ward out).",
+            "Raheem Morris defense with Fred Warner, Nick Bosa, DeForest Buckner shutting down one-dimensional Addison-less offense."
+          ],
+          "how": [
+            "Strike early through Evans & Kittle, force Minnesota behind by two scores, pin ears back on Cousins."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 3.0,
+        "homeScore": 4.0,
+        "awayTrajectory": "Resurgent Trade Buzz",
+        "homeTrajectory": "Rolling Powerhouse",
+        "awayVibe": "Optimism around Kirk Cousins' deadline return & 30-10 win over GB.",
+        "homeVibe": "Confidence after 584-yard shootout win over Dallas and Colorado Springs camp cohesion.",
+        "awayBeat": "72% public spread tickets on MIN +3.5; altitude fly-in/fly-out strategy debated.",
+        "homeBeat": "Sharp 56% handle on SF -3.5; Evans return hyped.",
+        "marketSplit": "Public liked MIN +3.5 (72% tickets); sharp money backed SF -3.5 (56% handle).",
+        "contrarianTakeaway": "Sharp handle beat public tickets easily as SF cruised 35-10."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Minnesota Vikings Front Office",
+            "homeStaff": "John Lynch (SF GM)",
+            "edge": "SF",
+            "impact": "DeForest Buckner midseason addition & Evans/Deebo depth overwhelmed MIN's depleted DB room."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Kevin O'Connell (HC), Brian Flores (DC)",
+            "homeStaff": "Kyle Shanahan (HC), Klay Kubiak (OC), Raheem Morris (DC)",
+            "edge": "SF",
+            "impact": "Shanahan dismantled Flores' missing-DB secondary early before Raheem Morris closed the door."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Vikings Position Staff",
+            "homeStaff": "49ers Offensive/Defensive Position Staff",
+            "edge": "SF",
+            "impact": "SF passing weapons dominated Minnesota's backup defensive backs."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Vikings Sports Science / Assistants",
+            "homeStaff": "49ers Assistants / Acclimation Staff",
+            "edge": "SF",
+            "impact": "SF's Colorado Springs week paid off as their older core (26.9 avg) pulled away 35-10."
+          }
+        ],
+        "crossStaffTells": [
+          "Kirk Cousins had literally just faced SF's defense weeks earlier as Las Vegas Raiders QB."
+        ],
+        "hiddenMismatch": "49ers pass catchers & medical return staff (Evans/Kittle) vs. Vikings DB room missing Rodgers, Ward, and Q2-injured Theo Jackson."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini",
+          "modelLabel": "Gemini (Antigravity)",
+          "status": "graded",
+          "publishedAtUtc": "2026-11-23T01:07:00Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/blob/main/README.md",
+          "winnerAbbr": "SF",
+          "projectedScore": { "away": 10, "home": 35 },
+          "spreadLean": "49ers -3.5 (Halftime 35-10 call)",
+          "totalLean": "Under 46.5 (final 45 pts)",
+          "primaryKey": "Evans & Kittle shredding Minnesota's missing DBs while SF's pass rush forces Cousins into negative plays.",
+          "refCall": "Alex Moore (16.7 flags/gm) — Q2 flags flipped field position and created the 0:03 free-kick chance.",
+          "sentimentEdge": "Sharp handle on SF -3.5 vs public MIN tickets.",
+          "hiddenMismatch": "SF returning WRs vs. MIN backup secondary.",
+          "surpriseCall": {
+            "title": "68-70 Yard Mexico City Record Threat / Fair-Catch Free Kick",
+            "detail": "Pegged Will Reichard's exact Mexico City ceiling at 68-70 yds AND explicitly named the rare fair-catch free kick rule before Q2 ended — Reichard then attempted a 71-yard fair-catch free kick at 0:03 Q2 that missed 1 yard short of the crossbar, dead center.",
+            "ingredients": [
+              "7,350-ft Mexico City thin air (+6 to +8 yds carry)",
+              "Will Reichard 62-yd career long -> 68-70 yd ceiling",
+              "Fair-catch free-kick rule mechanic before halftime"
+            ],
+            "probability": "~2%"
+          },
+          "bonusSleeper": null,
+          "grade": {
+            "total": 91,
+            "max": 100,
+            "breakdown": {
+              "winner": 20,
+              "scoreMargin": 18,
+              "spreadTotal": 15,
+              "winScriptRef": 14,
+              "orgSentiment": 12,
+              "surpriseBonus": 12
+            },
+            "notes": "Hit SF -3.5, Under 46.5 (35-10 = 45), called 35-10 script at halftime, AND nailed the 68-70 yd carry ceiling + fair-catch free-kick mechanic right before Reichard's 71-yd attempt landed 1 yd short."
+          }
+        }
+      ],
+      "result": {
+        "finalScore": { "away": 10, "home": 35 },
+        "winnerAbbr": "SF",
+        "summary": "49ers dominated 35-10 (covering -3.5; total 45 landed Under 46.5).",
+        "freakPlayOutcome": "At 0:03 Q2, after a Purdy intentional grounding pushed SF back, MIN called a fair catch at its 39 and Will Reichard kicked a 71-yard fair-catch free kick that sailed dead straight and fell 1 yard short of the crossbar."
+      }
+    },
+    {
+      "id": "bengals-at-commanders-mnf",
+      "label": "Week 11 MNF · Live / Pending Grade",
+      "away": {
+        "abbr": "CIN",
+        "name": "Cincinnati Bengals",
+        "record": "7-2",
+        "color": "#FB4F14",
+        "avgAge": 26.5,
+        "qb": "Joe Burrow (74.7% comp, 2,795 yds, 27 TDs, 6 INTs, 117.7 RTG through 9 games)",
+        "kicker": {
+          "name": "Evan McPherson",
+          "careerLong": 59,
+          "ceiling": "59-60 yds",
+          "note": "AFC Special Teams Player of the Month form."
+        }
+      },
+      "home": {
+        "abbr": "WAS",
+        "name": "Washington Commanders",
+        "record": "3-5-1",
+        "color": "#5A1414",
+        "avgAge": 26.7,
+        "qb": "Jayden Daniels (~1,499 pass yds, 10 TDs, 2 INTs + team-high 280 rush yds; probable elbow)",
+        "kicker": {
+          "name": "Washington K / P Tress Way",
+          "careerLong": 55,
+          "ceiling": "Punter Tress Way in likely final 13th NFL season",
+          "note": "Way had 0 punts in the famous 2024 MNF 38-33 game."
+        }
+      },
+      "kickoffUtc": "2026-11-24T01:15:00Z",
+      "broadcast": "ESPN",
+      "venue": {
+        "stadium": "Northwest Stadium",
+        "city": "Landover, MD",
+        "surface": "Outdoor Grass",
+        "elevationFt": 200,
+        "quirk": "Rematch of the famous Sept 2024 MNF game (38-33 WAS) featuring 0 punts and 0 turnovers."
+      },
+      "odds": {
+        "spread": "Bengals -6.5",
+        "moneyline": "CIN -280 / WAS +230",
+        "total": "54.0"
+      },
+      "weather": {
+        "summary": "56°F dropping to low 50s, 9 mph NW wind, dry by 9 PM ET",
+        "tempF": 56,
+        "wind": "9 mph NW",
+        "precipChance": "15% at kickoff -> 0%",
+        "physicsNote": "Clean shootout weather."
+      },
+      "injuries": {
+        "away": [
+          "INACTIVE: S Kyle Dugger (quad), G Dalton Risner (knee), OT Myles Hinton, TE Cam Grandy, DT Landon Robinson. (S Dax Hill & LG Dylan Fairchild ACTIVE.)"
+        ],
+        "home": [
+          "INACTIVE: CB Amik Robertson (ankle, late warmup scratch); LT Laremy Tunsil (triceps) & WR Terry McLaurin (IR) out. (RBs Jacory Croskey-Merritt & Rachaad White ACTIVE.)"
+        ]
+      },
+      "referee": {
+        "headRef": "Bill Vinovich",
+        "flagsPerGame": "11.1-11.4 penalties/gm (low-flag crew)",
+        "yardsPerGame": "~90 yds/gm",
+        "tendencies": [
+          "Famously swallows whistle on offensive holding; lets DBs hand-fight downfield.",
+          "False starts & neutral zone infractions take a larger share of calls; fast pace leans Under ~55%."
+        ],
+        "tonightImpact": "Low offensive-holding rate is huge help for Washington's backup LT replacing Laremy Tunsil."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "Joe Burrow (310.6 team pass yds/gm, #1 NFL) vs. #24 WAS defense missing CB Amik Robertson.",
+            "Al Golden & Sean Desai pass rush attacking Tunsil-less Washington edge."
+          ],
+          "how": [
+            "Attack outside coverage early with Chase & Higgins, build two-score lead, force McLaurin-less Washington to drop back 40+ times."
+          ]
+        },
+        "home": {
+          "why": [
+            "Jayden Daniels' legs & ball security (2 INTs) vs CIN defense allowing 340+ yds/gm.",
+            "Bengals #30 rushing attack (84.8 yds/gm) + Daronte Jones coaching under Zac Taylor in 2019."
+          ],
+          "how": [
+            "Control clock via Daniels & Anthony Lynn's RBs, steal possessions on 4th downs, lean on Vinovich holding leeway."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 3.5,
+        "homeScore": -1.5,
+        "awayTrajectory": "Surging on Field / Annoyed at FO",
+        "homeTrajectory": "Volatile / Hot Seat",
+        "awayVibe": "Burrow MVP hype & Chase locker-room spark offset by rescinded Arnold Ebiketie trade deadline blunder.",
+        "homeVibe": "Players rallied behind Dan Quinn after Giants win despite intense hot-seat chatter.",
+        "awayBeat": "80%+ / 95% ML handle backing red-hot Bengals.",
+        "homeBeat": "Local radio questioning clock management & injuries.",
+        "marketSplit": "95% ML handle on CIN; small sharp nibbles on WAS +6.5.",
+        "contrarianTakeaway": "Massive Bengals public chalk vs. backs-against-the-wall home dog."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Duke Tobin (Dir. Player Personnel)",
+            "homeStaff": "Adam Peters (GM)",
+            "edge": "Even",
+            "impact": "Tobin kept elite core intact despite aborted Ebiketie deal; Peters' depth stressed by Tunsil/McLaurin/Robertson losses."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Zac Taylor (HC), Dan Pitcher (OC), Al Golden (DC), Darrin Simmons (AHC/STC)",
+            "homeStaff": "Dan Quinn (HC), David Blough (OC), Daronte Jones (DC), Larry Izzo (STC)",
+            "edge": "CIN",
+            "impact": "Veteran DC Al Golden vs. young OC David Blough minus Tunsil/McLaurin."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Brad Kragthorpe (QB), Troy Walters (WR), Justin Rascati (Pass), Scott Peters (OL), Jerry Montgomery (DL), Michael Hodges (LB), Charles Burks (CB), Jordan Kovacs (S)",
+            "homeStaff": "D.J. Williams (QB), Bobby Engram (WR), David Raih (Pass), Anthony Lynn (RB), Darnell Stapleton (OL), Eric Henderson (DL), Ken Norton Jr. (LB), John Pagano (OLB), William Gay (CB), Tom Donatell (S)",
+            "edge": "CIN",
+            "impact": "Walters/Rascati/Kragthorpe vs. Gay/Donatell minus Amik Robertson."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Sean Desai (Sr Def Asst), Michael McCarthy (Asst OL), Mike Moon (Asst DL), Davis Koetter (Asst WR), Jordan Salkin (Asst QB), Ronnie Regula (Asst LB), Ben Jacobs (Asst ST)",
+            "homeStaff": "Wes Welker & Nick Charlton (Off Assts), Darryl Tapp (Asst DL), Shane Toub (Asst OL), Danny Etling (Asst QB), Andre Coleman (Asst WR), Jesse Madden (Asst RB), George Banko (Asst LB), Brian Schneider (Asst STC), Brian Stoldt & Luke Johnson (QC)",
+            "edge": "WAS",
+            "impact": "Deep veteran assistant bench (Welker, Tapp, Schneider, Pagano) gives Quinn trick/special-teams options."
+          }
+        ],
+        "crossStaffTells": [
+          "Commanders DC Daronte Jones coached CBs under Zac Taylor in Cincinnati (2019).",
+          "Commanders DL coach Eric Henderson came from Sean McVay's Rams tree immediately after Taylor left LA in Feb 2019."
+        ],
+        "hiddenMismatch": "WAS DL Coach Eric Henderson & Asst. DL Darryl Tapp vs. CIN OL Coach Scott Peters & Asst. OL Michael McCarthy (with Bengals G Dalton Risner inactive)."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini",
+          "modelLabel": "Gemini (Antigravity)",
+          "status": "locked",
+          "publishedAtUtc": "2026-11-24T00:12:00Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week11-archive.json",
+          "winnerAbbr": "CIN",
+          "projectedScore": { "away": 31, "home": 24 },
+          "spreadLean": "Bengals -6.5",
+          "totalLean": "Over 54.0",
+          "primaryKey": "Burrow targeting a depleted Washington CB room missing Amik Robertson.",
+          "refCall": "Bill Vinovich (11.1-11.4 flags/gm) — low holding rate shields Washington's backup LT.",
+          "sentimentEdge": "CIN +3.5 vs WAS -1.5 — heavy 95% ML chalk vs Dan Quinn hot-seat desperation.",
+          "hiddenMismatch": "WAS DL Eric Henderson & Darryl Tapp vs. CIN OL Scott Peters & Michael McCarthy (Risner OUT).",
+          "surpriseCall": {
+            "title": "Tress Way Farewell Fake-Punt Pass (or Fake-FG Throw)",
+            "detail": "In the rematch of the 2024 zero-punt game, retiring 13th-year punter Tress Way executes a 4th-down fake-punt throw for Dan Quinn to steal a possession against Joe Burrow with Vinovich swallowing his whistle on borderline blocking.",
+            "ingredients": [
+              "Rematch of historic 2024 0-punt, 0-turnover MNF shootout",
+              "Tress Way playing in his likely final 13th NFL season",
+              "Dan Quinn +6.5 home underdog desperation vs 31+ PPG Bengals"
+            ],
+            "probability": "~7%"
+          },
+          "bonusSleeper": {
+            "title": "Defensive 2-Point Conversion Return ('Pick-Two')",
+            "detail": "Late 54-point shootout 2-point try gets picked/scooped and returned the other way for a 3-point swing.",
+            "probability": "~3%"
+          },
+          "grade": null
+        }
+      ],
+      "result": null
+    }
+  ]
+}

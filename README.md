@@ -1,14 +1,15 @@
 # NFL Game Scout
 
-A cross-platform **Agent Plugin & Skill** for **Google Antigravity**, **Claude Desktop**, **Claude Code**, and any model/harness supporting the open `SKILL.md` format.
+A cross-platform **Agent Plugin & Skill** + **Multi-Model Arena Dashboard** + **YouTube Shorts Video Generator** for **Google Antigravity**, **Claude Desktop**, **Claude Code**, and any model supporting the open `SKILL.md` format.
 
-Built to run deep, current-season NFL game scouting dossiers — and designed specifically so you can run the **exact same scouting protocol across different AI models** (Gemini, Claude, GPT, etc.) and score their predictions side-by-side after the final whistle.
+* **Live Pre-Kickoff Receipts & Arena:** https://thescottyb.github.io/nfl-game-scout/
+* **Public GitHub Repo:** https://github.com/TheScottyB/nfl-game-scout
 
 > **Origin story:** Born during Week 11 SNF in Mexico City (Vikings vs. 49ers, Nov 22, 2026), where this workflow predicted a 35–10 game script *and* pegged Will Reichard's thin-air ceiling at 68–70 yards while calling out the rare fair-catch free kick rule — right before Reichard lined up a **71-yard fair-catch free kick** at `0:03` of Q2 that flew dead center and came up **1 yard short of the crossbar**.
 
 ---
 
-## What It Does (7 Modules + Live Mode)
+## What It Does (7 Modules + Live Mode + Shorts + Pages)
 
 1. **Matchup Snapshot & Dual Win Scripts ("How & Why"):** Live-verified records, spreads/totals, official inactives, and separate *Structural Edge (Why)* + *Winning Game Script (How)* blueprints for both teams.
 2. **Weather, Venue & Altitude Physics:** Stadium forecast, wind/surface impact, elevation carry math (Denver/Mexico City kicking ranges), and team travel/acclimation prep.
@@ -16,8 +17,8 @@ Built to run deep, current-season NFL game scouting dossiers — and designed sp
 4. **Officiating Crew Scouting Report:** Assigned head referee & full crew, accepted penalties/game vs. NFL average, holding/DPI/RTP/false-start tendencies, and late-game whistle profile.
 5. **Last-30-Day Social Media & Locker-Room Sentiment:** 30-day sentiment score (`-5` to `+5`), trajectory label, public player/team social tone, beat-writer pulse, and public vs. sharp money divergence.
 6. **Full Org-Chart Matchup (GM → Assistant Position Coaches):** 4-tier breakdown covering General Managers, Head Coach & Coordinators, Position Coaches (unit vs. unit), and Assistant Position Coaches / Quality Control + cross-staff coaching-tree tells.
-7. **The "Crazy Surprise Story" (Freak-Play Prediction):** One headline rare-rule or freak-play prediction (fair-catch free kick, fake-punt pass, pick-two, record FG, zero-punt shootout, etc.) grounded in 3+ verified ingredients from the game, plus a realistic probability estimate.
-8. **Live In-Game Check-In Mode & Multi-Model Arena Scorecard:** Mid-game Q1/Halftime/Q3/Q4 box-score refreshes and a standardized 100-point grading rubric for comparing models.
+7. **The "Crazy Surprise Story" (Freak-Play Prediction):** One headline rare-rule or freak-play prediction grounded in 3+ verified ingredients from the game, plus a realistic probability estimate.
+8. **GitHub Pages Arena & Automated 9:16 YouTube Shorts:** Commit pre-kickoff predictions to `docs/data/`, publish verified receipts to GitHub Pages, and render 1080×1920 vertical Shorts with `scripts/render_shorts.py`.
 
 ---
 
@@ -43,10 +44,9 @@ The plugin activates automatically on your next turn.
    ./scripts/pack-claude-skill.sh
    ```
 2. Open **Claude Desktop** → **Settings → Capabilities** and confirm **Code execution and file creation** is **ON** (plus **Web search** enabled for live NFL lookups).
-3. Go to **Customize → Skills → `+` → Upload a skill** and select `dist/nfl-game-scout.zip`.
-4. Toggle **nfl-game-scout** **ON**.
+3. Go to **Customize → Skills → `+` → Upload a skill**, select `dist/nfl-game-scout.zip`, and toggle **nfl-game-scout** **ON**.
 
-### Option B — Claude Code / Claude Desktop Plugin Marketplace
+### Option B — Claude Code / Desktop Plugin Marketplace
 Install directly from GitHub or your local clone:
 
 ```bash
@@ -56,13 +56,21 @@ claude plugin install nfl-game-scout@nfl-game-scout
 
 ---
 
-## Running a Multi-Model Arena Comparison
+## Running Multi-Model Arena & Rendering YouTube Shorts
 
-Give the exact same prompt to two or more models with the `nfl-game-scout` skill loaded:
+```bash
+# 1. Print ready-to-paste prompt for Claude Desktop / GPT
+python3 scripts/arena_cli.py prompt --slate 2026-thanksgiving
 
-> *"Use nfl-game-scout to run a full pregame scouting dossier on tonight's NFL game, including the 30-day social media sentiment, full GM-to-assistant-position-coach matchup, ref crew, crazy surprise call, and Model Arena Scorecard."*
+# 2. Ingest another model's JSON predictions into the Arena
+python3 scripts/arena_cli.py ingest --slate 2026-thanksgiving --file claude_predictions.json
 
-Every model outputs the same compact **Model Arena Scorecard** at the bottom so you can track and grade them out of 100 points after the final whistle (see [`skills/nfl-game-scout/references/model-arena-template.md`](./skills/nfl-game-scout/references/model-arena-template.md)).
+# 3. Validate all Arena slates
+python3 scripts/arena_cli.py validate
+
+# 4. Render 1080x1920 YouTube Shorts + upload kit locally (macOS Chrome + say + ffmpeg)
+python3 scripts/render_shorts.py --data docs/data/2026-thanksgiving.json --out-dir shorts/output --all --supercut
+```
 
 ---
 
@@ -70,25 +78,23 @@ Every model outputs the same compact **Model Arena Scorecard** at the bottom so 
 
 ```text
 nfl-game-scout/
-├── plugin.json                                     # Antigravity plugin manifest
-├── .claude-plugin/
-│   ├── plugin.json                                 # Claude Code / Desktop plugin manifest
-│   └── marketplace.json                            # Claude plugin marketplace entry
-├── assets/
-│   └── logo.svg                                    # High-contrast plugin icon
-├── skills/
-│   └── nfl-game-scout/
-│       ├── SKILL.md                                # Core cross-platform skill instructions
-│       └── references/
-│           ├── org-chart-matchup.md                # 4-tier GM → Asst. Position Coach guide
-│           ├── sentiment-30d.md                    # 30-day social & locker-room sentiment rubric
-│           ├── freak-play-catalog.md               # Grounded crazy-surprise-play catalog
-│           └── model-arena-template.md             # Standardized scorecard & 100-pt grading rubric
+├── docs/                                           # GitHub Pages Arena Dashboard
+│   ├── index.html
+│   ├── styles.css
+│   ├── app.js
+│   ├── favicon.svg
+│   └── data/
+│       ├── slates.json
+│       ├── 2026-thanksgiving.json                  # Active Thanksgiving 3-game slate
+│       └── 2026-week11-archive.json                # SNF Mexico City (91/100) + MNF receipts
 ├── scripts/
+│   ├── arena_cli.py                                # Validate slates, generate prompts, ingest models
+│   ├── render_shorts.py                            # 1080x1920 vertical YouTube Shorts renderer
 │   └── pack-claude-skill.sh                        # Builds dist/nfl-game-scout.zip for Claude Desktop
-├── install.sh                                      # Symlinks plugin into Antigravity
-└── tests/
-    └── test_plugin_structure.py                    # Validates manifests, SKILL.md, refs, and ZIP layout
+├── shorts/
+│   └── YOUTUBE_UPLOAD_KIT.md                       # Generated titles, descriptions & pinned comments
+├── skills/nfl-game-scout/                          # Core cross-platform skill + 4 reference guides
+└── tests/                                          # Stdlib unittest verification suite
 ```
 
 ## Running Tests

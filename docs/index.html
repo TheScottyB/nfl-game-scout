@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const savedScheme = localStorage.getItem("color-scheme");
+      if (savedScheme === "light" || savedScheme === "dark") {
+        document.querySelector('meta[name="color-scheme"]').content = savedScheme;
+      }
+    } catch {}
+  </script>
+  <title>NFL Game Scout — Multi-Model Arena &amp; Pre-Kickoff Receipts</title>
+  <meta name="description" content="Side-by-side AI NFL game scouting arena (Gemini, Claude, and more): win scripts, weather/altitude physics, officiating crews, 30-day sentiment, GM-to-assistant org-chart matchups, and timestamped freak-play predictions.">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to Arena content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="./favicon.svg" alt="" width="40" height="40" class="brand-logo">
+        <div>
+          <p class="eyebrow">Public Pre-Kickoff Receipts · Multi-Model NFL Arena</p>
+          <h1>NFL Game Scout</h1>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a class="repo-pill" href="https://github.com/TheScottyB/nfl-game-scout" target="_blank" rel="noopener noreferrer">
+          GitHub Repo &amp; Skill
+        </a>
+        <button type="button" id="copy-prompt-btn" class="action-btn">
+          Copy Claude / GPT Prompt
+        </button>
+        <button type="button" id="theme-toggle-btn" class="theme-toggle-btn">
+          <span class="theme-option-to-light">☀ Light theme</span>
+          <span class="theme-option-to-dark">☾ Dark theme</span>
+        </button>
+      </div>
+    </div>
+
+    <p id="status-live" class="status-live" role="status" aria-live="polite"></p>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="hero-banner" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <h2 id="hero-heading">Timestamped Before Kickoff. Graded Out of 100 After Final.</h2>
+        <p id="hero-subtitle">
+          Every game runs the exact same 7-module scouting protocol: Dual Win Scripts, Weather &amp; Kicking Physics,
+          Roster Age, Referee Crew Tendencies, 30-Day Sentiment, Full GM-to-Assistant Org Charts, and Grounded Freak-Play Calls.
+        </p>
+      </div>
+
+      <div class="hero-metrics" id="hero-metrics">
+        <div class="metric-card">
+          <span class="metric-label">Origin Receipt (SNF Mexico)</span>
+          <strong class="metric-value">91 / 100</strong>
+          <span class="metric-sub">Called SF 35-10 &amp; 70-yd free kick (missed by 1 yd!)</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Thanksgiving Slate</span>
+          <strong class="metric-value">3 Games</strong>
+          <span class="metric-sub">CHI@DET · PHI@DAL · KC@BUF (Nov 26, 2026)</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">YouTube Shorts Kit</span>
+          <strong class="metric-value">4 Ready Reels</strong>
+          <span class="metric-sub">Run <code>scripts/render_shorts.py</code> locally</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="tabs-shell">
+      <div class="tablist scroller" role="tablist" focusgroup="tablist nomemory" aria-label="NFL Game Scout Arena views">
+        <button type="button" role="tab" id="tab-thanksgiving" aria-selected="true" focusgroupstart>
+          Thanksgiving 2026 (3 Games)
+        </button>
+        <button type="button" role="tab" id="tab-week11" aria-selected="false">
+          Week 11 Receipts (2 Games)
+        </button>
+        <button type="button" role="tab" id="tab-leaderboard" aria-selected="false">
+          100-Point Model Leaderboard
+        </button>
+      </div>
+
+      <div id="panel-thanksgiving" role="tabpanel" aria-labelledby="tab-thanksgiving" tabindex="0">
+        <div class="panel-inner" id="thanksgiving-mount">
+          <p class="loading-note">Loading Thanksgiving 2026 matchups…</p>
+        </div>
+      </div>
+
+      <div id="panel-week11" role="tabpanel" aria-labelledby="tab-week11" hidden="until-found">
+        <div class="panel-inner" id="week11-mount">
+          <p class="loading-note">Loading Week 11 receipts…</p>
+        </div>
+      </div>
+
+      <div id="panel-leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard" hidden="until-found">
+        <div class="panel-inner" id="leaderboard-mount">
+          <p class="loading-note">Loading Multi-Model Leaderboard…</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Powered by the open-source <a href="https://github.com/TheScottyB/nfl-game-scout" target="_blank" rel="noopener noreferrer">nfl-game-scout</a>
+      plugin &amp; skill for <strong>Google Antigravity</strong>, <strong>Claude Desktop</strong>, and <strong>Claude Code</strong>.
+      Static receipts verified via Git commit history.
+    </p>
+  </footer>
+
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
