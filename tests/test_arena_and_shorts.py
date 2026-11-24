@@ -226,7 +226,7 @@ class TestArenaAndShorts(unittest.TestCase):
 
         # Upload kit hygiene & 100-char YouTube title cap
         kit_text = (SHORTS_DIR / "YOUTUBE_UPLOAD_KIT.md").read_text(encoding="utf-8")
-        self.assertNotIn("/Users/", kit_text)
+        self.assertIsNone(re.search(r"/[U]sers/", kit_text))
         titles = re.findall(r"Suggested YouTube Short Title:\*\* `([^`]+)`", kit_text)
         self.assertEqual(len(titles), 4)
         for t in titles:
