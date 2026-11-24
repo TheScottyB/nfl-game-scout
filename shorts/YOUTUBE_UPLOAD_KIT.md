@@ -45,7 +45,7 @@ https://thescottyb.github.io/nfl-game-scout/
 
 ## Philadelphia Eagles at Dallas Cowboys
 - **File:** `shorts/output/02-eagles-at-cowboys-thanksgiving-2026.mp4` (52.3s · 1080×1920 9:16)
-- **Suggested YouTube Short Title:** `PHI vs DAL Freak Play Call (~9% (Record FG) / ~12% (Sun-glare muff)) — Locked Before Kickoff! #shorts`
+- **Suggested YouTube Short Title:** `PHI vs DAL Freak Play Call (~9%-~12%) — Locked Before Kickoff! #shorts`
 - **Description:**
 ```text
 Last Sunday we pegged a 70-yard free kick right before a 71-yarder landed 1 yard short in Mexico City.

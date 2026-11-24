@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Validate Arena slate JSON schemas
+        run: python3 scripts/arena_cli.py validate
+
+      - name: Syntax-check frontend JavaScript
+        run: node --check docs/app.js
+
+      - name: Check repo hygiene (no local /Users/ paths in tracked files)
+        run: |
+          if git grep -n "/Users/" -- . ':!.github/workflows/ci.yml'; then
+            echo "Found local /Users/ path in tracked file!"
+            exit 1
+          fi

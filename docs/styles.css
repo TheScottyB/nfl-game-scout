@@ -92,6 +92,33 @@
   }
 }
 
+@supports not (scrollbar-color: auto) {
+  :root,
+  .scroller,
+  .table-wrapper {
+    scrollbar-width: auto;
+  }
+
+  :root::-webkit-scrollbar,
+  .scroller::-webkit-scrollbar,
+  .table-wrapper::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  :root::-webkit-scrollbar-thumb,
+  .scroller::-webkit-scrollbar-thumb,
+  .table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+  }
+
+  :root::-webkit-scrollbar-track,
+  .scroller::-webkit-scrollbar-track,
+  .table-wrapper::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
 /* Toggle option visibility follows effective rendered color scheme without JS dependency */
 .theme-option-to-light {
   display: none;
@@ -181,6 +208,14 @@ body {
 
 a {
   color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+.table-wrapper:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 
 code {
@@ -376,23 +411,25 @@ code {
   scroll-padding-inline: 3rem;
 }
 
-.scroller {
-  --fade-size: 2.5rem;
-  --fade-dir: right;
-  --fade-start-pos: 0;
-  --fade-end-pos: 100%;
-  mask:
-    linear-gradient(black, black) no-clip subtract,
-    linear-gradient(to var(--fade-dir), black, transparent) var(--fade-start-pos) 0 / var(--fade-start) 100% no-repeat no-clip,
-    linear-gradient(to var(--fade-dir), transparent, black) var(--fade-end-pos) 0 / var(--fade-end) 100% no-repeat no-clip;
-  animation: reveal-fade-start linear both, hide-fade-end linear both;
-  animation-timeline: scroll(self inline);
-  animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
+@supports (animation-timeline: scroll()) {
+  .scroller {
+    --fade-size: 2.5rem;
+    --fade-dir: right;
+    --fade-start-pos: 0;
+    --fade-end-pos: 100%;
+    mask:
+      linear-gradient(black, black) no-clip subtract,
+      linear-gradient(to var(--fade-dir), black, transparent) var(--fade-start-pos) 0 / var(--fade-start) 100% no-repeat no-clip,
+      linear-gradient(to var(--fade-dir), transparent, black) var(--fade-end-pos) 0 / var(--fade-end) 100% no-repeat no-clip;
+    animation: reveal-fade-start linear both, hide-fade-end linear both;
+    animation-timeline: scroll(self inline);
+    animation-range: 0 var(--fade-size), calc(100% - var(--fade-size)) 100%;
 
-  &:dir(rtl) {
-    --fade-dir: left;
-    --fade-start-pos: 100%;
-    --fade-end-pos: 0;
+    &:dir(rtl) {
+      --fade-dir: left;
+      --fade-start-pos: 100%;
+      --fade-end-pos: 0;
+    }
   }
 }
 
@@ -936,4 +973,35 @@ details:not([open])::details-content {
 
 .loading-note {
   color: var(--text-muted);
+}
+
+.surprise-ingredients {
+  margin-block-start: 0.35rem;
+  font-weight: 600;
+}
+
+.acc-heading {
+  margin: 0;
+}
+
+.impact-note {
+  font-weight: 600;
+}
+
+.hidden-mismatch-note {
+  font-weight: 700;
+}
+
+@media (forced-colors: active) {
+  [role="tab"][aria-selected="true"]::after {
+    border-block-end: 3px solid Highlight;
+  }
+
+  .game-card,
+  .model-card,
+  .surprise-spotlight,
+  .table-wrapper,
+  .pill {
+    border: 1px solid CanvasText;
+  }
 }

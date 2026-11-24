@@ -9,6 +9,8 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
+import shutil
 import subprocess
 import tempfile
 from dataclasses import dataclass
@@ -20,6 +22,11 @@ DEFAULT_DATA = REPO_ROOT / "docs" / "data" / "2026-thanksgiving.json"
 DEFAULT_OUT_DIR = REPO_ROOT / "shorts" / "output"
 DEFAULT_UPLOAD_KIT = REPO_ROOT / "shorts" / "YOUTUBE_UPLOAD_KIT.md"
 CHROME_BIN = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
+
+SAFE_HEX_COLOR_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
+SAFE_SLUG_RE = re.compile(r"^[a-z0-9-]+$")
+SAFE_VOICE_RE = re.compile(r"^[A-Za-z0-9 ()_-]+$")
+MAX_YT_TITLE_LEN = 100
 
 WIDTH = 1080
 HEIGHT = 1920
@@ -43,6 +50,46 @@ def _esc(val: Any) -> str:
     return html.escape(str(val), quote=True)
 
 
+def _safe_hex_color(raw: Any, fallback: str = "#10b981") -> str:
+    if isinstance(raw, str) and SAFE_HEX_COLOR_RE.fullmatch(raw.strip()):
+        return raw.strip()
+    return fallback
+
+
+def _safe_slug(raw: Any) -> str:
+    if not isinstance(raw, str) or not SAFE_SLUG_RE.fullmatch(raw):
+        raise ValueError(f"Unsafe slug identifier: {raw!r} (expected ^[a-z0-9-]+$)")
+    return raw
+
+
+def _safe_output_path(out_dir: Path, filename: str) -> Path:
+    resolved_dir = out_dir.resolve()
+    candidate = (resolved_dir / filename).resolve()
+    if candidate.parent != resolved_dir:
+        raise ValueError(f"Output path escapes target directory: {candidate}")
+    return candidate
+
+
+def _validate_cli_voice_and_rate(voice: str, rate: int) -> None:
+    if not voice or voice.startswith("-") or not SAFE_VOICE_RE.fullmatch(voice):
+        raise ValueError(f"Invalid voice name: {voice!r}")
+    if not (120 <= rate <= 300):
+        raise ValueError(f"Rate must be between 120 and 300 wpm, got {rate}")
+
+
+def _check_media_tools() -> None:
+    missing: list[str] = []
+    if not CHROME_BIN.is_file():
+        missing.append(f"Google Chrome ({CHROME_BIN})")
+    for tool in ("ffmpeg", "ffprobe", "say"):
+        if not shutil.which(tool):
+            missing.append(tool)
+    if missing:
+        raise RuntimeError(
+            "Missing required rendering tool(s): " + ", ".join(missing)
+        )
+
+
 def _pick_primary_prediction(game: dict[str, Any]) -> dict[str, Any]:
     for pred in game.get("predictions", []):
         if pred.get("status") in {"locked", "graded"} and pred.get("surpriseCall"):
@@ -51,6 +98,8 @@ def _pick_primary_prediction(game: dict[str, Any]) -> dict[str, Any]:
 
 
 def _render_slide_html(spec: SlideSpec, slide_num: int, total_slides: int, footer_label: str) -> str:
+    accent_a = _safe_hex_color(spec.accent_a, "#10b981")
+    accent_b = _safe_hex_color(spec.accent_b, "#3b82f6")
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,8 +123,8 @@ def _render_slide_html(spec: SlideSpec, slide_num: int, total_slides: int, foote
     flex-direction: column;
     justify-content: space-between;
     background:
-      radial-gradient(circle at 15% 15%, {spec.accent_a}44 0%, transparent 45%),
-      radial-gradient(circle at 85% 32%, {spec.accent_b}44 0%, transparent 45%),
+      radial-gradient(circle at 15% 15%, {accent_a}44 0%, transparent 45%),
+      radial-gradient(circle at 85% 32%, {accent_b}44 0%, transparent 45%),
       linear-gradient(170deg, #070d1a 0%, #0d1629 55%, #060913 100%);
   }}
   .grid-overlay {{
@@ -277,8 +326,8 @@ def build_game_slides(game: dict[str, Any]) -> list[SlideSpec]:
     sc = pred["surpriseCall"]
     sent = game["sentiment30d"]
     ref = game["referee"]
-    away_c = away.get("color", "#0f766e")
-    home_c = home.get("color", "#1d4ed8")
+    away_c = _safe_hex_color(away.get("color"), "#0f766e")
+    home_c = _safe_hex_color(home.get("color"), "#1d4ed8")
 
     # Slide 1: Hook + Matchup
     s1_body = f"""
@@ -458,8 +507,8 @@ def build_supercut_slides(slate: dict[str, Any]) -> list[SlideSpec]:
                     f"Game {idx}, {g['away']['abbr']} at {g['home']['abbr']}: {sc['title']}. "
                     f"Estimated probability {sc['probability']}, with {p['winnerAbbr']} winning."
                 ),
-                accent_a=g["away"].get("color", "#f59e0b"),
-                accent_b=g["home"].get("color", "#10b981"),
+                accent_a=_safe_hex_color(g["away"].get("color"), "#f59e0b"),
+                accent_b=_safe_hex_color(g["home"].get("color"), "#10b981"),
             )
         )
 
@@ -692,6 +741,26 @@ def render_short_video(
     return _ffprobe_duration(out_mp4)
 
 
+def _relative_repo_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(REPO_ROOT.resolve()))
+    except ValueError:
+        return path.name
+
+
+def _build_short_title(game: dict[str, Any], prob: str) -> str:
+    away_abbr = game["away"]["abbr"]
+    home_abbr = game["home"]["abbr"]
+    # Compact multi-part probability descriptions so YouTube Shorts 100-char limit holds cleanly
+    pcts = re.findall(r"~?\d+%", str(prob))
+    compact_prob = "-".join(pcts) if len(pcts) > 1 else (pcts[0] if pcts else str(prob).strip())
+    candidate = f"{away_abbr} vs {home_abbr} Freak Play Call ({compact_prob}) — Locked Before Kickoff! #shorts"
+    if len(candidate) <= MAX_YT_TITLE_LEN:
+        return candidate
+    fallback = f"{away_abbr} vs {home_abbr} Freak Play Call — Locked Before Kickoff! #shorts"
+    return fallback[:MAX_YT_TITLE_LEN]
+
+
 def write_upload_kit(
     kit_path: Path,
     slate: dict[str, Any],
@@ -711,12 +780,14 @@ def write_upload_kit(
     ]
 
     for slug, title, mp4_path, dur, game in rendered:
+        rel_mp4 = _relative_repo_path(mp4_path)
         lines.append(f"## {title}")
-        lines.append(f"- **File:** `{mp4_path}` ({dur:.1f}s · 1080×1920 9:16)")
+        lines.append(f"- **File:** `{rel_mp4}` ({dur:.1f}s · 1080×1920 9:16)")
         if game:
             pred = _pick_primary_prediction(game)
             sc = pred["surpriseCall"]
-            lines.append(f"- **Suggested YouTube Short Title:** `{game['away']['abbr']} vs {game['home']['abbr']} Freak Play Call ({sc['probability']}) — Locked Before Kickoff! #shorts`")
+            yt_title = _build_short_title(game, sc["probability"])
+            lines.append(f"- **Suggested YouTube Short Title:** `{yt_title}`")
             lines.append("- **Description:**")
             lines.append("```text")
             lines.append(
@@ -763,31 +834,41 @@ def main() -> int:
     parser.add_argument("--all", action="store_true", help="Render every game in the slate")
     parser.add_argument("--supercut", action="store_true", help="Render combined Thanksgiving 3-freak-play supercut")
     parser.add_argument("--no-music", action="store_true", help="Disable subtle background synth bed")
+    parser.add_argument("--kit-only", action="store_true", help="Regenerate YOUTUBE_UPLOAD_KIT.md without re-rendering MP4s")
     args = parser.parse_args()
 
+    _validate_cli_voice_and_rate(args.voice, args.rate)
+    if not args.kit_only:
+        _check_media_tools()
+
     slate = json.loads(args.data.read_text(encoding="utf-8"))
-    slate_slug = "thanksgiving-2026" if "thanksgiving" in slate["slateId"] else slate["slateId"]
+    raw_slug = "thanksgiving-2026" if "thanksgiving" in slate["slateId"] else slate["slateId"]
+    slate_slug = _safe_slug(raw_slug)
     footer_label = "thescottyb.github.io/nfl-game-scout · Locked Pre-Kickoff"
     use_music = not args.no_music
 
     rendered: list[tuple[str, str, Path, float, dict[str, Any] | None]] = []
 
     if args.supercut:
-        super_path = args.out_dir / f"00-{slate_slug}-all-3-freak-plays.mp4"
-        dur = render_short_video(
-            build_supercut_slides(slate),
-            super_path,
-            footer_label,
-            args.voice,
-            args.rate,
-            use_music,
-        )
-        print(f"Rendered {super_path} ({dur:.2f}s)")
+        super_path = _safe_output_path(args.out_dir, f"00-{slate_slug}-all-3-freak-plays.mp4")
+        if args.kit_only:
+            dur = _ffprobe_duration(super_path) if super_path.is_file() and shutil.which("ffprobe") else 47.4
+        else:
+            dur = render_short_video(
+                build_supercut_slides(slate),
+                super_path,
+                footer_label,
+                args.voice,
+                args.rate,
+                use_music,
+            )
+            print(f"Rendered {super_path} ({dur:.2f}s)")
         rendered.append(("supercut", "All 3 Thanksgiving Freak Plays (Supercut)", super_path, dur, None))
 
     games_to_render = slate["games"]
     if args.game:
-        games_to_render = [g for g in slate["games"] if g["id"] == args.game]
+        safe_gid = _safe_slug(args.game)
+        games_to_render = [g for g in slate["games"] if g["id"] == safe_gid]
         if not games_to_render:
             raise SystemExit(f"Game ID not found: {args.game}")
     elif not args.all and not args.supercut:
@@ -795,18 +876,22 @@ def main() -> int:
 
     if args.all or args.game or not args.supercut:
         for idx, game in enumerate(games_to_render, start=1):
-            filename = f"{idx:02d}-{game['id']}-{slate_slug}.mp4"
-            out_path = args.out_dir / filename
-            dur = render_short_video(
-                build_game_slides(game),
-                out_path,
-                footer_label,
-                args.voice,
-                args.rate,
-                use_music,
-            )
-            print(f"Rendered {out_path} ({dur:.2f}s)")
-            rendered.append((game["id"], f"{game['away']['name']} at {game['home']['name']}", out_path, dur, game))
+            gid = _safe_slug(game["id"])
+            filename = f"{idx:02d}-{gid}-{slate_slug}.mp4"
+            out_path = _safe_output_path(args.out_dir, filename)
+            if args.kit_only:
+                dur = _ffprobe_duration(out_path) if out_path.is_file() and shutil.which("ffprobe") else 48.0
+            else:
+                dur = render_short_video(
+                    build_game_slides(game),
+                    out_path,
+                    footer_label,
+                    args.voice,
+                    args.rate,
+                    use_music,
+                )
+                print(f"Rendered {out_path} ({dur:.2f}s)")
+            rendered.append((gid, f"{game['away']['name']} at {game['home']['name']}", out_path, dur, game))
 
     write_upload_kit(args.upload_kit, slate, rendered)
     print(f"Wrote YouTube upload kit: {args.upload_kit}")

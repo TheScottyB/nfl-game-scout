@@ -1,9 +1,23 @@
 const SLATES_INDEX_URL = "./data/slates.json";
 const REPO_URL = "https://github.com/TheScottyB/nfl-game-scout";
+const SAFE_SLATE_FILE_RE = /^data\/[a-z0-9-]+\.json$/i;
+
+/**
+ * Allowlist only HTTPS URLs before assigning to dynamic anchor href attributes.
+ */
+export function sanitizeHttpsUrl(raw) {
+  if (typeof raw !== "string" || !raw) return null;
+  try {
+    const parsed = new URL(raw);
+    return parsed.protocol === "https:" ? parsed.href : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Safely insert limited markup using the native Sanitizer API when available,
- * falling back to plain text assignment when unsupported.
+ * falling back to Trusted-Types-safe plain text assignment when unsupported.
  */
 export function safeSetHTML(el, html) {
   if ("setHTML" in Element.prototype) {
@@ -14,8 +28,7 @@ export function safeSetHTML(el, html) {
       },
     });
   } else {
-    const doc = new DOMParser().parseFromString(String(html), "text/html");
-    el.textContent = doc.body?.textContent ?? "";
+    el.textContent = String(html).replace(/<[^>]*>/g, "");
   }
 }
 
@@ -220,9 +233,7 @@ function renderModelCard(game, pred) {
     box.append(el("p", "surprise-title", pred.surpriseCall.title));
     box.append(el("p", "", pred.surpriseCall.detail));
     if (Array.isArray(pred.surpriseCall.ingredients) && pred.surpriseCall.ingredients.length) {
-      const ing = el("p", "", `Ingredients: ${pred.surpriseCall.ingredients.join(" · ")}`);
-      ing.style.marginTop = "0.35rem";
-      ing.style.fontWeight = "600";
+      const ing = el("p", "surprise-ingredients", `Ingredients: ${pred.surpriseCall.ingredients.join(" · ")}`);
       box.append(ing);
     }
     card.append(box);
@@ -255,9 +266,10 @@ function renderModelCard(game, pred) {
       document.createTextNode(`Locked UTC: ${pred.publishedAtUtc} (`),
       document.createTextNode(`${formatLocalDateTime(pred.publishedAtUtc)} local)`)
     );
-    if (pred.receiptUrl) {
+    const safeReceipt = sanitizeHttpsUrl(pred.receiptUrl);
+    if (safeReceipt) {
       const link = el("a", "", " · GitHub Receipt");
-      link.href = pred.receiptUrl;
+      link.href = safeReceipt;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
       receiptLine.append(link);
@@ -385,17 +397,18 @@ function renderGameCard(game) {
   pills.append(
     el("span", "pill pill-accent", `Line: ${game.odds.spread} | O/U ${game.odds.total}`),
     el("span", "pill", `Ref: ${game.referee.headRef}`),
-    el("span", "pill", `Avg Age: ${game.away.abbr} ${game.away.avgAge} vs ${game.home.abbr} ${game.home.avgAge}`),
+    el("span", "pill", `Avg Age: ${game.away.abbr} ${Number(game.away.avgAge).toFixed(1)} vs ${game.home.abbr} ${Number(game.home.avgAge).toFixed(1)}`),
     el("span", "pill pill-amber", game.weather.summary)
   );
   left.append(pills);
 
   const right = el("div", "receipt-box");
   right.append(el("span", "", `ML: ${game.odds.moneyline}`));
-  const primaryPred = game.predictions.find((p) => p.receiptUrl);
-  if (primaryPred?.receiptUrl) {
+  const primaryPred = game.predictions.find((p) => sanitizeHttpsUrl(p.receiptUrl));
+  const primaryHref = sanitizeHttpsUrl(primaryPred?.receiptUrl);
+  if (primaryHref) {
     const a = el("a", "", "View Git Commit Receipt");
-    a.href = primaryPred.receiptUrl;
+    a.href = primaryHref;
     a.target = "_blank";
     a.rel = "noopener noreferrer";
     right.append(a);
@@ -430,9 +443,8 @@ function renderGameCard(game) {
   accordion.setAttribute("aria-labelledby", accHeadingId);
 
   const toolbar = el("div", "accordion-toolbar");
-  const accHeading = el("h4", "", "Full 7-Module Scouting Breakdown");
+  const accHeading = el("h4", "acc-heading", "Full 7-Module Scouting Breakdown");
   accHeading.id = accHeadingId;
-  accHeading.style.margin = "0";
 
   const toggleAllBtn = document.createElement("button");
   toggleAllBtn.type = "button";
@@ -484,7 +496,7 @@ function renderGameCard(game) {
           el("h4", "", "Kicker Ranges & Roster Ages"),
           el("p", "", `${game.away.kicker.name} (${game.away.abbr}): Career long ${game.away.kicker.careerLong} yds · Ceiling: ${game.away.kicker.ceiling}. ${game.away.kicker.note}`),
           el("p", "", `${game.home.kicker.name} (${game.home.abbr}): Career long ${game.home.kicker.careerLong} yds · Ceiling: ${game.home.kicker.ceiling}. ${game.home.kicker.note}`),
-          el("p", "", `53-man Avg Age: ${game.away.abbr} ${game.away.avgAge} vs ${game.home.abbr} ${game.home.avgAge}`)
+          el("p", "", `53-man Avg Age: ${game.away.abbr} ${Number(game.away.avgAge).toFixed(1)} vs ${game.home.abbr} ${Number(game.home.avgAge).toFixed(1)}`)
         );
         grid.append(wBox, kBox);
         const injBox = el("div", "sub-box");
@@ -509,8 +521,7 @@ function renderGameCard(game) {
       const ul = document.createElement("ul");
       for (const t of game.referee.tendencies) ul.append(el("li", "", t));
       box.append(ul);
-      const impact = el("p", "", `Tonight's Impact: ${game.referee.tonightImpact}`);
-      impact.style.fontWeight = "600";
+      const impact = el("p", "impact-note", `Tonight's Impact: ${game.referee.tonightImpact}`);
       box.append(impact);
       body.append(box);
     }),
@@ -537,8 +548,7 @@ function renderGameCard(game) {
         const ul = document.createElement("ul");
         for (const tell of game.orgChart.crossStaffTells) ul.append(el("li", "", tell));
         tells.append(ul);
-        const hm = el("p", "", `#1 Hidden Mismatch: ${game.orgChart.hiddenMismatch}`);
-        hm.style.fontWeight = "700";
+        const hm = el("p", "hidden-mismatch-note", `#1 Hidden Mismatch: ${game.orgChart.hiddenMismatch}`);
         tells.append(hm);
         body.append(tells);
       }
@@ -673,6 +683,9 @@ async function boot() {
 
     const loaded = await Promise.all(
       idx.slates.map(async (entry) => {
+        if (!SAFE_SLATE_FILE_RE.test(String(entry.file ?? ""))) {
+          throw new Error(`Disallowed slate path: ${entry.file}`);
+        }
         const resp = await fetch(`./${entry.file}`);
         if (!resp.ok) throw new Error(`Failed loading ${entry.file}`);
         return resp.json();
