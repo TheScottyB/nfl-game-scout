@@ -1,0 +1,16 @@
+{
+  "name": "nfl-game-scout",
+  "owner": {
+    "name": "Scott Beilfuss"
+  },
+  "plugins": [
+    {
+      "name": "nfl-game-scout",
+      "source": "./",
+      "description": "Deep pregame and live NFL matchup scouting: dual win scripts, weather/altitude physics, roster age, referee tendencies, 30-day social media sentiment, full GM-to-assistant-position-coach org-chart matchups, and grounded freak-play surprise predictions."
+    }
+  ],
+  "metadata": {
+    "description": "Cross-platform NFL Game Scout plugin for Antigravity, Claude Code, and Claude Desktop."
+  }
+}

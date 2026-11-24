@@ -1,0 +1,18 @@
+{
+  "name": "nfl-game-scout",
+  "displayName": "NFL Game Scout",
+  "version": "0.1.0",
+  "author": {
+    "name": "Scott Beilfuss",
+    "url": "https://github.com/TheScottyB"
+  },
+  "repository": "https://github.com/TheScottyB/nfl-game-scout",
+  "homepage": "https://github.com/TheScottyB/nfl-game-scout",
+  "description": "Deep pregame and live NFL matchup scouting: dual win scripts, weather/altitude physics, roster age, referee tendencies, 30-day social media sentiment, full GM-to-assistant-position-coach org-chart matchups, and grounded freak-play surprise predictions.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Scout tonight's NFL primetime game with win scripts, refs, 30-day sentiment, full coaching staff matchup, and a crazy surprise call",
+    "Compare the GM-to-assistant-position-coach matchups and officiating crew for Sunday Night Football",
+    "Live Q1 check-in: pull current box score, weather, injury swings, and update which team's winning script is hitting"
+  ]
+}

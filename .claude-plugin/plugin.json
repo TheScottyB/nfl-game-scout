@@ -1,0 +1,21 @@
+{
+  "name": "nfl-game-scout",
+  "version": "0.1.0",
+  "description": "Deep pregame and live NFL matchup scouting: dual win scripts, weather/altitude physics, roster age, referee tendencies, 30-day social media sentiment, full GM-to-assistant-position-coach org-chart matchups, and grounded freak-play surprise predictions.",
+  "author": {
+    "name": "Scott Beilfuss",
+    "url": "https://github.com/TheScottyB"
+  },
+  "repository": "https://github.com/TheScottyB/nfl-game-scout",
+  "license": "MIT",
+  "keywords": [
+    "nfl",
+    "football",
+    "sports-analytics",
+    "scouting",
+    "officiating",
+    "sentiment-analysis",
+    "coaching-matchups",
+    "multi-model-benchmark"
+  ]
+}
