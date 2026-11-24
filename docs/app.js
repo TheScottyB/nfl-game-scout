@@ -413,6 +413,14 @@ function renderGameCard(game) {
     a.rel = "noopener noreferrer";
     right.append(a);
   }
+  const shortHref = sanitizeHttpsUrl(game.studioShortUrl);
+  if (shortHref) {
+    const sLink = el("a", "short-link", "▶ Watch Studio Short");
+    sLink.href = shortHref;
+    sLink.target = "_blank";
+    sLink.rel = "noopener noreferrer";
+    right.append(sLink);
+  }
   top.append(left, right);
   card.append(top);
 
@@ -566,6 +574,14 @@ function renderSlatePanel(mount, slate) {
     el("h2", "", slate.title),
     el("p", "", `${slate.subtitle} Last updated UTC: ${slate.updatedAtUtc}`)
   );
+  const supercutHref = sanitizeHttpsUrl(slate.studioShortUrl);
+  if (supercutHref) {
+    const pill = el("a", "short-pill", "▶ Watch Studio Supercut Short");
+    pill.href = supercutHref;
+    pill.target = "_blank";
+    pill.rel = "noopener noreferrer";
+    header.append(pill);
+  }
   mount.append(header);
 
   for (const game of slate.games) {

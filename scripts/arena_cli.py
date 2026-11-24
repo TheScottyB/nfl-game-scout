@@ -96,6 +96,10 @@ def validate_slate_dict(slate: dict[str, Any], source_name: str = "<slate>") -> 
     except ValueError as exc:
         errors.append(str(exc))
 
+    slate_short = slate.get("studioShortUrl")
+    if slate_short is not None and not _is_https_url(slate_short):
+        errors.append(f"{source_name}.studioShortUrl: must be https:// URL, got {slate_short!r}")
+
     games = slate.get("games")
     if not isinstance(games, list) or not games:
         errors.append(f"{source_name}: 'games' must be a non-empty list")
@@ -110,6 +114,10 @@ def validate_slate_dict(slate: dict[str, Any], source_name: str = "<slate>") -> 
 
         if not isinstance(gid, str) or not SAFE_ID_RE.fullmatch(gid):
             errors.append(f"{source_name}:{gid}: game id must match ^[a-z0-9-]+$")
+
+        game_short = game.get("studioShortUrl")
+        if game_short is not None and not _is_https_url(game_short):
+            errors.append(f"{gid}.studioShortUrl: must be https:// URL, got {game_short!r}")
 
         for side in ("away", "home"):
             color = game[side].get("color")

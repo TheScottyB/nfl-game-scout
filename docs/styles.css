@@ -502,6 +502,34 @@ code {
   }
 }
 
+.short-pill,
+.short-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-block-start: 0.45rem;
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
+.short-link {
+  margin-block-start: 0.25rem;
+  padding: 0.22rem 0.6rem;
+  font-size: 0.76rem;
+}
+
 /* Game Card */
 .game-card {
   background: var(--surface-card);

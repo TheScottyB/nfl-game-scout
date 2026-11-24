@@ -68,7 +68,10 @@ python3 scripts/arena_cli.py ingest --slate 2026-thanksgiving --file claude_pred
 # 3. Validate all Arena slates
 python3 scripts/arena_cli.py validate
 
-# 4. Render 1080x1920 YouTube Shorts + upload kit locally (macOS Chrome + say + ffmpeg)
+# 4. Render Studio v2 1080x1920 YouTube Shorts (Gemini dual-host TTS + 9:16 art + 2-pass loudnorm + QA gate)
+python3 scripts/render_studio_short.py --slate docs/data/2026-thanksgiving.json --cut all
+
+# 5. Or render lightweight offline v1 Shorts (macOS Chrome + say + ffmpeg)
 python3 scripts/render_shorts.py --data docs/data/2026-thanksgiving.json --out-dir shorts/output --all --supercut
 ```
 
@@ -85,14 +88,16 @@ nfl-game-scout/
 │   ├── favicon.svg
 │   └── data/
 │       ├── slates.json
-│       ├── 2026-thanksgiving.json                  # Active Thanksgiving 3-game slate
+│       ├── 2026-thanksgiving.json                  # Active Thanksgiving 3-game slate + live Studio Short links
 │       └── 2026-week11-archive.json                # SNF Mexico City (91/100) + MNF receipts
 ├── scripts/
 │   ├── arena_cli.py                                # Validate slates, generate prompts, ingest models
-│   ├── render_shorts.py                            # 1080x1920 vertical YouTube Shorts renderer
+│   ├── render_studio_short.py                      # Studio v2 Shorts (dual-host Gemini TTS, art, HUD, QA gate)
+│   ├── render_shorts.py                            # Offline lightweight v1 Shorts renderer
 │   └── pack-claude-skill.sh                        # Builds dist/nfl-game-scout.zip for Claude Desktop
 ├── shorts/
-│   └── YOUTUBE_UPLOAD_KIT.md                       # Generated titles, descriptions & pinned comments
+│   ├── YOUTUBE_UPLOAD_KIT.md                       # v1 upload metadata
+│   └── YOUTUBE_STUDIO_UPLOAD_KIT.md                # Auto-generated Studio v2 titles, descriptions & QA stats
 ├── skills/nfl-game-scout/                          # Core cross-platform skill + 4 reference guides
 └── tests/                                          # Stdlib unittest verification suite
 ```

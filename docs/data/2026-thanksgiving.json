@@ -5,10 +5,12 @@
   "season": 2026,
   "week": "Week 12 (Thanksgiving)",
   "updatedAtUtc": "2026-11-24T00:32:16Z",
+  "studioShortUrl": "https://youtube.com/shorts/jLTHaBAOj44",
   "games": [
     {
       "id": "bears-at-lions",
       "label": "Thanksgiving Early · 1:00 PM ET",
+      "studioShortUrl": "https://youtube.com/shorts/7BTGwW-2eIE",
       "away": {
         "abbr": "CHI",
         "name": "Chicago Bears",
@@ -211,6 +213,7 @@
     {
       "id": "eagles-at-cowboys",
       "label": "Thanksgiving Afternoon · 4:30 PM ET",
+      "studioShortUrl": "https://youtube.com/shorts/0-Kq5a_UfKI",
       "away": {
         "abbr": "PHI",
         "name": "Philadelphia Eagles",
@@ -414,6 +417,7 @@
     {
       "id": "chiefs-at-bills",
       "label": "Thanksgiving Night · 8:20 PM ET",
+      "studioShortUrl": "https://youtube.com/shorts/J-iVIHvIjQ8",
       "away": {
         "abbr": "KC",
         "name": "Kansas City Chiefs",

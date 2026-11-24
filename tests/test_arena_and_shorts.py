@@ -17,6 +17,7 @@ SHORTS_DIR = REPO_ROOT / "shorts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 import arena_cli  # noqa: E402
 import render_shorts  # noqa: E402
+import render_studio_short  # noqa: E402
 
 
 class TestArenaAndShorts(unittest.TestCase):
@@ -166,6 +167,14 @@ class TestArenaAndShorts(unittest.TestCase):
             errors = arena_cli.validate_slate_dict(bad_slate, "test.json")
             self.assertTrue(any("invalid hex color" in e for e in errors))
 
+            # Bad studioShortUrl rejected at both slate and game level
+            bad_short = json.loads(target_file.read_text(encoding="utf-8"))
+            bad_short["studioShortUrl"] = "javascript:alert(1)"
+            bad_short["games"][0]["studioShortUrl"] = "http://insecure.example/short"
+            short_errors = arena_cli.validate_slate_dict(bad_short, "test.json")
+            self.assertTrue(any("test.json.studioShortUrl" in e for e in short_errors))
+            self.assertTrue(any("bears-at-lions.studioShortUrl" in e for e in short_errors))
+
     def test_frontend_csp_hash_and_hardening_markers(self):
         js_check = subprocess.run(
             ["node", "--check", str(DOCS_DIR / "app.js")],
@@ -231,6 +240,72 @@ class TestArenaAndShorts(unittest.TestCase):
         self.assertEqual(len(titles), 4)
         for t in titles:
             self.assertLessEqual(len(t), 100, f"YouTube title exceeds 100 chars ({len(t)}): {t}")
+
+    def test_studio_short_data_driven_security_and_upload_kit(self):
+        # Runtime bounds validation
+        render_studio_short.validate_runtime_args(1.07, 3, 20.0)
+        with self.assertRaises(ValueError):
+            render_studio_short.validate_runtime_args(2.5, 3, 20.0)
+        with self.assertRaises(ValueError):
+            render_studio_short.validate_runtime_args(0.4, 3, 20.0)
+        with self.assertRaises(ValueError):
+            render_studio_short.validate_runtime_args(1.0, 0, 20.0)
+
+        # Hex color & slug hardening
+        self.assertEqual(render_studio_short._safe_hex_color("#38bdf8"), "#38bdf8")
+        self.assertEqual(render_studio_short._safe_hex_color("red;url(x)"), "#22d3ee")
+        with self.assertRaises(ValueError):
+            render_studio_short._safe_slug("../escape")
+
+        # Thanksgiving flagship cuts load cleanly and obey 100-char YouTube title cap
+        tg_cuts = render_studio_short.build_cuts_from_slate(DOCS_DIR / "data" / "2026-thanksgiving.json")
+        self.assertEqual(set(tg_cuts.keys()), {"supercut", "bears-at-lions", "eagles-at-cowboys", "chiefs-at-bills"})
+        for cut in tg_cuts.values():
+            self.assertLessEqual(len(cut.yt_title), 100)
+            self.assertEqual(len(cut.scenes), 5)
+
+        # Generic any-slate data-driven builder works on arbitrary future slates
+        with tempfile.TemporaryDirectory() as tmp:
+            base = json.loads((DOCS_DIR / "data" / "2026-thanksgiving.json").read_text(encoding="utf-8"))
+            base["slateId"] = "2026-week13"
+            base["week"] = "Week 13"
+            synthetic = Path(tmp) / "2026-week13.json"
+            synthetic.write_text(json.dumps(base), encoding="utf-8")
+
+            gen_cuts = render_studio_short.build_cuts_from_slate(synthetic)
+            self.assertEqual(set(gen_cuts.keys()), {"supercut", "bears-at-lions", "eagles-at-cowboys", "chiefs-at-bills"})
+            for cut in gen_cuts.values():
+                self.assertLessEqual(len(cut.yt_title), 100)
+                self.assertGreaterEqual(len(cut.scenes), 5)
+
+            # HUD HTML escapes script injection safely
+            evil_scene = render_studio_short.StudioScene(
+                index=1,
+                slug="01-test",
+                top_badge="<script>alert(1)</script>",
+                headline="A<br><b>B</b>",
+                call_pill="TEST",
+                caption="<img src=x onerror=alert(1)>",
+                accent_hex="#22d3ee",
+                motion="zoom_in",
+                transition_out="fade",
+                art_prompt="prompt",
+                dialogue=(render_studio_short.DialogueTurn("Alex", "crisp", "hi"),),
+            )
+            hud_html = render_studio_short.build_hud_html(evil_scene, 5)
+            self.assertNotIn("<script>alert(1)</script>", hud_html)
+            self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", hud_html)
+            self.assertNotIn("onerror=alert(1)>", hud_html)
+
+            # Upload kit generation enforces clean relative paths and <=100-char titles
+            kit_out = Path(tmp) / "YOUTUBE_STUDIO_UPLOAD_KIT.md"
+            render_studio_short.write_studio_upload_kit(list(tg_cuts.values()), kit_out)
+            kit_content = kit_out.read_text(encoding="utf-8")
+            self.assertIsNone(re.search(r"/[U]sers/", kit_content))
+            studio_titles = re.findall(r"Suggested YouTube Short Title:\*\* `([^`]+)`", kit_content)
+            self.assertEqual(len(studio_titles), 4)
+            for t in studio_titles:
+                self.assertLessEqual(len(t), 100)
 
 
 if __name__ == "__main__":
