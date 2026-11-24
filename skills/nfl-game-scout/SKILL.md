@@ -85,6 +85,11 @@ Verify kickoff-to-final-whistle forecast for the exact stadium:
   fly-in/fly-out / hypoxic chambers).
 * Include each active kicker's verified career long and realistic stadium
   ceiling tonight.
+* **Venue Promotions, Uniform Themes & Facility Quirks:** Check if tonight is a
+  themed night (e.g., stadium-wide "Blackout" / "Whiteout" or throwback
+  uniforms), whether the stadium has an infrastructure or physical reputation
+  (sun-glare window, aging electrical grid, roof/clock/turf glitches), and
+  whether any freak streak has followed either team recently.
 
 ### Module 3: Roster Age & Conditioning Profile
 * Compare current-season **53-man average roster ages** for both teams.
@@ -152,12 +157,23 @@ before running this module.
 * Synthesize **3+ real game-specific ingredients** from Modules 1–6 (venue
   altitude/wind, retiring or booming specialist, aggressive 4th-down coach,
   historical quirk between these two teams, referee blind spot, depleted
-  position group, rare NFL rulebook edge case).
+  position group, rare NFL rulebook edge case, plus **narrative irony &
+  poetic symmetry** such as "Blackout"/"Whiteout" stadium themes, active
+  team curses/streaks, venue quirks, revenge/reunion storylines, and farewell
+  milestones).
+* **Narrative-First Selection Rule:** When multiple plausible candidates are
+  backed by 3+ verified ingredients, **always prioritize the one that makes the
+  best, most poetic, most viral narrative** (the *"you cannot script this"*
+  story — like a literal stadium power outage on a team's promotional
+  "Blackout" night two weeks after a lighting failure in Madrid).
 * Pitch **one headline Crazy Surprise Call** + **one bonus sleeper**, each
   with:
+  * **The Narrative Hook:** Why *this* storyline is the most poetic/viral script
+    on the board.
   * The exact scenario / rule mechanic (e.g., fair-catch free kick, fake-punt
     pass by a retiring punter, defensive "pick-two" 2-pt return, 68+ yd record
-    FG attempt, 1-point safety, zero-punt shootout, backup-QB gadget package).
+    FG attempt, 1-point safety, zero-punt shootout, backup-QB gadget package,
+    venue power/clock/sun-glare chaos).
   * Why *this exact game* makes it plausibly live.
   * Realistic probability estimate (e.g., `~4%`, `~10%`, `<1%`).
 

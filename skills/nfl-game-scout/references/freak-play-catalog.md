@@ -11,6 +11,14 @@ ingredients** from tonight's exact matchup.
 > rule → *predicted a ~70-yd record threat / fair-catch free kick* → Reichard
 > literally attempted a **71-yard fair-catch free kick** at `0:03` of Q2 that
 > landed **1 yard short of the crossbar, dead center**.
+>
+> **Benchmark Lesson (MNF Landover, Nov 23, 2026 — Narrative Irony):**
+> Washington billed MNF as a stadium-wide **"Blackout"** night for its
+> all-black uniforms + aging Northwest Stadium + Cincinnati had *just*
+> experienced a literal stadium power outage 15 days earlier in Madrid (Nov 8)
+> → literal stadium power outage mid-game. Always scout stadium promotions,
+> uniform themes, and poetic-irony streaks—not just x's-and-o's rulebook
+> mechanics.
 
 ---
 
@@ -34,6 +42,19 @@ ingredients** from tonight's exact matchup.
    franchises (e.g., zero-punt shootout), newly traded QB facing a team he just
    played weeks ago, decimated position room forcing emergency personnel
    (backup OL/TE/DB or emergency 3rd QB).
+6. **Narrative Irony, Poetic Symmetry & Venue Promotions ("Best Story" Signal):**
+   Stadium promotions and uniform themes ("Blackout" / "Whiteout" / throwback
+   nights), aging-venue infrastructure quirks (electrical, roof, turf,
+   sun-glare), recent freak streaks following a team (e.g., consecutive stadium
+   incidents), revenge/reunion games (ex-coaches or traded QBs facing former
+   clubs), farewell primetime games, and infamous venue ghosts ("13 Seconds",
+   "Eligible Tackle").
+
+> **Narrative-First Filter:** Whenever 2+ candidates are backed by 3+ verified
+> ingredients from the checklist above, **always promote the one with the
+> strongest narrative irony or poetic symmetry** to the **Headline Crazy
+> Surprise Call** — ask *"what is the most unforgettable 'you cannot script
+> this' story on the board tonight?"* before locking the pick.
 
 ---
 
@@ -63,15 +84,21 @@ Draw from real NFL mechanics when the ingredients genuinely line up:
 * **Dynamic Kickoff Chaos / Surprise Onside Kick (4th Quarter):** Live under
   current NFL kickoff rules when a trailing team burns timeouts or faces a
   shaky return/coverage unit.
+* **Venue / Infrastructure / Poetic-Irony Chaos (Power Outage, Sun-Glare
+  Turnover, Roof/Clock/Turf Glitch):** Live when a stadium's physical or
+  infrastructure reputation collides with a literal promotional theme (e.g., a
+  "Blackout" night at an aging venue or a 3:30 PM sun-glare window) or an
+  active freak streak following one of the teams.
 
 ---
 
 ## Output Format for Module 7
 
-* **Ingredients on the Board:** 3 concise bullets citing verified facts from
-  Modules 1–6.
-* **Headline Crazy Surprise Call:** Exact play/event, who executes it, when it
-  triggers, why tonight's physics/refs/coaches unlock it, and an honest
-  probability estimate (e.g., `~5–8%`).
+* **Ingredients on the Board:** 3+ concise bullets citing verified facts from
+  Modules 1–6 (including venue themes, streaks, or poetic irony when present).
+* **Headline Crazy Surprise Call:** Exact play/event, **the narrative hook
+  ("why it's the best story")**, who executes it, when it triggers, why
+  tonight's physics/refs/coaches/theme unlock it, and an honest probability
+  estimate (e.g., `~5–8%`).
 * **Bonus Freak-Play Sleeper:** 1–2 sentences on a secondary wild-rule or
   statistical outlier to watch for.
