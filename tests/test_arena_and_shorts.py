@@ -477,6 +477,17 @@ class TestArenaAndShorts(unittest.TestCase):
         errs = render_studio_short.validate_cut_models(bad_cut, synthetic)
         self.assertTrue(any("grok" in e.lower() for e in errs))
 
+    def test_studio_short_kickoff_and_expiry_metadata(self):
+        bf = json.loads((DOCS_DIR / "data" / "2026-black-friday.json").read_text(encoding="utf-8"))
+        k_bf, exp_bf = render_studio_short._resolve_cut_kickoff_and_expiry("broncos-at-steelers", bf)
+        self.assertEqual(k_bf, "2026-11-27T20:00:00Z")
+        self.assertEqual(exp_bf, "2026-11-28T00:00:00Z")
+
+        tg = json.loads((DOCS_DIR / "data" / "2026-thanksgiving.json").read_text(encoding="utf-8"))
+        k_sup, exp_sup = render_studio_short._resolve_cut_kickoff_and_expiry("supercut", tg)
+        self.assertEqual(k_sup, "2026-11-27T01:20:00Z")
+        self.assertEqual(exp_sup, "2026-11-27T05:20:00Z")
+
 
 SLATE_ID = "2026-black-friday"
 

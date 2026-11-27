@@ -22,6 +22,7 @@ import argparse
 import base64
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
+from datetime import datetime, timedelta, timezone
 import html
 import json
 import math
@@ -60,6 +61,7 @@ API_REVISION = "2026-05-20"
 SAFE_HEX_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
 SAFE_SLUG_RE = re.compile(r"^[a-z0-9-]+$")
 MAX_YT_TITLE_LEN = 100
+DEFAULT_EXPIRE_HOURS_AFTER_KICKOFF = 4.0
 
 WIDTH = 1080
 HEIGHT = 1920
@@ -2335,6 +2337,50 @@ def verify_rendered_short(
     return report
 
 
+def _parse_utc_iso(raw: Any) -> datetime | None:
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    normalized = raw.strip()
+    if normalized.endswith("Z"):
+        normalized = normalized[:-1] + "+00:00"
+    try:
+        dt = datetime.fromisoformat(normalized)
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc)
+
+
+def _resolve_cut_kickoff_and_expiry(
+    cut_id: str,
+    slate_data: dict[str, Any] | None,
+    expire_hours: float = DEFAULT_EXPIRE_HOURS_AFTER_KICKOFF,
+) -> tuple[str | None, str | None]:
+    if not isinstance(slate_data, dict):
+        return None, None
+    games = slate_data.get("games")
+    if not isinstance(games, list) or not games:
+        return None, None
+
+    kickoff_dt: datetime | None = None
+    if cut_id == "supercut":
+        kickoffs = [
+            dt for dt in (_parse_utc_iso(g.get("kickoffUtc")) for g in games if isinstance(g, dict)) if dt is not None
+        ]
+        if kickoffs:
+            kickoff_dt = max(kickoffs)
+    else:
+        target = next((g for g in games if isinstance(g, dict) and g.get("id") == cut_id), None)
+        if target is not None:
+            kickoff_dt = _parse_utc_iso(target.get("kickoffUtc"))
+
+    if kickoff_dt is None:
+        return None, None
+    expires_dt = kickoff_dt + timedelta(hours=expire_hours)
+    return kickoff_dt.strftime("%Y-%m-%dT%H:%M:%SZ"), expires_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def render_cut(
     cut: StudioCut,
     api_key: str | None,
@@ -2348,6 +2394,7 @@ def render_cut(
     allow_say_fallback: bool,
     max_mb: float,
     slate_data: dict[str, Any] | None = None,
+    expire_hours_after_kickoff: float = DEFAULT_EXPIRE_HOURS_AFTER_KICKOFF,
 ) -> tuple[Path, dict[str, Any]]:
     asset_dir = ASSETS_ROOT / cut.asset_subdir
     asset_dir.mkdir(parents=True, exist_ok=True)
@@ -2423,6 +2470,15 @@ def render_cut(
     qa_report = verify_rendered_short(out_mp4, vo_spans=vo_spans, max_mb=max_mb)
     qa_report["music_source"] = music_source
     qa_report["tempo"] = tempo
+    kickoff_utc, expires_at_utc = _resolve_cut_kickoff_and_expiry(
+        cut.cut_id,
+        slate_data,
+        expire_hours=expire_hours_after_kickoff,
+    )
+    if kickoff_utc:
+        qa_report["kickoff_utc"] = kickoff_utc
+    if expires_at_utc:
+        qa_report["expires_at_utc"] = expires_at_utc
 
     tts_sources: set[str] = set()
     art_sources: set[str] = set()
@@ -2474,6 +2530,12 @@ def main() -> int:
     parser.add_argument("--chrome-bin", type=Path, default=None, help="Path to Chrome/Chromium binary")
     parser.add_argument("--max-mb", type=float, default=20.0, help="QA gate max file size in MB (default: 20.0)")
     parser.add_argument("--upload-kit", type=Path, default=DEFAULT_STUDIO_KIT, help="Path to Studio upload kit Markdown")
+    parser.add_argument(
+        "--expire-hours-after-kickoff",
+        type=float,
+        default=DEFAULT_EXPIRE_HOURS_AFTER_KICKOFF,
+        help="Hours after kickoffUtc when the Short auto-expires from rotation (default: 4.0)",
+    )
     parser.add_argument("--force", action="store_true", help="Regenerate cached Gemini art/TTS/music")
     args = parser.parse_args()
 
@@ -2513,6 +2575,7 @@ def main() -> int:
             allow_say_fallback=args.allow_say_fallback,
             max_mb=args.max_mb,
             slate_data=slate_data,
+            expire_hours_after_kickoff=args.expire_hours_after_kickoff,
         )
         qa_reports[cut.cut_id] = qa
 
