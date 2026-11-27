@@ -260,6 +260,28 @@ function renderModelCard(game, pred) {
   }
   card.append(list);
 
+  if (pred.modelMeta && typeof pred.modelMeta === "object") {
+    const metaRow = el("div", "model-meta-row");
+    if (pred.modelMeta.exactModelId) {
+      metaRow.append(el("span", "meta-chip", `Model: ${pred.modelMeta.exactModelId}`));
+    }
+    if (pred.modelMeta.provider || pred.modelMeta.harness) {
+      const via = [pred.modelMeta.provider, pred.modelMeta.harness].filter(Boolean).join(" / ");
+      metaRow.append(el("span", "meta-chip", via));
+    }
+    if (typeof pred.modelMeta.promptSha256 === "string" && pred.modelMeta.promptSha256.length >= 8) {
+      metaRow.append(el("span", "meta-chip", `Prompt #${pred.modelMeta.promptSha256.slice(0, 8)}`));
+    }
+    if (typeof pred.modelMeta.latencySec === "number") {
+      metaRow.append(el("span", "meta-chip", `${pred.modelMeta.latencySec.toFixed(1)}s`));
+    }
+    const totalTok = pred.modelMeta.usage?.totalTokens ?? pred.modelMeta.usage?.outputTokens;
+    if (typeof totalTok === "number") {
+      metaRow.append(el("span", "meta-chip", `${totalTok} tok`));
+    }
+    card.append(metaRow);
+  }
+
   if (pred.publishedAtUtc) {
     const receiptLine = el("p", "matchup-sub");
     receiptLine.append(
@@ -400,6 +422,9 @@ function renderGameCard(game) {
     el("span", "pill", `Avg Age: ${game.away.abbr} ${Number(game.away.avgAge).toFixed(1)} vs ${game.home.abbr} ${Number(game.home.avgAge).toFixed(1)}`),
     el("span", "pill pill-amber", game.weather.summary)
   );
+  if (game.divisionContext?.isDivisional) {
+    pills.append(el("span", "pill pill-accent", `Divisional: ${game.divisionContext.division || "Yes"}`));
+  }
   left.append(pills);
 
   const right = el("div", "receipt-box");
@@ -469,6 +494,20 @@ function renderGameCard(game) {
 
   accordion.append(
     makeDetails("1. Dual Win Scripts (How & Why Each Team Wins)", `${game.away.abbr} vs ${game.home.abbr}`, (body) => {
+      if (game.divisionContext) {
+        const divBox = el("div", "sub-box");
+        divBox.append(el("h4", "", `Division Context: ${game.divisionContext.division || "Matchup"}`));
+        if (game.divisionContext.awayDivRecord) {
+          divBox.append(el("p", "", `${game.away.abbr}: ${game.divisionContext.awayDivRecord}`));
+        }
+        if (game.divisionContext.homeDivRecord) {
+          divBox.append(el("p", "", `${game.home.abbr}: ${game.divisionContext.homeDivRecord}`));
+        }
+        if (game.divisionContext.note) {
+          divBox.append(el("p", "", game.divisionContext.note));
+        }
+        body.append(divBox);
+      }
       const grid = el("div", "two-col");
       for (const side of ["away", "home"]) {
         const team = game[side];
@@ -587,6 +626,103 @@ function renderSlatePanel(mount, slate) {
   for (const game of slate.games) {
     mount.append(renderGameCard(game));
   }
+
+  if (Array.isArray(slate.missedGames) && slate.missedGames.length) {
+    const auditCard = el("section", "missed-game-card");
+    auditCard.append(el("h3", "", "Missed-Game Audit Receipt (Full-Window Schedule Check)"));
+    for (const mg of slate.missedGames) {
+      const item = el("div", "sub-box");
+      item.append(
+        el("h4", "", `${mg.matchup} — ${mg.label}`),
+        el(
+          "p",
+          "",
+          `FINAL: ${mg.finalScore.away}–${mg.finalScore.home} (${mg.winnerAbbr} Win) · ${mg.venue}`
+        ),
+        el("p", "", mg.recapSummary),
+        el("p", "impact-note", `Why Missed & Pipeline Fix: ${mg.reasonMissed}`)
+      );
+      auditCard.append(item);
+    }
+    mount.append(auditCard);
+  }
+}
+
+function renderStandingsTable(slates) {
+  const byModel = new Map();
+  for (const slate of slates) {
+    for (const game of slate.games) {
+      for (const pred of game.predictions) {
+        const exactId = pred.modelMeta?.exactModelId || pred.modelId;
+        const via = [pred.modelMeta?.provider, pred.modelMeta?.harness].filter(Boolean).join(" / ") || "manual";
+        const current = byModel.get(exactId) ?? {
+          label: pred.modelLabel,
+          exactId,
+          via,
+          locked: 0,
+          graded: 0,
+          wins: 0,
+          losses: 0,
+          scoreSum: 0,
+        };
+        if (pred.status === "locked" || pred.status === "graded") current.locked += 1;
+        if (pred.status === "graded" && pred.grade) {
+          current.graded += 1;
+          current.scoreSum += pred.grade.total;
+          if (game.result?.winnerAbbr) {
+            if (pred.winnerAbbr === game.result.winnerAbbr) current.wins += 1;
+            else current.losses += 1;
+          }
+        }
+        byModel.set(exactId, current);
+      }
+    }
+  }
+
+  const capId = "standings-cap";
+  const wrapper = el("div", "table-wrapper");
+  wrapper.setAttribute("tabindex", "0");
+  wrapper.setAttribute("role", "region");
+  wrapper.setAttribute("aria-labelledby", capId);
+
+  const table = el("table", "standings-table");
+  const cap = el("caption", "", "Cumulative Model Standings (Grouped by Recorded Exact Model ID)");
+  cap.id = capId;
+  table.append(cap);
+
+  const thead = document.createElement("thead");
+  const hrow = document.createElement("tr");
+  for (const c of ["Model (Exact ID)", "Provider / Harness", "Locked", "Graded", "Straight-Up W-L", "Avg Score (/100)"]) {
+    hrow.append(el("th", "", c));
+  }
+  thead.append(hrow);
+  table.append(thead);
+
+  const tbody = document.createElement("tbody");
+  const rows = Array.from(byModel.values()).sort((a, b) => {
+    const avgA = a.graded ? a.scoreSum / a.graded : -1;
+    const avgB = b.graded ? b.scoreSum / b.graded : -1;
+    return avgB - avgA || b.locked - a.locked;
+  });
+  for (const row of rows) {
+    const tr = document.createElement("tr");
+    const title = row.exactId && row.exactId !== row.label ? `${row.label} (${row.exactId})` : row.label;
+    const th = el("th", "", title);
+    th.scope = "row";
+    const avgText = row.graded ? `${(row.scoreSum / row.graded).toFixed(1)} / 100` : "Awaiting final";
+    tr.append(
+      th,
+      el("td", "", row.via),
+      el("td", "", String(row.locked)),
+      el("td", "", String(row.graded)),
+      el("td", "", `${row.wins}-${row.losses}`),
+      el("td", "", avgText)
+    );
+    tbody.append(tr);
+  }
+  table.append(tbody);
+  wrapper.append(table);
+  return wrapper;
 }
 
 function renderLeaderboardPanel(mount, slates) {
@@ -601,6 +737,7 @@ function renderLeaderboardPanel(mount, slates) {
     )
   );
   mount.append(header);
+  mount.append(renderStandingsTable(slates));
 
   const capId = "leaderboard-cap";
   const wrapper = el("div", "table-wrapper");
@@ -626,14 +763,16 @@ function renderLeaderboardPanel(mount, slates) {
     for (const game of slate.games) {
       for (const pred of game.predictions) {
         const tr = document.createElement("tr");
-        const th = el("th", "", pred.modelLabel);
+        const exactId = pred.modelMeta?.exactModelId;
+        const labelText = exactId ? `${pred.modelLabel} [${exactId}]` : pred.modelLabel;
+        const th = el("th", "", labelText);
         th.scope = "row";
         const scoreText = pred.projectedScore
           ? `${pred.winnerAbbr} (${game.away.abbr} ${pred.projectedScore.away}-${game.home.abbr} ${pred.projectedScore.home})`
           : "Pending";
         const surpriseText = pred.surpriseCall
           ? `${pred.surpriseCall.title} (${pred.surpriseCall.probability})`
-          : "Awaiting Claude Desktop run";
+          : "Pending";
         const gradeText =
           pred.status === "graded" && pred.grade
             ? `${pred.grade.total} / ${pred.grade.max}`
@@ -657,28 +796,28 @@ function renderLeaderboardPanel(mount, slates) {
   mount.append(wrapper);
 }
 
-function setupCopyPromptButton(thanksgivingSlate) {
+function setupCopyPromptButton(activeSlate) {
   const btn = document.getElementById("copy-prompt-btn");
   const live = document.getElementById("status-live");
-  if (!btn || !thanksgivingSlate) return;
+  if (!btn || !activeSlate) return;
 
   btn.addEventListener("click", async () => {
-    const gamesList = thanksgivingSlate.games
+    const gamesList = activeSlate.games
       .map((g, i) => `${i + 1}. ${g.id}: ${g.away.name} (${g.away.record}) at ${g.home.name} (${g.home.record}) — ${g.label}`)
       .join("\n");
     const prompt = [
-      `Use your nfl-game-scout skill to run a full live-verified pregame scouting dossier for all 3 Thanksgiving 2026 games:`,
+      `Use your nfl-game-scout skill to run a full live-verified pregame scouting dossier for ${activeSlate.title}:`,
       gamesList,
       "",
-      `Verify current injuries, spreads, weather/altitude physics, kicker longs, roster ages, assigned referees, 30-day sentiment (-5 to +5), full 4-tier GM-to-assistant-coach org charts, and one grounded Crazy Surprise Call per game.`,
-      `Return both the human dossier + JSON array matching scripts/arena_cli.py ingest so we can score Gemini vs. Claude side-by-side!`,
+      `Verify last week's starting QBs & official depth charts/inactives, intra-division record (if divisional), spreads, weather/altitude physics, kicker longs, roster ages, assigned referees, 30-day sentiment (-5 to +5), full 4-tier GM-to-assistant-coach org charts, and one grounded Crazy Surprise Call per game.`,
+      `Return both the human dossier + JSON array with exact modelMeta matching scripts/arena_cli.py ingest so we can score every model side-by-side!`,
     ].join("\n");
 
     try {
       await navigator.clipboard.writeText(prompt);
-      if (live) live.textContent = "Copied Thanksgiving multi-model benchmark prompt to clipboard!";
+      if (live) live.textContent = `Copied ${activeSlate.title} multi-model benchmark prompt to clipboard!`;
     } catch {
-      if (live) live.textContent = `Run locally: python3 scripts/arena_cli.py prompt --slate 2026-thanksgiving`;
+      if (live) live.textContent = `Run locally: python3 scripts/arena_cli.py prompt --slate ${activeSlate.slateId}`;
     }
   });
 }
@@ -688,6 +827,7 @@ async function boot() {
   initTabs();
   initAccordionCommands();
 
+  const bfMount = document.getElementById("black-friday-mount");
   const tgMount = document.getElementById("thanksgiving-mount");
   const w11Mount = document.getElementById("week11-mount");
   const lbMount = document.getElementById("leaderboard-mount");
@@ -708,14 +848,16 @@ async function boot() {
       })
     );
 
-    const tgSlate = loaded.find((s) => s.slateId === "2026-thanksgiving") ?? loaded[0];
-    const w11Slate = loaded.find((s) => s.slateId === "2026-week11-archive") ?? loaded[1];
+    const bfSlate = loaded.find((s) => s.slateId === "2026-black-friday") ?? loaded[0];
+    const tgSlate = loaded.find((s) => s.slateId === "2026-thanksgiving") ?? loaded[1];
+    const w11Slate = loaded.find((s) => s.slateId === "2026-week11-archive") ?? loaded[2];
 
+    if (bfMount && bfSlate) renderSlatePanel(bfMount, bfSlate);
     if (tgMount && tgSlate) renderSlatePanel(tgMount, tgSlate);
     if (w11Mount && w11Slate) renderSlatePanel(w11Mount, w11Slate);
     if (lbMount) renderLeaderboardPanel(lbMount, loaded);
 
-    setupCopyPromptButton(tgSlate);
+    setupCopyPromptButton(bfSlate ?? tgSlate);
   } catch (err) {
     const msg = `Could not load arena slate JSONs (${err instanceof Error ? err.message : String(err)}). Visit ${REPO_URL}`;
     if (tgMount) safeSetHTML(tgMount, `<p>${msg}</p>`);

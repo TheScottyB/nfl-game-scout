@@ -23,8 +23,9 @@ training-data rosters or last season's coordinators.
 
 1. **Zero Stale Roster Assumptions:** Always verify the current date, exact
    matchup, venue (watch for International Series / neutral-site games!),
-   current-season QBs, mid-season trades, coordinator changes, and official
-   inactives/injury reports before writing analysis.
+   **who started last week at QB**, current official depth charts, mid-week
+   trades/benchings/releases/suspensions, coordinator changes, and game-day
+   weather/official inactives before locking any pick or rendering video audio.
 2. **Respect Platform Boundaries:** Never bypass login walls, paywalls, or
    CAPTCHAs on X, Instagram, or sports sites. When social platforms gate posts
    behind sign-in, combine web-indexed social coverage, beat-writer quotes,
@@ -64,6 +65,13 @@ Verify and report:
 * Teams, current records, division standings, kickoff time, broadcast, **exact
   venue** (flag international/neutral-site stadiums), betting spread, moneyline,
   and over/under (plus public vs. sharp split if available).
+* **Full-Window Schedule Discovery:** For holiday or multi-day slates
+  (Thanksgiving, Christmas, International), check the entire **Wednesday–Monday**
+  schedule window so Thanksgiving Eve and Black Friday games are never omitted.
+* **Intra-Division Record Check:** Whenever a matchup is intra-division, verify
+  and report each team's **current-season record vs. the division** (e.g., `2-1
+  in NFC North`), earlier season head-to-head split, and how divisional
+  familiarity affects play-calling and trick-play frequency.
 * Official inactives (if within 90 minutes of kickoff) or latest injury report,
   highlighting returning stars and missing starters.
 * **How & Why Team A Wins** — split into:
@@ -203,4 +211,7 @@ Always conclude a Mode A Full Pregame Dossier with the standardized
 **Model Arena Scorecard** from
 [`references/model-arena-template.md`](./references/model-arena-template.md) so
 the user can run the same matchup across different models (Gemini, Claude,
-GPT, etc.) and grade accuracy + creativity after the final whistle.
+GPT, etc.) and grade accuracy + creativity after the final whistle. Every stored
+prediction in `docs/data/<slate>.json` must record exact model provenance inside
+`modelMeta` (`provider`, `exactModelId`, `harness`, `promptSha256`, `runAtUtc`,
+`latencySec`, and `usage`).

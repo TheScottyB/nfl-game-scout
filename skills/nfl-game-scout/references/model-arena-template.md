@@ -12,8 +12,10 @@ the game.
 ```markdown
 ### Model Arena Scorecard
 - **Model / App:** <Model Name & App, e.g., Gemini in Antigravity / Claude in Claude Desktop>
+- **Exact Model ID & Harness:** <exactModelId> via <provider>/<harness>
 - **Timestamp:** <YYYY-MM-DD HH:MM TZ>
 - **Matchup:** <Away Team> at <Home Team> (<Venue>)
+- **Intra-Division Record (if divisional):** <Away div record> vs <Home div record>
 - **Market Line Used:** <Favorite -X.X | O/U XX.X>
 - **Projected Winner & Score:** <Team> <XX> – <Team> <XX>
 - **Spread / Total Lean:** <Team +/-X.X> | <Over / Under XX.X>

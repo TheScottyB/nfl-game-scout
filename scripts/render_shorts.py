@@ -17,6 +17,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+try:
+    from tts_pronunciation import apply_tts_pronunciations
+except ImportError:
+    from scripts.tts_pronunciation import apply_tts_pronunciations
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DATA = REPO_ROOT / "docs" / "data" / "2026-thanksgiving.json"
 DEFAULT_OUT_DIR = REPO_ROOT / "shorts" / "output"
@@ -603,7 +608,7 @@ def render_short_video(
                 ]
             )
 
-            _run(["say", "-v", voice, "-r", str(rate), "-o", str(aiff_path), spec.narration])
+            _run(["say", "-v", voice, "-r", str(rate), "-o", str(aiff_path), apply_tts_pronunciations(spec.narration)])
             _run(["ffmpeg", "-y", "-i", str(aiff_path), "-ar", "48000", "-ac", "2", str(raw_wav)])
             raw_dur = _ffprobe_duration(raw_wav)
             clip_dur = max(4.0, round(raw_dur + 0.35, 2))

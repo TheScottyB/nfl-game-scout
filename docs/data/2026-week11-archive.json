@@ -4,7 +4,7 @@
   "subtitle": "Origin slate that sparked NFL Game Scout: SNF Mexico City (35-10 + 71-yard Fair-Catch Free Kick!) and MNF Bengals at Commanders.",
   "season": 2026,
   "week": "Week 11 (SNF & MNF)",
-  "updatedAtUtc": "2026-11-24T00:32:16Z",
+  "updatedAtUtc": "2026-11-27T17:52:00Z",
   "games": [
     {
       "id": "vikings-at-49ers-mexico",
@@ -148,6 +148,13 @@
         {
           "modelId": "gemini",
           "modelLabel": "Gemini (Antigravity)",
+          "modelMeta": {
+            "provider": "google",
+            "exactModelId": "gemini-antigravity",
+            "harness": "antigravity",
+            "webSearchEnabled": true,
+            "runAtUtc": "2026-11-23T01:07:00Z"
+          },
           "status": "graded",
           "publishedAtUtc": "2026-11-23T01:07:00Z",
           "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/blob/main/README.md",
@@ -194,7 +201,7 @@
     },
     {
       "id": "bengals-at-commanders-mnf",
-      "label": "Week 11 MNF · Live / Pending Grade",
+      "label": "Week 11 MNF · Graded Receipt",
       "away": {
         "abbr": "CIN",
         "name": "Cincinnati Bengals",
@@ -335,7 +342,14 @@
         {
           "modelId": "gemini",
           "modelLabel": "Gemini (Antigravity)",
-          "status": "locked",
+          "modelMeta": {
+            "provider": "google",
+            "exactModelId": "gemini-antigravity",
+            "harness": "antigravity",
+            "webSearchEnabled": true,
+            "runAtUtc": "2026-11-24T00:12:00Z"
+          },
+          "status": "graded",
           "publishedAtUtc": "2026-11-24T00:12:00Z",
           "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week11-archive.json",
           "winnerAbbr": "CIN",
@@ -361,10 +375,27 @@
             "detail": "Late 54-point shootout 2-point try gets picked/scooped and returned the other way for a 3-point swing.",
             "probability": "~3%"
           },
-          "grade": null
+          "grade": {
+            "total": 25,
+            "max": 100,
+            "breakdown": {
+              "winner": 0,
+              "scoreMargin": 6,
+              "spreadTotal": 0,
+              "winScriptRef": 8,
+              "orgSentiment": 9,
+              "surpriseBonus": 2
+            },
+            "notes": "Missed WAS +6.5 outright upset (22-20 on rookie Drew Stevens' walk-off FG) and Under 54.0 (42 pts). Biggest lesson: Washington billed a promotional 'Blackout' night and the stadium lights literally went out in Q3 (10:00 PM vendor timer), inspiring the Narrative-First venue-promotion rule in SKILL.md."
+          }
         }
       ],
-      "result": null
+      "result": {
+        "finalScore": { "away": 20, "home": 22 },
+        "winnerAbbr": "WAS",
+        "summary": "Washington upset Cincinnati 22-20 on rookie K Drew Stevens' walk-off field goal at 0:00, flipping 95% public ML handle on CIN and landing Under 54.0.",
+        "freakPlayOutcome": "Mid-Q3 total stadium blackout halted play for several minutes on Washington's promotional 'Blackout' night after the lighting vendor left a 10:00 PM weekday shutoff schedule active; no Tress Way fake punt occurred."
+      }
     }
   ]
 }

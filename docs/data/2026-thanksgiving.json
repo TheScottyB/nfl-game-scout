@@ -1,10 +1,10 @@
 {
   "slateId": "2026-thanksgiving",
   "title": "Thanksgiving 2026 Tripleheader — Multi-Model Arena",
-  "subtitle": "All 3 Thursday matchups scouted across win scripts, physics, refs, 30-day sentiment, full GM-to-assistant org charts, and freak-play calls.",
+  "subtitle": "All 3 Thursday matchups scouted pre-kickoff and graded post-game (plus Thanksgiving Eve GB @ LAR missed-game receipt).",
   "season": 2026,
   "week": "Week 12 (Thanksgiving)",
-  "updatedAtUtc": "2026-11-24T00:32:16Z",
+  "updatedAtUtc": "2026-11-27T17:52:00Z",
   "studioShortUrl": "https://youtube.com/shorts/jLTHaBAOj44",
   "games": [
     {
@@ -53,6 +53,13 @@
         "spread": "Bears -2.5",
         "moneyline": "CHI -135 / DET +115",
         "total": "55.5"
+      },
+      "divisionContext": {
+        "isDivisional": true,
+        "division": "NFC North",
+        "awayDivRecord": "Entered tied 8-2 atop NFC North (finished 9-2)",
+        "homeDivRecord": "Entered tied 8-2 atop NFC North (dropped to 8-3)",
+        "note": "Intra-division familiarity produced a straight-up shootout with zero trick plays; post-game review added mandatory intra-division record checks to SKILL.md."
       },
       "weather": {
         "summary": "Indoor Dome (70°F controlled, 0 mph wind)",
@@ -161,7 +168,14 @@
         {
           "modelId": "gemini",
           "modelLabel": "Gemini (Antigravity)",
-          "status": "locked",
+          "modelMeta": {
+            "provider": "google",
+            "exactModelId": "gemini-antigravity",
+            "harness": "antigravity",
+            "webSearchEnabled": true,
+            "runAtUtc": "2026-11-24T00:32:16Z"
+          },
+          "status": "graded",
           "publishedAtUtc": "2026-11-24T00:32:16Z",
           "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
           "winnerAbbr": "DET",
@@ -187,28 +201,27 @@
             "detail": "Cairo Santos (58 career long) and Jake Bates (59 career long) both drill 55+ yard indoor field goals inside the final 4 minutes.",
             "probability": "~11%"
           },
-          "grade": null
-        },
-        {
-          "modelId": "claude",
-          "modelLabel": "Claude (Claude Desktop)",
-          "status": "pending",
-          "publishedAtUtc": null,
-          "receiptUrl": null,
-          "winnerAbbr": null,
-          "projectedScore": null,
-          "spreadLean": "Awaiting Claude Desktop run",
-          "totalLean": "Pending",
-          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
-          "refCall": "Pending",
-          "sentimentEdge": "Pending",
-          "hiddenMismatch": "Pending",
-          "surpriseCall": null,
-          "bonusSleeper": null,
-          "grade": null
+          "grade": {
+            "total": 40,
+            "max": 100,
+            "breakdown": {
+              "winner": 0,
+              "scoreMargin": 8,
+              "spreadTotal": 8,
+              "winScriptRef": 10,
+              "orgSentiment": 12,
+              "surpriseBonus": 2
+            },
+            "notes": "Nailed Over 55.5 (74 pts) and Hank Fraley OL/Gibbs 205-yd run edge + Campbell 4th-down aggression flipping late momentum, but missed CHI outright win (39-35), over-indexed on Hochuli flags (only 8 total), had zero trick plays, and missed intra-division record weighting."
+          }
         }
       ],
-      "result": null
+      "result": {
+        "finalScore": { "away": 39, "home": 35 },
+        "winnerAbbr": "CHI",
+        "summary": "Caleb Williams (30/44, 345 yds, 2 TDs + 2-pt run) hit Rome Odunze for a 6-yd GW TD with 0:03 left after Detroit failed a late 4th-and-4. Jahmyr Gibbs rushed for 205 yds & 3 TDs, while Shawn Hochuli called only 8 total penalties (CHI 5/25, DET 3/20) with zero trick plays.",
+        "freakPlayOutcome": "First-half Derrick Moore strip-sack ended in an illegal-bat safety in the end zone; zero eligible-tackle or trick plays occurred."
+      }
     },
     {
       "id": "eagles-at-cowboys",
@@ -256,6 +269,13 @@
         "spread": "Cowboys -8.5",
         "moneyline": "DAL -450 / PHI +350",
         "total": "47.5"
+      },
+      "divisionContext": {
+        "isDivisional": true,
+        "division": "NFC East",
+        "awayDivRecord": "Lost first meeting 38-21 to DAL (Oct 26); swept split 1-1 with Thanksgiving upset",
+        "homeDivRecord": "Beat PHI 38-21 in first meeting; 1-1 season split after blowing 21-pt lead",
+        "note": "Divisional revenge game starred ex-Cowboys practice-squad QB Joe Milton III leading the largest Thanksgiving comeback in NFL history."
       },
       "weather": {
         "summary": "Indoor Climate + Low West Sunset Glare (Q2/Q3)",
@@ -365,7 +385,14 @@
         {
           "modelId": "gemini",
           "modelLabel": "Gemini (Antigravity)",
-          "status": "locked",
+          "modelMeta": {
+            "provider": "google",
+            "exactModelId": "gemini-antigravity",
+            "harness": "antigravity",
+            "webSearchEnabled": true,
+            "runAtUtc": "2026-11-24T00:32:16Z"
+          },
+          "status": "graded",
           "publishedAtUtc": "2026-11-24T00:32:16Z",
           "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
           "winnerAbbr": "DAL",
@@ -391,28 +418,27 @@
             "detail": "With Philly down Tanner McKee's upside, Fangio baits Prescott into a pick-six or Mike Pettine chaos allows a scoop-and-score to keep the +8.5 cover sweaty.",
             "probability": "~11%"
           },
-          "grade": null
-        },
-        {
-          "modelId": "claude",
-          "modelLabel": "Claude (Claude Desktop)",
-          "status": "pending",
-          "publishedAtUtc": null,
-          "receiptUrl": null,
-          "winnerAbbr": null,
-          "projectedScore": null,
-          "spreadLean": "Awaiting Claude Desktop run",
-          "totalLean": "Pending",
-          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
-          "refCall": "Pending",
-          "sentimentEdge": "Pending",
-          "hiddenMismatch": "Pending",
-          "surpriseCall": null,
-          "bonusSleeper": null,
-          "grade": null
+          "grade": {
+            "total": 37,
+            "max": 100,
+            "breakdown": {
+              "winner": 0,
+              "scoreMargin": 4,
+              "spreadTotal": 8,
+              "winScriptRef": 11,
+              "orgSentiment": 6,
+              "surpriseBonus": 8
+            },
+            "notes": "Stale QB failure: missed Tanner McKee's earlier November benching—Joe Milton III (ex-DAL practice squad) started and dropped 331 yds + 4 TDs in PHI's historic 21-pt comeback (39-38). Credited for Over 47.5 (77), nailing Adrian Hill's Q2 DPI spree, and hitting the Philly non-offensive TD sleeper (blocked punt TD)."
+          }
         }
       ],
-      "result": null
+      "result": {
+        "finalScore": { "away": 39, "home": 38 },
+        "winnerAbbr": "PHI",
+        "summary": "Largest Thanksgiving comeback in NFL history (down 31-10): ex-Cowboys practice-squad QB Joe Milton III (331 pass yds, 3 TDs + rush TD) & DeVonta Smith (200 yds, 2 TDs) sparked the rally, Ty Robinson blocked a punt for Kenny Moore II's TD, Aubrey hit 59 & missed 40, and Jake Elliott drilled a 59-yd walk-off FG with 0:02 left. Adrian Hill drew heat for back-to-back Q2 DPI calls on PHI.",
+        "freakPlayOutcome": "Bonus sleeper hit via Ty Robinson's Q4 blocked punt returned for a TD (and Aubrey hit 59 yds); sun-glare muff and 68-yd record FG did not materialize."
+      }
     },
     {
       "id": "chiefs-at-bills",
@@ -460,6 +486,11 @@
         "spread": "Bills -2.5 (some books -3)",
         "moneyline": "BUF -154 / KC +129",
         "total": "50.5"
+      },
+      "divisionContext": {
+        "isDivisional": false,
+        "division": "AFC Non-Divisional (AFC West vs AFC East)",
+        "note": "AFC #1-seed tiebreaker showdown."
       },
       "weather": {
         "summary": "35-38°F, Chance Light Rain/Drizzle, 3-10 mph wind",
@@ -567,7 +598,14 @@
         {
           "modelId": "gemini",
           "modelLabel": "Gemini (Antigravity)",
-          "status": "locked",
+          "modelMeta": {
+            "provider": "google",
+            "exactModelId": "gemini-antigravity",
+            "harness": "antigravity",
+            "webSearchEnabled": true,
+            "runAtUtc": "2026-11-24T00:32:16Z"
+          },
+          "status": "graded",
           "publishedAtUtc": "2026-11-24T00:32:16Z",
           "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-thanksgiving.json",
           "winnerAbbr": "BUF",
@@ -593,28 +631,40 @@
             "detail": "KC exploits Jim Leonhard's aggressive run-fit pursuit off heavy personnel with a red-zone shovel or pitch trick touchdown.",
             "probability": "~9%"
           },
-          "grade": null
-        },
-        {
-          "modelId": "claude",
-          "modelLabel": "Claude (Claude Desktop)",
-          "status": "pending",
-          "publishedAtUtc": null,
-          "receiptUrl": null,
-          "winnerAbbr": null,
-          "projectedScore": null,
-          "spreadLean": "Awaiting Claude Desktop run",
-          "totalLean": "Pending",
-          "primaryKey": "Upload dist/nfl-game-scout.zip to Claude Desktop, click 'Copy Multi-Model Prompt', and ingest Claude's JSON before kickoff.",
-          "refCall": "Pending",
-          "sentimentEdge": "Pending",
-          "hiddenMismatch": "Pending",
-          "surpriseCall": null,
-          "bonusSleeper": null,
-          "grade": null
+          "grade": {
+            "total": 72,
+            "max": 100,
+            "breakdown": {
+              "winner": 20,
+              "scoreMargin": 10,
+              "spreadTotal": 8,
+              "winScriptRef": 12,
+              "orgSentiment": 9,
+              "surpriseBonus": 13
+            },
+            "notes": "Nailed BUF -2.5 & exact 3-pt winning margin (13-10 vs 27-24) AND near-bullseye on Reverse 13 Seconds (late Alex Kemp catch overturn + partial punt block with 4s left -> Tyler Bass 57-yd walk-off FG in driving rain/wind). Docked on Over 50.5 miss & stale Kenneth Walker III inactive (groin)."
+          }
         }
       ],
-      "result": null
+      "result": {
+        "finalScore": { "away": 10, "home": 13 },
+        "winnerAbbr": "BUF",
+        "summary": "Driving rain & heavy wind turned Highmark into a 13-10 slugfest (Allen 10/21, 81 yds, 2 INTs; Cook 117 rush yds & TD; Mahomes 174 yds, 0 TDs; Kenneth Walker III OUT groin, rookie Emmett Johnson scored KC's TD; Butker missed 46-yd FG). After Alex Kemp's crew overturned a 3rd-down Rashee Rice catch on replay, Joe Andreessen partially blocked KC's punt with 0:04 left and Tyler Bass drilled a 57-yd walk-off FG at 0:00.",
+        "freakPlayOutcome": "Near-bullseye on Reverse 13 Seconds: late Alex Kemp officiating overturn + partial punt block with 4 seconds left set up Tyler Bass's 57-yd cold-weather walk-off FG."
+      }
+    }
+  ],
+  "missedGames": [
+    {
+      "id": "packers-at-rams",
+      "label": "Thanksgiving Eve · Wed, Nov 25, 2026 · Netflix",
+      "matchup": "Green Bay Packers (6-5) at Los Angeles Rams (7-4)",
+      "venue": "SoFi Stadium (Inglewood, CA)",
+      "kickoffUtc": "2026-11-26T01:15:00Z",
+      "finalScore": { "away": 13, "home": 26 },
+      "winnerAbbr": "LAR",
+      "reasonMissed": "2026-thanksgiving only queried Thursday's traditional tripleheader, omitting the NFL's first-ever Wednesday Thanksgiving Eve game. Fixed by adding Wed-Mon full-window schedule discovery to SKILL.md.",
+      "recapSummary": "Tied 13-13 at half before LA dominated 2nd half (40:40 TOP; GB ran just 16 plays after intermission). RB Blake Corum erupted on his 26th birthday for 184 rush yds & TD on 32 carries without Puka Nacua or Davante Adams; Micah Parsons logged a sack in his Packers ACL-return debut; Rams S Kamren Kinchens was ejected on the hit that concussed Christian Watson."
     }
   ]
 }

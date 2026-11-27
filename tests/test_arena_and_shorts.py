@@ -18,6 +18,7 @@ sys.path.insert(0, str(SCRIPTS_DIR))
 import arena_cli  # noqa: E402
 import render_shorts  # noqa: E402
 import render_studio_short  # noqa: E402
+import tts_pronunciation  # noqa: E402
 
 
 class TestArenaAndShorts(unittest.TestCase):
@@ -52,11 +53,19 @@ class TestArenaAndShorts(unittest.TestCase):
             self.assertEqual(len(game["orgChart"]["tiers"]), 4)
             self.assertTrue(game["orgChart"]["hiddenMismatch"])
             self.assertTrue(game["referee"]["headRef"])
+            self.assertIn("divisionContext", game)
+            self.assertIsInstance(game["divisionContext"]["isDivisional"], bool)
             self.assertGreaterEqual(game["sentiment30d"]["awayScore"], -5)
             self.assertLessEqual(game["sentiment30d"]["awayScore"], 5)
-            locked = [p for p in game["predictions"] if p["status"] == "locked"]
-            self.assertGreaterEqual(len(locked), 1)
-            self.assertTrue(locked[0]["surpriseCall"]["title"])
+            active = [p for p in game["predictions"] if p["status"] in {"locked", "graded"}]
+            self.assertGreaterEqual(len(active), 1)
+            self.assertTrue(active[0]["surpriseCall"]["title"])
+            self.assertIsNotNone(game.get("result"))
+            self.assertEqual(active[0]["status"], "graded")
+            self.assertIsNotNone(active[0].get("grade"))
+
+        missed = tg.get("missedGames", [])
+        self.assertTrue(any(m.get("id") == "packers-at-rams" for m in missed))
 
     def test_arena_cli_ingest_and_grade_on_temp_copy(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -306,6 +315,150 @@ class TestArenaAndShorts(unittest.TestCase):
             self.assertEqual(len(studio_titles), 4)
             for t in studio_titles:
                 self.assertLessEqual(len(t), 100)
+
+    def test_tts_pronunciation_lexicon_and_hud_preservation(self):
+        self.assertEqual(
+            tts_pronunciation.apply_tts_pronunciations("With Shawn Hochuli throwing 14 flags"),
+            "With Shawn Hock-yoo-lee throwing 14 flags",
+        )
+        self.assertEqual(
+            tts_pronunciation.apply_tts_pronunciations("Hochuli's crew and HOCHULI flags"),
+            "Hock-yoo-lee's crew and Hock-yoo-lee flags",
+        )
+        self.assertEqual(
+            tts_pronunciation.apply_tts_pronunciations("Eric Bieniemy, Eddy Piñeiro, and Rome Odunze"),
+            "Eric Bee-en-uh-mee, Eddy Pin-yair-oh, and Rome Oh-doon-zay",
+        )
+        # Word boundaries prevent partial-word corruption
+        self.assertEqual(
+            tts_pronunciation.apply_tts_pronunciations("Hochulism Pukan"),
+            "Hochulism Pukan",
+        )
+        # Visual HUD preserves exact written spelling ("HOCHULI")
+        hud_html = render_studio_short.build_hud_html(render_studio_short.BEARS_LIONS_SCENES[2], 5)
+        self.assertIn("HOCHULI FLAGS", hud_html)
+        self.assertIn("SHAWN HOCHULI", hud_html)
+        self.assertNotIn("Hock-yoo-lee", hud_html)
+
+    def test_black_friday_multi_model_provenance(self):
+        bf_path = DOCS_DIR / "data" / "2026-black-friday.json"
+        self.assertTrue(bf_path.is_file())
+        bf = json.loads(bf_path.read_text(encoding="utf-8"))
+        self.assertEqual(bf["slateId"], "2026-black-friday")
+        games = bf["games"]
+        self.assertEqual(len(games), 1)
+        game = games[0]
+        self.assertEqual(game["id"], "broncos-at-steelers")
+        locked = [p for p in game["predictions"] if p["status"] in {"locked", "graded"}]
+        self.assertGreaterEqual(len(locked), 2)
+        for pred in locked:
+            meta = pred.get("modelMeta")
+            self.assertIsInstance(meta, dict)
+            self.assertTrue(meta.get("provider"))
+            self.assertTrue(meta.get("exactModelId"))
+            self.assertTrue(meta.get("harness"))
+            self.assertRegex(str(meta.get("promptSha256", "")), r"^[0-9a-f]{64}$")
+            self.assertTrue(meta.get("runAtUtc"))
+        self.assertEqual(arena_cli.validate_all(), [])
+
+    def test_arena_cli_run_dry_run_and_validation(self):
+        res = subprocess.run(
+            [
+                "python3",
+                str(SCRIPTS_DIR / "arena_cli.py"),
+                "run",
+                "--slate",
+                "2026-black-friday",
+                "--models",
+                "gemini:gemini-3.1-pro-preview,claude-cli:sonnet",
+                "--dry-run",
+            ],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        dry = json.loads(res.stdout)
+        self.assertEqual(len(dry), 2)
+        self.assertTrue(all(item["dryRun"] for item in dry))
+        self.assertEqual(dry[0]["promptSha256"], dry[1]["promptSha256"])
+
+        bf = json.loads((DOCS_DIR / "data" / "2026-black-friday.json").read_text(encoding="utf-8"))
+        bf_bad_meta = json.loads(json.dumps(bf))
+        if bf_bad_meta["games"][0]["predictions"]:
+            bf_bad_meta["games"][0]["predictions"][0]["modelMeta"] = {"provider": "google"}
+            errs = arena_cli.validate_slate_dict(bf_bad_meta, "bad-meta.json")
+            self.assertTrue(any("exactModelId" in e for e in errs))
+
+        bf_bad_missed = json.loads(json.dumps(bf))
+        bf_bad_missed["missedGames"] = [{"id": "../evil", "label": "X"}]
+        m_errs = arena_cli.validate_slate_dict(bf_bad_missed, "bad-missed.json")
+        self.assertTrue(any("missedGames" in e for e in m_errs))
+
+    def test_studio_short_multi_model_faceoff_and_pending_guard(self):
+        bf_path = DOCS_DIR / "data" / "2026-black-friday.json"
+        bf = json.loads(bf_path.read_text(encoding="utf-8"))
+        cuts = render_studio_short.build_cuts_from_slate(bf_path)
+        game_cut = cuts["broncos-at-steelers"]
+        outro = game_cut.scenes[-1]
+        outro_text = " ".join(
+            [outro.top_badge, outro.headline, outro.call_pill, outro.caption, *(t.text for t in outro.dialogue)]
+        )
+        self.assertNotIn("GEMINI VS. CLAUDE", outro_text)
+        locked = [p for p in bf["games"][0]["predictions"] if p["status"] in {"locked", "graded"}]
+        if len(locked) >= 2:
+            self.assertIn(f"{len(locked)}-MODEL ARENA", outro.top_badge)
+            for p in locked[:3]:
+                short_name = render_studio_short._short_model_name(p)
+                self.assertIn(short_name, outro_text)
+
+        # Pending guard catches advertising an un-run pending model in Scene 5
+        synthetic = json.loads(json.dumps(bf))
+        synthetic["games"][0]["predictions"] = [
+            synthetic["games"][0]["predictions"][0]
+            if synthetic["games"][0]["predictions"]
+            else {
+                "modelId": "gemini",
+                "modelLabel": "Gemini 3.1 Pro",
+                "status": "locked",
+                "winnerAbbr": "DEN",
+                "projectedScore": {"away": 20, "home": 13},
+                "surpriseCall": {"title": "T", "detail": "D", "probability": "~8%"},
+            },
+            {
+                "modelId": "grok",
+                "modelLabel": "Grok",
+                "status": "pending",
+                "winnerAbbr": None,
+                "projectedScore": None,
+            },
+        ]
+        bad_cut = render_studio_short.StudioCut(
+            cut_id="broncos-at-steelers",
+            output_filename="test.mp4",
+            asset_subdir="test",
+            default_tempo=1.0,
+            yt_title="Test #shorts",
+            yt_description="Test",
+            scenes=(
+                *game_cut.scenes[:-1],
+                render_studio_short.StudioScene(
+                    index=5,
+                    slug="05-pick-arena",
+                    top_badge="GEMINI VS. GROK",
+                    headline="PICK",
+                    call_pill="PILL",
+                    caption="Gemini vs Grok live",
+                    accent_hex="#34d399",
+                    motion="zoom_out",
+                    transition_out="fade",
+                    art_prompt="prompt",
+                    dialogue=(render_studio_short.DialogueTurn("Alex", "crisp", "Grok is live"),),
+                ),
+            ),
+        )
+        errs = render_studio_short.validate_cut_models(bad_cut, synthetic)
+        self.assertTrue(any("grok" in e.lower() for e in errs))
 
 
 if __name__ == "__main__":

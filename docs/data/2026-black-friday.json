@@ -1,0 +1,316 @@
+{
+  "slateId": "2026-black-friday",
+  "title": "Black Friday 2026 \u2014 Live Multi-Model Arena",
+  "subtitle": "Denver Broncos (8-2) at Pittsburgh Steelers (6-4) \u2014 live pre-kickoff multi-model predictions with exact recorded model provenance.",
+  "season": 2026,
+  "week": "Week 12 (Black Friday)",
+  "updatedAtUtc": "2026-11-27T17:59:31Z",
+  "games": [
+    {
+      "id": "broncos-at-steelers",
+      "label": "Black Friday \u00b7 3:00 PM ET",
+      "away": {
+        "abbr": "DEN",
+        "name": "Denver Broncos",
+        "record": "8-2",
+        "color": "#FB4F14",
+        "avgAge": 26.9,
+        "qb": "Bo Nix (riding a 6-game winning streak; RB J.K. Dobbins suspended for conduct detrimental, rookie Jonah Coleman leads backfield)",
+        "kicker": {
+          "name": "Wil Lutz",
+          "careerLong": 60,
+          "ceiling": "54-56 yds in 15-30 mph gusty rain",
+          "note": "Career long 60 yds; heavy Pittsburgh crosswinds trim deep-kick distance."
+        }
+      },
+      "home": {
+        "abbr": "PIT",
+        "name": "Pittsburgh Steelers",
+        "record": "6-4",
+        "color": "#FFB612",
+        "avgAge": 27.1,
+        "qb": "Mason Rudolph (1st start of 2026 after Pittsburgh benched and released Aaron Rodgers following public criticism of HC Mike McCarthy)",
+        "kicker": {
+          "name": "Chris Boswell",
+          "careerLong": 60,
+          "ceiling": "55-57 yds at windy Acrisure",
+          "note": "Career long 60 yds; elite familiarity with Acrisure's swirling south-end gusts."
+        }
+      },
+      "kickoffUtc": "2026-11-27T20:00:00Z",
+      "broadcast": "Amazon Prime Video",
+      "venue": {
+        "stadium": "Acrisure Stadium",
+        "city": "Pittsburgh, PA",
+        "surface": "Outdoor Grass",
+        "elevationFt": 730,
+        "quirk": "Open south end toward the Ohio/Allegheny/Monongahela confluence creates notorious swirling gusts up to 30 mph on late-November kicks."
+      },
+      "odds": {
+        "spread": "Broncos -4.5",
+        "moneyline": "DEN -220 / PIT +185",
+        "total": "37.5"
+      },
+      "divisionContext": {
+        "isDivisional": false,
+        "division": "AFC Non-Divisional (AFC West vs AFC North)",
+        "note": "High-leverage AFC playoff tiebreaker: 8-2 Broncos chasing AFC West / #1 seed vs. 6-4 Steelers defending Wild Card positioning."
+      },
+      "weather": {
+        "summary": "41\u00b0F (upper-20s wind chill), light rain/drizzle, 14-17 mph W/SW gusts to 30 mph",
+        "tempF": 41,
+        "wind": "14-17 mph W/SW (gusts 30 mph)",
+        "precipChance": "Light rain/drizzle",
+        "physicsNote": "Heavy 30 mph gusts + wet grass slice ~5-7 yds off deep field goals, depress passing efficiency, and elevate fumble/muffed-punt volatility."
+      },
+      "injuries": {
+        "away": [
+          "RB J.K. Dobbins OUT (suspended for conduct detrimental); rookie Jonah Coleman leads backfield after breakout vs. LV.",
+          "RB RJ Harvey OUT, DE Sai'vion Jones OUT (hamstring), TE Caleb Lohner OUT (foot), S Taylor Rapp Q/OUT (quad), RB Tyler Badie Q/IR (thumb)."
+        ],
+        "home": [
+          "QB Aaron Rodgers RELEASED mid-week after public criticism of Mike McCarthy \u2014 Mason Rudolph makes his first 2026 start.",
+          "LB Alex Highsmith OUT (ankle), G Gennings Dunker OUT (knee), WR Ben Skowronek IR, LB Cole Holcomb Q (heel), WR DK Metcalf Q (illness).",
+          "WR Michael Pittman Jr. activated off IR and Max Hurleman promoted from practice squad."
+        ]
+      },
+      "referee": {
+        "headRef": "Brad Allen",
+        "flagsPerGame": "10-13 accepted penalties/gm (low-to-moderate)",
+        "yardsPerGame": "~85-95 yds/gm",
+        "tendencies": [
+          "Moderate-to-low Offensive Holding (~1.7-1.8/gm) and DPI (~0.7-0.9/gm); lets DBs and linemen play physically.",
+          "Low Roughing the Passer (~0.3/gm), while staying vigilant on pre-snap False Starts (~1.9/gm).",
+          "Controlled whistle on drive-extending defensive flags historically leans Under."
+        ],
+        "tonightImpact": "Allen's lenient holding and DPI whistle lets physical DBs and trench linemen battle in 30 mph gusts \u2014 favoring a low-scoring grind unless pre-snap false starts stall Mason Rudolph drives."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "8-2 Denver enters on a 6-game winning streak with stable leadership (Sean Payton, Bo Nix, Vance Joseph) facing a Steelers locker room in post-Rodgers turmoil.",
+            "Vance Joseph's aggressive pass rush and DBs (Robert Livingston, Doug Belk) can squeeze Mason Rudolph in 30 mph gusts, especially if DK Metcalf is limited by illness.",
+            "Rookie RB Jonah Coleman + Zach Strief's veteran OL give Bo Nix a downhill answer in wet grass without Dobbins."
+          ],
+          "how": [
+            "Lean on Jonah Coleman and quick perimeter rhythm throws for Bo Nix to neutralize swirling winds and avoid turnovers.",
+            "Dial up Vance Joseph simulated pressures to rattle Mason Rudolph in his first 2026 start.",
+            "Play clean special teams under Darren Rizzi so Chris Boswell and swirling gusts don't gift Pittsburgh short fields."
+          ]
+        },
+        "home": {
+          "why": [
+            "Classic post-crisis 'nobody believes in us' rally at home in miserable 41\u00b0F/30-mph-gust weather where an underdog can drag a 37.5-total game into the mud.",
+            "Chris Boswell (60-yd career long) knows Acrisure's open south-end wind currents better than any visiting kicker.",
+            "Denver's backfield is thinned (Dobbins suspended, RJ Harvey out, Badie banged up), putting heavy load on rookie Jonah Coleman against Domata Peko and Patrick Graham's front."
+          ],
+          "how": [
+            "Protect Mason Rudolph with James Campen's OL, emphasize ball security, and force Denver to drive 80 yards into 30 mph gusts.",
+            "Test Denver's banged-up RB depth and force Bo Nix into tight-window throws where Brad Allen lets DBs hand-fight.",
+            "Win field position and special teams behind Danny Crossman & Chris Boswell to steal a 17-13 / 16-13 grinder."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 4.0,
+        "homeScore": -3.5,
+        "awayTrajectory": "Surging / 6-Game Streak",
+        "homeTrajectory": "Turbulent / Post-Rodgers Reset",
+        "awayVibe": "High confidence riding a 6-game win streak, though Dobbins' conduct suspension tested backfield focus early this week.",
+        "homeVibe": "Full locker-room shockwaves after back-to-back post-bye losses, Aaron Rodgers criticizing Mike McCarthy, and his abrupt release handing keys to Mason Rudolph.",
+        "awayBeat": "Denver beat spotlights Sean Payton's discipline on Dobbins, rookie Jonah Coleman's emergence, and chasing AFC West / #1 seed.",
+        "homeBeat": "Pittsburgh beat focused on McCarthy vs. Rodgers fallout, Mason Rudolph stepping in, and Michael Pittman Jr.'s return off IR.",
+        "marketSplit": "Public handle heavy on Broncos -4.5 after Rodgers' release; sharp Under 37.5 & Steelers +4.5 dog nibbles eyeing 30 mph gusts.",
+        "contrarianTakeaway": "Massive sentiment gap (+4.0 vs -3.5) makes Denver public chalk, but 30 mph gusts + a low 37.5 total keep Steelers +4.5 live if Pittsburgh plays clean."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "George Paton (GM), Reed Burckhardt (Asst. GM)",
+            "homeStaff": "Omar Khan (GM), Andy Weidl (Asst. GM)",
+            "edge": "DEN",
+            "impact": "Denver's depth held up through a 6-game streak even after suspending Dobbins; Pittsburgh's QB room imploded mid-week."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Sean Payton (HC), Davis Webb (OC), Vance Joseph (DC), Darren Rizzi (AHC/STC)",
+            "homeStaff": "Mike McCarthy (HC), Brian Angelichio (OC), Patrick Graham (DC), Danny Crossman (STC)",
+            "edge": "DEN",
+            "impact": "Payton + Vance Joseph + Darren Rizzi provide calm continuity vs. McCarthy navigating a mid-week QB crisis on a short turnaround."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Zach Strief (Run/AHC), John Morton (Pass), Chris Morgan (OL), Lou Ayeni (RB), Ronald Curry (WR), Robert Livingston (Def Pass), Jamar Cain (DL), Doug Belk (DB), Jeff Schmedding (ILB), Isaac Shewmaker (OLB)",
+            "homeStaff": "Tom Arth (QB), James Campen (OL), Robert Kugler (TE), Adam Henry (WR), Joe Whitt Jr. (AHC/Sec), Jason Simmons (Def Pass/DB), Domata Peko (DL), C.J. Ah You (OLB), Scott McCurley (ILB)",
+            "edge": "Even",
+            "impact": "James Campen & Tom Arth prepping Mason Rudolph on short notice vs. Vance Joseph's Jamar Cain/Doug Belk defense; Joe Whitt Jr. & Jason Simmons challenge Bo Nix."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Joe Vitt (Sr. Def. Asst.), Broncos Offensive/Defensive QC & Special Teams Assistants",
+            "homeStaff": "Frank Cignetti Jr. (Sr. Off. Asst.), Tim Berbenich (Game Mgmt/QB), Derius Swinton II (Sr. ST Asst.)",
+            "edge": "Even",
+            "impact": "Frank Cignetti Jr. & Tim Berbenich stabilize McCarthy's emergency Mason Rudolph script, while Joe Vitt reinforces Payton/Joseph's defensive adjustments."
+          }
+        ],
+        "crossStaffTells": [
+          "Mike McCarthy & Senior Offensive Assistant Frank Cignetti Jr. previously worked together in Green Bay and leaned on quick-game rhythm concepts when shifting from Aaron Rodgers to Mason Rudolph.",
+          "Broncos DC Vance Joseph noted mid-week that Denver's core rush plan stays intact despite Pittsburgh's abrupt switch from Rodgers to Rudolph."
+        ],
+        "hiddenMismatch": "DEN DL Coach Jamar Cain & Sr. Def. Asst. Joe Vitt vs. PIT OL Coach James Campen & QB Coach Tom Arth \u2014 emergency protection & cadence for Mason Rudolph's first 2026 start in swirling 30 mph wind."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini-3-flash-preview",
+          "modelLabel": "Gemini 3 Flash Preview",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-3-flash-preview",
+            "exactModelId": "gemini-3-flash-preview",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "0fb2cf393bcd825134b0df34a6b33d8c3eb3522b6f789c54bfce3eec6650fce8",
+            "runAtUtc": "2026-11-27T17:59:39Z",
+            "latencySec": 7.67,
+            "usage": {
+              "inputTokens": 3208,
+              "outputTokens": 472,
+              "totalTokens": 4426
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T17:59:39Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-black-friday.json",
+          "winnerAbbr": "DEN",
+          "projectedScore": {
+            "away": 19,
+            "home": 13
+          },
+          "spreadLean": "DEN -4.5",
+          "totalLean": "Under 37.5",
+          "primaryKey": "Vance Joseph's aggressive simulated pressures will overwhelm Mason Rudolph in his first 2026 start amidst 30 mph swirling gusts and a disrupted Pittsburgh locker room.",
+          "refCall": "Brad Allen \u2014 His lenient whistle on DPI and holding will allow Denver\u2019s physical secondary to aggressively jam Pittsburgh\u2019s receivers, further stifling a rhythm-starved Rudolph offense.",
+          "sentimentEdge": "AWAY +4.0 vs HOME -3.5 \u2014 Denver's 6-game win streak stability contrasts sharply with the 'post-Rodgers' locker room vacuum and mid-week coaching friction in Pittsburgh.",
+          "hiddenMismatch": "DEN DL Coach Jamar Cain vs. PIT OL Coach James Campen \u2014 Cain's front will exploit a Pittsburgh line adjusting to Rudolph's different pocket cadence in wet, high-wind conditions.",
+          "surpriseCall": {
+            "title": "The South-End Gust Safety",
+            "detail": "A high-snap or muffed punt occurs in the notorious open south end of Acrisure Stadium, where a 30 mph gust causes a special teams turnover resulting in a safety rather than a touchdown.",
+            "ingredients": [
+              "30 mph W/SW swirling gusts at the open south end confluence",
+              "Wet grass and light rain increasing fumble/muff volatility",
+              "Brad Allen's tendency to let physical trench play continue, leading to a collapsed pocket/protection"
+            ],
+            "probability": "~9%"
+          },
+          "bonusSleeper": {
+            "title": "Jonah Coleman Workhorse Era",
+            "detail": "Rookie RB Jonah Coleman exceeds 25 carries and 115 scrimmage yards as Sean Payton hides Bo Nix from the wind to exploit a Highsmith-less Steelers front.",
+            "probability": "~12%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "gemini-2-5-flash",
+          "modelLabel": "Gemini 2.5 Flash",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-2.5-flash",
+            "exactModelId": "gemini-2.5-flash",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "0fb2cf393bcd825134b0df34a6b33d8c3eb3522b6f789c54bfce3eec6650fce8",
+            "runAtUtc": "2026-11-27T17:59:48Z",
+            "latencySec": 17.51,
+            "usage": {
+              "inputTokens": 3208,
+              "outputTokens": 646,
+              "totalTokens": 7086
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T17:59:48Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-black-friday.json",
+          "winnerAbbr": "DEN",
+          "projectedScore": {
+            "away": 20,
+            "home": 17
+          },
+          "spreadLean": "PIT +4.5",
+          "totalLean": "Under 37.5",
+          "primaryKey": "Steelers' mid-week QB change to Mason Rudolph amidst team turmoil directly into 30 mph gusts and a disciplined Broncos defense creates an insurmountable offensive challenge.",
+          "refCall": "Brad Allen's lenient holding and DPI whistle will allow physical play in the trenches and secondary, favoring a low-scoring, grind-it-out game, especially impacting Mason Rudolph's ability to extend drives against Denver's pass rush.",
+          "sentimentEdge": "AWAY +4.0 vs HOME -3.5 \u2014 The massive public sentiment gap on Denver makes Pittsburgh +4.5 a sharp contrarian play if they can avoid critical turnovers in the gusty conditions.",
+          "hiddenMismatch": "DEN DL Coach Jamar Cain & Sr. Def. Asst. Joe Vitt vs. PIT OL Coach James Campen & QB Coach Tom Arth \u2014 emergency protection & cadence for Mason Rudolph's first 2026 start in swirling 30 mph wind.",
+          "surpriseCall": {
+            "title": "Boswell's Wind-Assisted Game-Winner from 60+ Yards",
+            "detail": "In a low-scoring, defensive slugfest tied late in the 4th quarter, the Steelers, facing a 4th & long from Denver's 45-yard line, opt for a game-winning 62-yard field goal attempt. Chris Boswell, leveraging his \"elite familiarity with Acrisure's swirling south-end gusts\" and a perfectly timed 30 mph tailwind, drills the kick just inside the upright, despite the \"5-7 yds off deep field goals\" physics note, stunning Denver and covering the spread.",
+            "ingredients": [
+              "Chris Boswell...elite familiarity with Acrisure's swirling south-end gusts.",
+              "Heavy 30 mph gusts + wet grass slice ~5-7 yds off deep field goals",
+              "Classic post-crisis 'nobody believes in us' rally at home in miserable 41\u00b0F/30-mph-gust weather where an underdog can drag a 37.5-total game into the mud.",
+              "Controlled whistle on drive-extending defensive flags historically leans Under"
+            ],
+            "probability": "~9%"
+          },
+          "bonusSleeper": {
+            "title": "Michael Pittman Jr. Leads Steelers in Receiving",
+            "detail": "Activated off IR, Michael Pittman Jr. becomes Mason Rudolph's primary target in the short-to-intermediate game, exploiting DK Metcalf's limited status and Brad Allen's lenient DPI whistle to lead Pittsburgh in receiving yards.",
+            "probability": "~7%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude-sonnet-5-5",
+          "modelLabel": "Claude Sonnet 5.5",
+          "modelMeta": {
+            "provider": "anthropic",
+            "requestedModel": "sonnet",
+            "exactModelId": "claude-sonnet-5-5",
+            "harness": "arena-cli-claude-cli",
+            "webSearchEnabled": false,
+            "promptSha256": "0fb2cf393bcd825134b0df34a6b33d8c3eb3522b6f789c54bfce3eec6650fce8",
+            "runAtUtc": "2026-11-27T17:59:44Z",
+            "latencySec": 12.91,
+            "usage": {
+              "inputTokens": 2,
+              "outputTokens": 926,
+              "cacheReadInputTokens": 21673,
+              "costUsd": 0.155899
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T17:59:44Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-black-friday.json",
+          "winnerAbbr": "DEN",
+          "projectedScore": {
+            "away": 19,
+            "home": 13
+          },
+          "spreadLean": "DEN -4.5",
+          "totalLean": "Under 37.5",
+          "primaryKey": "Vance Joseph's simulated pressures against Mason Rudolph, who is making his first 2026 start on short notice, plus 30 mph gusts that kill the deep passing game, should stall Pittsburgh drives. Denver's rookie-led run game and quick throws are enough to win a field-position grind.",
+          "refCall": "Brad Allen \u2014 his lenient holding and DPI whistle (~1.7-1.8 holds/gm, ~0.7-0.9 DPI/gm) lets DBs and linemen play physically in the wind, which keeps the flag count low and the clock moving. The Under gets a boost, and the main risk is a pre-snap false start (~1.9/gm) stalling a Rudolph drive.",
+          "sentimentEdge": "AWAY +4.0 vs HOME -3.5 \u2014 Denver is public chalk with a 7.5-point sentiment gap, but Pittsburgh's locker-room turmoil is a real cost on a short week. The 37.5 total is the better bet than the 4.5-point spread.",
+          "hiddenMismatch": "DEN DL coach Jamar Cain and Sr. Def. Asst. Joe Vitt vs. PIT OL coach James Campen and QB coach Tom Arth \u2014 emergency protection calls and cadence for Rudolph against Denver's simulated pressures in swirling wind.",
+          "surpriseCall": {
+            "title": "Boswell Wind Heroics Meet a Muffed Punt: Steelers Steal It on Special Teams",
+            "detail": "A wet-grass muffed punt or a gust-knocked Denver kick gives Pittsburgh a short field. Chris Boswell, who knows Acrisure's south-end gusts, kicks the go-ahead field goal late. Pittsburgh wins 16-13 without scoring a touchdown, because the 37.5 total keeps both offenses grounded and Denver's thin backfield can't close out the game.",
+            "ingredients": [
+              "30 mph gusts and wet grass raise muffed-punt and fumble volatility",
+              "Chris Boswell's familiarity with Acrisure's swirling south-end gusts",
+              "Denver's thinned backfield (Dobbins suspended, Harvey out) and a rookie RB carrying the load against Patrick Graham's front"
+            ],
+            "probability": "~9%"
+          },
+          "bonusSleeper": {
+            "title": "Rookie Jonah Coleman is the game's leading rusher",
+            "detail": "Coleman carries a heavy load in the wet conditions, tops 90 scrimmage yards, and runs out the clock in the fourth quarter.",
+            "probability": "~7%"
+          },
+          "grade": null
+        }
+      ]
+    }
+  ]
+}

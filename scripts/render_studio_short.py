@@ -40,6 +40,11 @@ import urllib.error
 import urllib.request
 import wave
 
+try:
+    from tts_pronunciation import apply_tts_pronunciations
+except ImportError:
+    from scripts.tts_pronunciation import apply_tts_pronunciations
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_SLATE = REPO_ROOT / "docs" / "data" / "2026-thanksgiving.json"
 OUTPUT_DIR = REPO_ROOT / "shorts" / "output"
@@ -782,18 +787,119 @@ THANKSGIVING_2026_CUTS: dict[str, StudioCut] = {
 CUTS = THANKSGIVING_2026_CUTS
 
 
+def _active_predictions(game: dict[str, Any]) -> list[dict[str, Any]]:
+    return [p for p in game.get("predictions", []) if p.get("status") in {"locked", "graded"}]
+
+
 def _primary_locked_pred(game: dict[str, Any]) -> dict[str, Any]:
+    active = _active_predictions(game)
+    if active:
+        return active[0]
     preds = game.get("predictions", [])
-    for p in preds:
-        if p.get("status") in {"locked", "graded"}:
-            return p
     return preds[0] if preds else {}
+
+
+def _short_model_name(pred: dict[str, Any]) -> str:
+    label = str(pred.get("modelLabel") or pred.get("modelMeta", {}).get("exactModelId") or pred.get("modelId") or "Model")
+    return label.split(" (", 1)[0].strip()
+
+
+def _build_arena_faceoff_copy(active: list[dict[str, Any]], away_abbr: str, home_abbr: str) -> tuple[str, str, str, str, str]:
+    """Return (top_badge, headline, call_pill, caption, dialogue_summary) for Scene 5."""
+    if not active:
+        return (
+            "100-PT ARENA • PENDING",
+            "AWAITING<br>MODEL PICKS",
+            "NO LOCKED PREDICTIONS YET",
+            "Run arena_cli.py run before kickoff to lock models.",
+            "No locked model picks are recorded yet.",
+        )
+
+    if len(active) == 1:
+        only = active[0]
+        name = _short_model_name(only)
+        proj = only.get("projectedScore") or {"away": 0, "home": 0}
+        winner = only.get("winnerAbbr") or home_abbr
+        spread_total = f"{only.get('spreadLean', winner)} • {only.get('totalLean', '')}".strip(" •")
+        return (
+            f"{name.upper()} • 100-PT ARENA",
+            f"PICK: {winner}<br>{proj['away']} – {proj['home']}",
+            spread_total,
+            f"Locked by {name} on GitHub before kickoff. Graded out of 100 after final.",
+            f"Locked pick from {name}: {winner}, {away_abbr} {proj['away']} to {home_abbr} {proj['home']}.",
+        )
+
+    winners = [str(p.get("winnerAbbr") or "") for p in active]
+    unique_winners = {w for w in winners if w}
+    lead = active[0]
+    lead_proj = lead.get("projectedScore") or {"away": 0, "home": 0}
+    if len(unique_winners) == 1:
+        winner = next(iter(unique_winners))
+        headline = f"CONSENSUS: {winner}<br>{len(active)} MODELS LOCKED"
+    else:
+        counts = {w: winners.count(w) for w in unique_winners}
+        top_w = max(counts, key=lambda w: counts[w])
+        headline = f"MODELS SPLIT!<br>EDGE: {top_w} ({counts[top_w]}/{len(active)})"
+
+    pill_parts = [f"{_short_model_name(p).upper()}: {p.get('winnerAbbr', '?')}" for p in active[:3]]
+    score_parts = []
+    spoken_parts = []
+    for p in active[:3]:
+        name = _short_model_name(p)
+        proj = p.get("projectedScore") or {"away": 0, "home": 0}
+        w = p.get("winnerAbbr") or home_abbr
+        score_parts.append(f"{name}: {w} ({proj['away']}–{proj['home']})")
+        spoken_parts.append(f"{name} takes {w}, {proj['away']} to {proj['home']}")
+
+    top_badge = f"{len(active)}-MODEL ARENA • 100-PT RECEIPTS"
+    call_pill = " • ".join(pill_parts)[:46]
+    caption = " | ".join(score_parts)[:115]
+    dialogue = ". ".join(spoken_parts) + "."
+    return top_badge, headline, call_pill, caption, dialogue
+
+
+def validate_cut_models(cut: StudioCut, slate: dict[str, Any]) -> list[str]:
+    """Ensure pending models are never advertised as active participants in Scene 5."""
+    errors: list[str] = []
+    games = slate.get("games", [])
+    target_game = next((g for g in games if g.get("id") == cut.cut_id), None)
+    check_games = [target_game] if target_game is not None else games
+
+    pending_terms: set[str] = set()
+    active_terms: set[str] = set()
+    for g in check_games:
+        for p in g.get("predictions", []):
+            terms = {
+                str(p.get("modelId", "")).lower(),
+                _short_model_name(p).lower(),
+            }
+            terms.discard("")
+            if p.get("status") == "pending":
+                pending_terms.update(terms)
+            elif p.get("status") in {"locked", "graded"}:
+                active_terms.update(terms)
+
+    unresolved_pending = pending_terms - active_terms
+    if not unresolved_pending or not cut.scenes:
+        return errors
+
+    outro = cut.scenes[-1]
+    outro_text = " ".join(
+        [outro.top_badge, outro.headline, outro.call_pill, outro.caption, *(t.text for t in outro.dialogue)]
+    ).lower()
+    for term in sorted(unresolved_pending):
+        if re.search(rf"(?<!\w){re.escape(term)}(?!\w)", outro_text):
+            errors.append(
+                f"Cut {cut.cut_id!r} references pending model {term!r} in Scene {outro.index} while status is 'pending'"
+            )
+    return errors
 
 
 def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> StudioCut:
     gid = _safe_slug(str(game["id"]))
     away = game["away"]
     home = game["home"]
+    active_preds = _active_predictions(game)
     pred = _primary_locked_pred(game)
     sc = pred.get("surpriseCall") or {}
     bs = pred.get("bonusSleeper") or {}
@@ -812,17 +918,28 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
     accent_a = _safe_hex_color(home.get("color", ""), "#38bdf8")
     accent_b = _safe_hex_color(away.get("color", ""), "#f59e0b")
 
+    faceoff_badge, faceoff_headline, faceoff_pill, faceoff_caption, faceoff_spoken = _build_arena_faceoff_copy(
+        active_preds, away["abbr"], home["abbr"]
+    )
+    arena_summary_lines = "\n".join(
+        f"- {_short_model_name(p)} ({p.get('modelMeta', {}).get('exactModelId', p.get('modelId'))}): "
+        f"{p.get('winnerAbbr')} ({away['abbr']} {p['projectedScore']['away']}-{home['abbr']} {p['projectedScore']['home']}) | "
+        f"{p.get('spreadLean', '')} | {p.get('totalLean', '')}"
+        for p in active_preds
+        if p.get("projectedScore")
+    )
+
+    fallback_summary = f"- Pick: {winner} ({away['abbr']} {proj['away']}-{home['abbr']} {proj['home']})"
     yt_title = _truncate_yt_title(
         f"{away['abbr']} vs {home['abbr']} Studio Scout: {sc_title[:42]} ({prob})! #shorts"
     )
     yt_desc = (
         f"Pre-kickoff AI Studio Scout for {away['name']} ({away['record']}) at {home['name']} ({home['record']}):\n"
-        f"- Pick: {winner} ({away['abbr']} {proj['away']}-{home['abbr']} {proj['home']}) | "
-        f"{pred.get('spreadLean', '')} | {pred.get('totalLean', '')}\n"
+        f"{arena_summary_lines or fallback_summary}\n"
         f"- Hidden Mismatch: {mismatch}\n"
         f"- Ref Crew: {ref_name} ({ref_flags})\n"
         f"- Crazy Surprise Call ({prob}): {sc_title}\n\n"
-        "Full Multi-Model Arena (Gemini vs. Claude) & 100-pt receipts:\n"
+        "Full Multi-Model Arena & 100-pt receipts:\n"
         "https://thescottyb.github.io/nfl-game-scout/\n\n"
         f"#NFL #{away['abbr']}vs{home['abbr']} #NFLPredictions #AI #SportsAnalytics #Shorts"
     )
@@ -949,10 +1066,10 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
         StudioScene(
             index=5,
             slug="05-pick-arena",
-            top_badge="GEMINI VS. CLAUDE • 100-PT ARENA",
-            headline=f"PICK: {winner}<br>{proj['away']} – {proj['home']}",
-            call_pill=f"{pred.get('spreadLean', winner)} • {pred.get('totalLean', '')}".strip(" •"),
-            caption="Timestamped on GitHub before kickoff. Drop your boldest call below.",
+            top_badge=faceoff_badge,
+            headline=faceoff_headline,
+            call_pill=faceoff_pill,
+            caption=faceoff_caption,
             accent_hex="#34d399",
             motion="zoom_out",
             transition_out="fade",
@@ -964,15 +1081,12 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
                 DialogueTurn(
                     speaker="Alex",
                     style="fast, punchy sports anchor sign-off",
-                    text=(
-                        f"Locked pick before kickoff: {winner}, {away['abbr']} {proj['away']} to "
-                        f"{home['abbr']} {proj['home']}."
-                    ),
+                    text=faceoff_spoken,
                 ),
                 DialogueTurn(
                     speaker="Maya",
                     style="warm, energetic call-to-action",
-                    text="Gemini versus Claude gets graded out of a hundred after final—link's in the description!",
+                    text="Every model is graded out of a hundred after the final whistle—link is in the description!",
                 ),
             ),
         ),
@@ -1062,11 +1176,31 @@ def _build_generic_supercut(slate_id: str, slate: dict[str, Any]) -> StudioCut:
             )
         )
 
+    active_models: list[str] = []
+    seen_ids: set[str] = set()
+    for game in games:
+        for p in _active_predictions(game):
+            mid = str(p.get("modelId") or "")
+            if mid and mid not in seen_ids:
+                seen_ids.add(mid)
+                active_models.append(_short_model_name(p))
+
+    outro_badge = (
+        f"{len(active_models)}-MODEL ARENA • 100-PT RECEIPTS"
+        if len(active_models) >= 2
+        else f"{(active_models[0].upper() if active_models else 'AI SCOUT')} • 100-PT ARENA"
+    )
+    outro_spoken = (
+        f"Every call across {', '.join(active_models[:3])} is timestamped on GitHub before kickoff and graded out of a hundred."
+        if active_models
+        else "Every call is timestamped on GitHub before kickoff and graded out of a hundred."
+    )
+
     scenes.append(
         StudioScene(
             index=len(scenes) + 1,
             slug=f"{len(scenes) + 1:02d}-outro-arena",
-            top_badge="GEMINI VS. CLAUDE • 100-PT ARENA",
+            top_badge=outro_badge,
             headline="RECEIPTS LOCKED<br>BEFORE KICKOFF",
             call_pill="thescottyb.github.io/nfl-game-scout",
             caption="Timestamped on GitHub before kickoff. Which freak play hits?",
@@ -1081,7 +1215,7 @@ def _build_generic_supercut(slate_id: str, slate: dict[str, Any]) -> StudioCut:
                 DialogueTurn(
                     speaker="Alex",
                     style="fast sports anchor sign-off",
-                    text="Every call is timestamped on GitHub before kickoff—Gemini versus Claude graded out of a hundred.",
+                    text=outro_spoken,
                 ),
                 DialogueTurn(
                     speaker="Maya",
@@ -1098,7 +1232,7 @@ def _build_generic_supercut(slate_id: str, slate: dict[str, Any]) -> StudioCut:
     yt_desc = (
         f"Pre-kickoff AI Studio Supercut for {slate.get('title', slate_id)}:\n"
         + "\n".join(bullet_lines)
-        + "\n\nFull Multi-Model Arena (Gemini vs. Claude) & 100-pt receipts:\n"
+        + "\n\nFull Multi-Model Arena & 100-pt receipts:\n"
         "https://thescottyb.github.io/nfl-game-scout/\n\n"
         "#NFL #NFLPredictions #AI #SportsAnalytics #Shorts"
     )
@@ -1261,6 +1395,7 @@ def save_audio_bytes(raw: bytes, mime_type: str, out_path: Path) -> Path:
 
 def generate_scene_art(api_key: str | None, scene: StudioScene, asset_dir: Path, force: bool) -> Path:
     out_png = asset_dir / f"{scene.slug}_art.png"
+    meta_file = asset_dir / f"{scene.slug}_art.source.txt"
     if out_png.exists() and not force and out_png.stat().st_size > 20_000:
         print(f"[cache] art  {asset_dir.name}/{scene.slug} -> {out_png.name}")
         return out_png
@@ -1293,6 +1428,7 @@ def generate_scene_art(api_key: str | None, scene: StudioScene, asset_dir: Path,
             check=True,
         )
         tmp_raw.unlink(missing_ok=True)
+    meta_file.write_text("gemini-nano-banana-2.1", encoding="utf-8")
     print(f"[done]  art  {asset_dir.name}/{scene.slug} ({mime_type or 'image/png'}, {out_png.stat().st_size // 1024} KB)")
     return out_png
 
@@ -1308,8 +1444,9 @@ def synthesize_say_dialogue(scene: StudioScene, out_wav: Path) -> Path:
             aiff = tmp / f"t{idx}.aiff"
             wav_p = tmp / f"t{idx}.wav"
             voice = voice_map.get(turn.speaker, "Samantha")
+            spoken_text = apply_tts_pronunciations(turn.text)
             subprocess.run(
-                ["say", "-v", voice, "-r", "195", "-o", str(aiff), "--", turn.text],
+                ["say", "-v", voice, "-r", "195", "-o", str(aiff), "--", spoken_text],
                 check=True,
             )
             subprocess.run(
@@ -1336,12 +1473,14 @@ def generate_scene_tts(
     allow_say_fallback: bool = False,
 ) -> Path:
     out_wav = asset_dir / f"{scene.slug}_vo.wav"
+    meta_file = asset_dir / f"{scene.slug}_vo.source.txt"
     if out_wav.exists() and not force and out_wav.stat().st_size > 10_000:
         print(f"[cache] tts  {asset_dir.name}/{scene.slug} -> {out_wav.name}")
         return out_wav
 
     if tts_backend == "say":
         synthesize_say_dialogue(scene, out_wav)
+        meta_file.write_text("macos-say", encoding="utf-8")
         dur = probe_duration(out_wav)
         print(f"[done]  tts  {asset_dir.name}/{scene.slug} (macos-say, {dur:.2f}s)")
         return out_wav
@@ -1349,13 +1488,14 @@ def generate_scene_tts(
     if not api_key:
         if allow_say_fallback:
             synthesize_say_dialogue(scene, out_wav)
+            meta_file.write_text("macos-say", encoding="utf-8")
             return out_wav
         raise RuntimeError(f"Missing cached TTS {out_wav} and GEMINI_API_KEY is unset.")
 
     content_items = [
         {
             "type": "text",
-            "text": turn.text,
+            "text": apply_tts_pronunciations(turn.text),
             "annotations": [
                 {
                     "type": "speech_metadata",
@@ -1396,6 +1536,7 @@ def generate_scene_tts(
         if allow_say_fallback:
             print(f"[warn]  falling back to macOS `say` for {scene.slug}", file=sys.stderr)
             synthesize_say_dialogue(scene, out_wav)
+            meta_file.write_text("macos-say", encoding="utf-8")
             return out_wav
         assert last_err is not None
         raise last_err
@@ -1414,6 +1555,7 @@ def generate_scene_tts(
         tmp_mp3.unlink(missing_ok=True)
     else:
         save_audio_bytes(raw, mime_type, out_wav)
+    meta_file.write_text(used_model, encoding="utf-8")
     dur = probe_duration(out_wav)
     print(f"[done]  tts  {asset_dir.name}/{scene.slug} ({used_model}, {mime_type or 'audio/wav'}, {dur:.2f}s)")
     return out_wav
@@ -2196,12 +2338,17 @@ def render_cut(
     tts_backend: str,
     allow_say_fallback: bool,
     max_mb: float,
+    slate_data: dict[str, Any] | None = None,
 ) -> tuple[Path, dict[str, Any]]:
     asset_dir = ASSETS_ROOT / cut.asset_subdir
     asset_dir.mkdir(parents=True, exist_ok=True)
     out_mp4 = OUTPUT_DIR / cut.output_filename
     tempo = tempo_override if tempo_override is not None else cut.default_tempo
     validate_runtime_args(tempo, tts_workers, max_mb)
+    if slate_data is not None and slate_data.get("slateId") != "2026-thanksgiving":
+        model_errors = validate_cut_models(cut, slate_data)
+        if model_errors:
+            raise RuntimeError("QA GATE FAILED (model attribution): " + "; ".join(model_errors))
 
     print(f"\n================ RENDERING CUT: {cut.cut_id} ================")
     art_map: dict[int, Path] = {}
@@ -2267,6 +2414,38 @@ def render_cut(
     qa_report = verify_rendered_short(out_mp4, vo_spans=vo_spans, max_mb=max_mb)
     qa_report["music_source"] = music_source
     qa_report["tempo"] = tempo
+
+    tts_sources: set[str] = set()
+    art_sources: set[str] = set()
+    for scene in cut.scenes:
+        vo_src = asset_dir / f"{scene.slug}_vo.source.txt"
+        art_src = asset_dir / f"{scene.slug}_art.source.txt"
+        tts_sources.add(vo_src.read_text(encoding="utf-8").strip() if vo_src.exists() else "cached")
+        art_sources.add(art_src.read_text(encoding="utf-8").strip() if art_src.exists() else "cached")
+
+    pred_models: list[dict[str, Any]] = []
+    if slate_data is not None:
+        games = slate_data.get("games", [])
+        target_g = next((g for g in games if g.get("id") == cut.cut_id), None)
+        for g in ([target_g] if target_g is not None else games):
+            for p in _active_predictions(g):
+                meta = p.get("modelMeta") or {}
+                pred_models.append(
+                    {
+                        "gameId": g.get("id"),
+                        "modelId": p.get("modelId"),
+                        "modelLabel": p.get("modelLabel"),
+                        "exactModelId": meta.get("exactModelId", p.get("modelId")),
+                        "provider": meta.get("provider"),
+                        "harness": meta.get("harness"),
+                    }
+                )
+    qa_report["production_models"] = {
+        "image_models": sorted(art_sources),
+        "tts_models": sorted(tts_sources),
+        "music_model": music_source,
+        "prediction_models": pred_models,
+    }
     print(f"=== READY: {cut.cut_id} ({final_dur:.2f}s, {qa_report['size_mb']:.2f} MB) ===")
     return out_mp4, qa_report
 
@@ -2295,6 +2474,7 @@ def main() -> int:
             raise RuntimeError(f"Required binary not found on PATH: {bin_name}")
 
     chrome_bin = resolve_chrome_bin(args.chrome_bin)
+    slate_data = json.loads(args.slate.read_text(encoding="utf-8"))
     cuts_map = build_cuts_from_slate(args.slate)
 
     if args.cut == "all":
@@ -2323,6 +2503,7 @@ def main() -> int:
             tts_backend=args.tts_backend,
             allow_say_fallback=args.allow_say_fallback,
             max_mb=args.max_mb,
+            slate_data=slate_data,
         )
         qa_reports[cut.cut_id] = qa
 

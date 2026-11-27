@@ -61,37 +61,46 @@
 
       <div class="hero-metrics" id="hero-metrics">
         <div class="metric-card">
+          <span class="metric-label">Active Black Friday Slate</span>
+          <strong class="metric-value">3 AI Models</strong>
+          <span class="metric-sub">DEN @ PIT live pre-kickoff duel (Nov 27, 2026)</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Thanksgiving &amp; MNF Graded</span>
+          <strong class="metric-value">4 Receipts</strong>
+          <span class="metric-sub">Incl. 72/100 BUF 57-yd walk-off call &amp; GB @ LAR audit</span>
+        </div>
+        <div class="metric-card">
           <span class="metric-label">Origin Receipt (SNF Mexico)</span>
           <strong class="metric-value">91 / 100</strong>
           <span class="metric-sub">Called SF 35-10 &amp; 70-yd free kick (missed by 1 yd!)</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-label">Active Thanksgiving Slate</span>
-          <strong class="metric-value">3 Games</strong>
-          <span class="metric-sub">CHI@DET · PHI@DAL · KC@BUF (Nov 26, 2026)</span>
-        </div>
-        <div class="metric-card">
-          <span class="metric-label">YouTube Studio Shorts</span>
-          <strong class="metric-value">4 Studio v2 Reels</strong>
-          <span class="metric-sub">Dual-host Gemini TTS + art via <code>scripts/render_studio_short.py</code></span>
         </div>
       </div>
     </section>
 
     <div class="tabs-shell">
       <div class="tablist scroller" role="tablist" focusgroup="tablist nomemory" aria-label="NFL Game Scout Arena views">
-        <button type="button" role="tab" id="tab-thanksgiving" aria-selected="true" focusgroupstart>
-          Thanksgiving 2026 (3 Games)
+        <button type="button" role="tab" id="tab-black-friday" aria-selected="true" focusgroupstart>
+          Black Friday (3 Models)
+        </button>
+        <button type="button" role="tab" id="tab-thanksgiving" aria-selected="false">
+          Thanksgiving 2026 (Graded)
         </button>
         <button type="button" role="tab" id="tab-week11" aria-selected="false">
-          Week 11 Receipts (2 Games)
+          Week 11 Receipts (Graded)
         </button>
         <button type="button" role="tab" id="tab-leaderboard" aria-selected="false">
           100-Point Model Leaderboard
         </button>
       </div>
 
-      <div id="panel-thanksgiving" role="tabpanel" aria-labelledby="tab-thanksgiving" tabindex="0">
+      <div id="panel-black-friday" role="tabpanel" aria-labelledby="tab-black-friday" tabindex="0">
+        <div class="panel-inner" id="black-friday-mount">
+          <p class="loading-note">Loading Black Friday 2026 multi-model predictions…</p>
+        </div>
+      </div>
+
+      <div id="panel-thanksgiving" role="tabpanel" aria-labelledby="tab-thanksgiving" hidden="until-found">
         <div class="panel-inner" id="thanksgiving-mount">
           <p class="loading-note">Loading Thanksgiving 2026 matchups…</p>
         </div>

@@ -1,19 +1,26 @@
 {
-  "defaultSlateId": "2026-thanksgiving",
+  "defaultSlateId": "2026-black-friday",
   "repoUrl": "https://github.com/TheScottyB/nfl-game-scout",
   "pagesUrl": "https://thescottyb.github.io/nfl-game-scout/",
   "slates": [
     {
+      "id": "2026-black-friday",
+      "title": "Black Friday 2026 — Broncos @ Steelers",
+      "subtitle": "Week 12 · Friday, Nov 27, 2026 · Live Multi-Model Arena",
+      "file": "data/2026-black-friday.json",
+      "badge": "Live Multi-Model"
+    },
+    {
       "id": "2026-thanksgiving",
       "title": "Thanksgiving 2026 Tripleheader",
-      "subtitle": "Week 12 · Thursday, Nov 26, 2026",
+      "subtitle": "Week 12 · Thursday, Nov 26, 2026 (+ GB @ LAR Missed-Game Receipt)",
       "file": "data/2026-thanksgiving.json",
-      "badge": "Active Slate"
+      "badge": "Graded Receipts"
     },
     {
       "id": "2026-week11-archive",
       "title": "Week 11 Primetime Receipts",
-      "subtitle": "SNF Mexico City (35-10 + 71-yd Free Kick) & MNF",
+      "subtitle": "SNF Mexico City (91/100) & MNF CIN @ WAS (Graded)",
       "file": "data/2026-week11-archive.json",
       "badge": "Receipts & Grading"
     }
