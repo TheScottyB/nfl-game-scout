@@ -130,6 +130,14 @@ def _truncate_yt_title(title: str) -> str:
     return clean[: MAX_YT_TITLE_LEN - 1].rstrip() + "…"
 
 
+def _trim_words(text: str, max_chars: int) -> str:
+    clean = " ".join(str(text).split())
+    if len(clean) <= max_chars:
+        return clean
+    cut = clean[: max_chars - 1].rsplit(" ", 1)[0].rstrip(" ,;:-")
+    return (cut or clean[: max_chars - 1].rstrip()) + "…"
+
+
 def validate_runtime_args(tempo: float | None, tts_workers: int, max_mb: float) -> None:
     if tempo is not None and not (0.5 <= tempo <= 2.0):
         raise ValueError(f"--tempo must be within [0.5, 2.0] for ffmpeg atempo, got {tempo}")
@@ -993,7 +1001,7 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
             top_badge="HIDDEN COACHING MISMATCH",
             headline="BELOW THE<br>COORDINATORS",
             call_pill=f"{away['abbr']} VS. {home['abbr']} ORG CHART",
-            caption=mismatch[:115],
+            caption=_trim_words(mismatch, 118),
             accent_hex=accent_b,
             motion="pan_right",
             transition_out="smoothleft",
@@ -1020,8 +1028,8 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
             slug="03-refs",
             top_badge="REF CREW & PHYSICS",
             headline=f"REF CREW:<br>{ref_name.upper()}",
-            call_pill=ref_flags[:42],
-            caption=ref_impact[:115],
+            call_pill=_trim_words(ref_flags, 42),
+            caption=_trim_words(ref_impact, 118),
             accent_hex="#facc15",
             motion="zoom_in_high",
             transition_out="smoothright",
@@ -1047,9 +1055,9 @@ def _build_generic_game_cut(slate_id: str, idx: int, game: dict[str, Any]) -> St
             index=4,
             slug="04-freak-play",
             top_badge=f"{prob} CRAZY SURPRISE CALL",
-            headline=sc_title[:34].upper(),
+            headline=_trim_words(sc_title, 42).upper(),
             call_pill=f"LOCKED FREAK CALL • {prob}",
-            caption=sc_detail[:115],
+            caption=_trim_words(sc_detail, 118),
             accent_hex=accent_a,
             motion="pan_left",
             transition_out="fade",
@@ -1123,7 +1131,7 @@ def _build_generic_supercut(slate_id: str, slate: dict[str, Any]) -> StudioCut:
             top_badge=str(slate.get("week", "NFL SLATE")).upper(),
             headline=f"{len(games)} FREAK PLAYS<br>LOCKED PRE-KICKOFF",
             call_pill="TIMESTAMPED ON GITHUB",
-            caption=str(slate.get("subtitle", "Pre-kickoff AI scouting receipts."))[:115],
+            caption=_trim_words(str(slate.get("subtitle", "Pre-kickoff AI scouting receipts.")), 118),
             accent_hex="#22d3ee",
             motion="zoom_in",
             transition_out="smoothleft",
@@ -1162,9 +1170,9 @@ def _build_generic_supercut(slate_id: str, slate: dict[str, Any]) -> StudioCut:
                 index=g_idx + 1,
                 slug=f"{g_idx + 1:02d}-{_safe_slug(game['id'])}",
                 top_badge=f"{game['away']['abbr']} @ {game['home']['abbr']} • {game['broadcast']}",
-                headline=sc_title[:32].upper(),
+                headline=_trim_words(sc_title, 40).upper(),
                 call_pill=f"{prob} • PICK: {winner} {proj['away']}–{proj['home']}",
-                caption=str(sc.get("detail", ""))[:115],
+                caption=_trim_words(str(sc.get("detail", "")), 118),
                 accent_hex=_safe_hex_color(game["home"].get("color", ""), "#38bdf8"),
                 motion=motions[(g_idx - 1) % len(motions)],
                 transition_out=transitions[(g_idx - 1) % len(transitions)],

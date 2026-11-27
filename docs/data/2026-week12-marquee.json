@@ -1,0 +1,937 @@
+{
+  "slateId": "2026-week12-marquee",
+  "title": "Week 12 Marquee Tripleheader \u2014 Live Multi-Model Arena",
+  "subtitle": "Seahawks at 49ers (FOX 4:25 PM ET), Raiders at Browns (NBC SNF), and Panthers at Buccaneers (ESPN MNF) \u2014 locked pre-kickoff multi-model predictions with exact provenance.",
+  "season": 2026,
+  "week": "Week 12 (Sun/Mon Marquee)",
+  "updatedAtUtc": "2026-11-27T22:59:20Z",
+  "games": [
+    {
+      "id": "seahawks-at-49ers",
+      "label": "Sunday \u00b7 4:25 PM ET (FOX)",
+      "away": {
+        "abbr": "SEA",
+        "name": "Seattle Seahawks",
+        "record": "6-4",
+        "color": "#002244",
+        "avgAge": 26.7,
+        "qb": "Sam Darnold (officially cleared & returning after missing 2 games with quad/cracked ribs; Drew Lock backed him up)",
+        "kicker": {
+          "name": "Jason Myers",
+          "careerLong": 61,
+          "ceiling": "55-57 yds in rain/gusts",
+          "note": "Career long 61 yds (franchise record); wet turf and 20-30 mph gusts trim max outdoor range."
+        }
+      },
+      "home": {
+        "abbr": "SF",
+        "name": "San Francisco 49ers",
+        "record": "9-1",
+        "color": "#AA0000",
+        "avgAge": 26.9,
+        "qb": "Mac Jones (starting for 9-1 SF after Brock Purdy was officially ruled OUT Friday with an ankle sprain from Mexico City)",
+        "kicker": {
+          "name": "Eddy Pi\u00f1eiro",
+          "careerLong": 59,
+          "ceiling": "54-56 yds in rain/gusts",
+          "note": "Career long 59 yds; open-air gusts at Levi's Stadium test long outdoor attempts."
+        }
+      },
+      "kickoffUtc": "2026-11-29T21:25:00Z",
+      "broadcast": "FOX",
+      "venue": {
+        "stadium": "Levi's Stadium",
+        "city": "Santa Clara, CA",
+        "surface": "Outdoor Grass",
+        "elevationFt": 43,
+        "quirk": "Open-air Bay Area stadium; rain and 20-30 mph gusts amplify traction, perimeter ball-security, and deep-kick variance."
+      },
+      "odds": {
+        "spread": "49ers -3",
+        "moneyline": "SEA +135 / SF -160",
+        "total": "44.5"
+      },
+      "divisionContext": {
+        "isDivisional": true,
+        "division": "NFC West",
+        "awayDivRecord": "2-1",
+        "homeDivRecord": "3-0",
+        "note": "NFC West rematch of Week 5 (SF 32-29 at Seattle). 9-1 49ers (3-0 div) can sweep and tighten their grip on the NFC #1 seed; 6-4 Seahawks (2-1 div) come off their bye fighting for playoff positioning."
+      },
+      "weather": {
+        "summary": "Mid-60s\u00b0F, rain likely, 8-12 mph winds gusting 20-30 mph",
+        "tempF": 64,
+        "wind": "8-12 mph (gusts 20-30 mph)",
+        "precipChance": "Rain likely",
+        "physicsNote": "Wet grass and 20-30 mph gusts trim deep field goals by ~3-5 yds, elevate OL holding risk, and put a premium on short timing throws."
+      },
+      "injuries": {
+        "away": [
+          "RT Abraham Lucas OUT (ankle), LG Quenton Nelson OUT (knee).",
+          "QB Sam Darnold CLEARED (quad/cracked ribs) & WR Jaxon Smith-Njigba CLEARED (ankle); backup QB Drew Lock limited mid-week (right elbow)."
+        ],
+        "home": [
+          "QB Brock Purdy OUT (ankle, suffered in Mexico City) \u2014 Mac Jones makes the start after taking first-team reps all week.",
+          "WR Jordan Watkins missed Friday practice; WR Mike Evans (Achilles) & LB Dre Greenlaw monitored on report."
+        ]
+      },
+      "referee": {
+        "headRef": "Carl Cheffers",
+        "flagsPerGame": "13-15 accepted penalties/gm (strict, upper tier)",
+        "yardsPerGame": "~110-125 yds/gm",
+        "tendencies": [
+          "Upper-tier Offensive Holding scrutiny (~2.5+/gm) punishes patched-up tackles vs. elite edge rushers.",
+          "Strict Roughing the Passer and deep-ball DPI whistle disrupts rhythm drives in wet footing.",
+          "High-variance penalty yardage swings field position quickly."
+        ],
+        "tonightImpact": "Carl Cheffers' tight offensive-holding whistle directly pressures Seattle's backup RT and LG against Kris Kocurek's 49ers defensive line."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "San Francisco is without starting QB Brock Purdy (OUT, ankle), forcing Mac Jones into a rainy divisional start against Mike Macdonald's rested post-bye defense.",
+            "Sam Darnold returns cleared with full knowledge of Kyle Shanahan's system from his 2023 stint in Santa Clara, plus healthy WR Jaxon Smith-Njigba.",
+            "Seahawks OC Brian Fleury left Shanahan's staff in 2026 and knows SF defensive and protection tendencies cold."
+          ],
+          "how": [
+            "Use quick-game rhythm and motion under Brian Fleury to shield backups replacing RT Abraham Lucas and LG Quenton Nelson from Kris Kocurek's rush.",
+            "Attack Mac Jones with Mike Macdonald/Aden Durde disguised simulated pressures in wet conditions.",
+            "Leverage Week 5 tape (29-32 loss) and fresh post-bye legs to steal the fourth quarter."
+          ]
+        },
+        "home": {
+          "why": [
+            "9-1 San Francisco owns a 3-0 NFC West record, already beat Seattle 32-29 in Week 5, and boasts superior infrastructure (Kyle Shanahan, Raheem Morris, Matt Eberflus).",
+            "Kris Kocurek's defensive line faces a Seahawks front missing both RT Abraham Lucas and LG Quenton Nelson under Carl Cheffers' strict holding whistle.",
+            "Shanahan's run-heavy script and Klay Kubiak's play-action ease the burden on Mac Jones on rain-slicked grass."
+          ],
+          "how": [
+            "Lean on Chris Foerster's OL and ground game to keep Mac Jones in manageable 3rd downs.",
+            "Turn Kris Kocurek's front loose on Seattle's backup RT and LG to force offensive-holding flags and third-and-long.",
+            "Let Raheem Morris, Jerry Gray, and ex-Seahawk K.J. Wright bait rusty Sam Darnold timing throws in 20-30 mph gusts."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 1.5,
+        "homeScore": 2.5,
+        "awayTrajectory": "Rested / QB Return",
+        "homeTrajectory": "9-1 Juggernaut / Purdy Out Shock",
+        "awayVibe": "Boosted by Sam Darnold and Jaxon Smith-Njigba clearing the Friday report after the Week 11 bye, tempered by Lucas/Nelson OL losses.",
+        "homeVibe": "High confidence after dominating Minnesota 35-10 in Mexico City, suddenly tested by Brock Purdy being ruled out with Mac Jones stepping in.",
+        "awayBeat": "Seattle beat highlights Darnold's health, OC Brian Fleury returning to Levi's, and how to survive without Abraham Lucas & Quenton Nelson.",
+        "homeBeat": "49ers beat focuses on Mac Jones running Shanahan's rain script and the defense clamping down to stay 4-0 in NFC West.",
+        "marketSplit": "Line tightened to SF -3 with Brock Purdy ruled out and Under action dropping the total from 46.5 toward 44.5 in rain forecast.",
+        "contrarianTakeaway": "Mac Jones stepping in drops public confidence on SF just enough to create value if Shanahan hides him behind the run and pass rush."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "John Schneider (GM / Pres. of Football Ops)",
+            "homeStaff": "John Lynch (GM)",
+            "edge": "SF",
+            "impact": "San Francisco's 9-1 roster depth absorbs a Purdy week-to-week absence cleanly with Mac Jones, while Seattle's OL depth is stretched by Lucas and Nelson being ruled out."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Mike Macdonald (HC), Brian Fleury (OC), Aden Durde (DC)",
+            "homeStaff": "Kyle Shanahan (HC), Klay Kubiak (OC), Raheem Morris (DC), Matt Eberflus (AHC Def.)",
+            "edge": "SF",
+            "impact": "Shanahan + Morris + Eberflus is a veteran playoff-caliber trio protecting Mac Jones against former 49ers assistant Brian Fleury."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Jake Peetz (Pass/QB), John Benton (OL), Thomas Hammock (RB), Zachary Orr (ILB), Josh Bynes (OLB), Chris Partridge (Def. Run)",
+            "homeStaff": "Chris Foerster (OL/AHC), Leonard Hankerson (WR/Pass), Bobby Turner (RB), Cameron Clemmons (TE), Kris Kocurek (DL), K.J. Wright (LB), Jerry Gray (Def. Pass), Johnny Holland (Def. Run)",
+            "edge": "SF",
+            "impact": "Kris Kocurek vs. John Benton's patched-up OL (no Lucas/Nelson) tilts heavily toward San Francisco's front."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Tyson Prince (QB Asst.), Kirk Olivadotti (Sr. Def. Asst.)",
+            "homeStaff": "Matt Eberflus (AHC Def.) & Shanahan/Morris defensive assistants",
+            "edge": "Even",
+            "impact": "Heavy institutional familiarity on both sidelines balances late-game situational adjustments."
+          }
+        ],
+        "crossStaffTells": [
+          "Seahawks OC Brian Fleury coached under Kyle Shanahan in San Francisco before jumping to Seattle in 2026.",
+          "49ers LB coach K.J. Wright knows Seattle's divisional culture inside out, while Sam Darnold previously backed up in Shanahan's system."
+        ],
+        "hiddenMismatch": "SF DL Coach Kris Kocurek vs. SEA OL Coach John Benton \u2014 Kocurek attacking a Seattle front missing RT Abraham Lucas and LG Quenton Nelson under flag-happy holding ref Carl Cheffers."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini-3-flash-preview",
+          "modelLabel": "Gemini 3 Flash Preview",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-3-flash-preview",
+            "exactModelId": "gemini-3-flash-preview",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "e3a1e7c1ac13d155760b544eb75cc19218e01407dcc34b7be4599c546b4b847d",
+            "runAtUtc": "2026-11-27T22:47:37Z",
+            "latencySec": 10.07,
+            "usage": {
+              "inputTokens": 3139,
+              "outputTokens": 446,
+              "totalTokens": 4897
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:47:37Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "SF",
+          "projectedScore": {
+            "away": 16,
+            "home": 20
+          },
+          "spreadLean": "SF -3 \u2014 the trench mismatch outweighs the QB downgrade",
+          "totalLean": "Under 44.5 \u2014 rain, 30mph gusts, and backup QBs favor a defensive slog",
+          "primaryKey": "Kris Kocurek's defensive line will exploit Seattle's backup RT and LG under Carl Cheffers' strict offensive holding whistle.",
+          "refCall": "Carl Cheffers \u2014 His high-tier offensive holding scrutiny (2.5+/gm) will specifically penalize Seattle's replacement linemen (Lucas/Nelson OUT) against the SF pass rush.",
+          "sentimentEdge": "AWAY +1.5 vs HOME +2.5 \u2014 Market overreaction to Purdy's injury creates value on SF's elite defensive infrastructure.",
+          "hiddenMismatch": "SF DL Coach Kris Kocurek vs. SEA OL Coach John Benton's patchwork protection unit.",
+          "surpriseCall": {
+            "title": "The End-Zone Holding Safety",
+            "detail": "Under heavy pressure from Kris Kocurek's front, a Seattle backup lineman commits a holding penalty in his own end zone while protecting Sam Darnold, resulting in a safety that provides the critical scoring margin.",
+            "ingredients": [
+              "Carl Cheffers' strict offensive holding tendency",
+              "RT Abraham Lucas and LG Quenton Nelson being officially OUT",
+              "20-30 mph gusts forcing longer pass-protection sets in the rain"
+            ],
+            "probability": "~18%"
+          },
+          "bonusSleeper": {
+            "title": "The K.J. Wright Revenge Script",
+            "detail": "Former Seahawk K.J. Wright (now SF LB coach) schemes a specific simulated pressure that baits Sam Darnold into a red-zone interception.",
+            "probability": "~35%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "gemini-2-5-flash",
+          "modelLabel": "Gemini 2.5 Flash",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-2.5-flash",
+            "exactModelId": "gemini-2.5-flash",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "e3a1e7c1ac13d155760b544eb75cc19218e01407dcc34b7be4599c546b4b847d",
+            "runAtUtc": "2026-11-27T22:46:27Z",
+            "latencySec": 13.08,
+            "usage": {
+              "inputTokens": 3139,
+              "outputTokens": 572,
+              "totalTokens": 5821
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:46:27Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "SF",
+          "projectedScore": {
+            "away": 17,
+            "home": 24
+          },
+          "spreadLean": "SF -3 \u2014 San Francisco's superior coaching and defensive line will overcome the QB change to cover the spread at home.",
+          "totalLean": "Under 44.5 \u2014 Rainy, gusty conditions, strict refereeing, and QB/OL injuries will lead to a lower-scoring, run-heavy affair.",
+          "primaryKey": "San Francisco's dominant defensive line will relentlessly exploit Seattle's compromised offensive line, forcing turnovers and disrupting Sam Darnold's rhythm in the rainy, gusty conditions.",
+          "refCall": "Carl Cheffers' tight offensive-holding whistle directly pressures Seattle's backup RT and LG against Kris Kocurek's 49ers defensive line, leading to drive-killing flags.",
+          "sentimentEdge": "HOME +Value on SF -3 as Mac Jones' start depresses public confidence, creating a market inefficiency for Shanahan's run-heavy script.",
+          "hiddenMismatch": "SF DL Coach Kris Kocurek vs. SEA OL Coach John Benton \u2014 Kocurek attacking a Seattle front missing RT Abraham Lucas and LG Quenton Nelson under flag-happy holding ref Carl Cheffers.",
+          "surpriseCall": {
+            "title": "Blocked Field Goal Scoop-and-Score",
+            "detail": "In the 4th quarter, with the game tight, a long field goal attempt by either team is blocked due to compromised protection or gusting winds, scooped up, and returned for a game-changing touchdown.",
+            "ingredients": [
+              "20-30 mph gusts and rain likely to affect kicking trajectory and hold, increasing block probability.",
+              "Seattle's compromised offensive line (Lucas/Nelson OUT) potentially impacts field goal protection.",
+              "Carl Cheffers' high-variance penalty yardage could lead to desperate, long field goal attempts.",
+              "Both kickers' max outdoor range is trimmed by 3-5 yards in wet/gusty conditions, forcing riskier attempts."
+            ],
+            "probability": "~15%"
+          },
+          "bonusSleeper": {
+            "title": "Drake Jackson's Breakout Pass Rush",
+            "detail": "49ers DE Drake Jackson, benefiting from Carl Cheffers' strict holding whistle and Seattle's backup RT, records 2+ sacks and a strip-sack turnover.",
+            "probability": "~20%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude-sonnet-5-5",
+          "modelLabel": "Claude Sonnet 5.5",
+          "modelMeta": {
+            "provider": "anthropic",
+            "requestedModel": "sonnet",
+            "exactModelId": "claude-sonnet-5-5",
+            "harness": "arena-cli-claude-cli",
+            "webSearchEnabled": false,
+            "promptSha256": "e3a1e7c1ac13d155760b544eb75cc19218e01407dcc34b7be4599c546b4b847d",
+            "runAtUtc": "2026-11-27T22:46:27Z",
+            "latencySec": 12.82,
+            "usage": {
+              "inputTokens": 2,
+              "outputTokens": 948,
+              "cacheReadInputTokens": 11842,
+              "cacheCreationInputTokens": 49726,
+              "costUsd": 0.209572
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:46:27Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "SF",
+          "projectedScore": {
+            "away": 16,
+            "home": 20
+          },
+          "spreadLean": "SEA +3 \u2014 Seattle's rested defense and the wet, low-possession game script make the 3-point cushion valuable, though SF wins by a field goal or so",
+          "totalLean": "Under 44.5 \u2014 rain, 20-30 mph gusts, a backup QB, a rusty returning QB, and strict holding calls point to stalled drives and kicks cut short",
+          "primaryKey": "Kris Kocurek's front against a Seattle line without RT Abraham Lucas and LG Quenton Nelson decides the game: it forces third-and-longs and holding flags, and Shanahan's run-heavy play-action script shields Mac Jones.",
+          "refCall": "Carl Cheffers \u2014 his tight offensive-holding whistle (~2.5+/gm) lands hardest on Seattle's patched-up tackle/guard spots against SF's rush, and strict roughing and deep-ball DPI calls could extend SF drives in wet footing.",
+          "sentimentEdge": "AWAY +1.5 vs HOME +2.5 \u2014 contrarian: Mac Jones starting drops public confidence in SF just enough to make the points with Seattle look like value, but the 9-1 infrastructure still wins a low-scoring game.",
+          "hiddenMismatch": "SF DL coach Kris Kocurek vs. SEA OL coach John Benton \u2014 Benton is patching two interior and edge spots, and Kocurek's rush plans to exploit them under a holding-happy crew.",
+          "surpriseCall": {
+            "title": "Holding flag wipes out a Seattle go-ahead score, and SF wins on a late field goal in the rain",
+            "detail": "Late in the fourth quarter, with Seattle driving to take the lead, Cheffers' crew flags the backup RT for offensive holding. That erases a long Darnold completion or touchdown, forces a punt or a missed long field goal from Jason Myers in the gusts, and Mac Jones then converts a short play-action drive into an Eddy Pi\u00f1eiro field goal.",
+            "ingredients": [
+              "Carl Cheffers' upper-tier holding scrutiny (~2.5+/gm)",
+              "Seattle missing RT Abraham Lucas and LG Quenton Nelson against Kris Kocurek's front",
+              "Wet grass with 20-30 mph gusts trimming Jason Myers' range from his 61-yard career long to about 55-57 yards"
+            ],
+            "probability": "~12% \u2014 my own estimate"
+          },
+          "bonusSleeper": {
+            "title": "Drew Lock enters in relief of Sam Darnold",
+            "detail": "Darnold is returning from quad and cracked ribs and could be hit often behind the patched line, so the limited-practice Drew Lock gets meaningful snaps in the second half.",
+            "probability": "~10% \u2014 my own estimate"
+          },
+          "grade": null
+        }
+      ],
+      "studioShortUrl": "https://youtube.com/shorts/F8XrUW2DrjI"
+    },
+    {
+      "id": "raiders-at-browns",
+      "label": "Sunday Night Football \u00b7 8:20 PM ET (NBC)",
+      "away": {
+        "abbr": "LV",
+        "name": "Las Vegas Raiders",
+        "record": "4-7",
+        "color": "#A5ACAF",
+        "avgAge": 26.0,
+        "qb": "Fernando Mendoza (rookie 2025 Heisman winner making 3rd NFL start & 1st primetime appearance after Kirk Cousins trade)",
+        "kicker": {
+          "name": "Matt Gay",
+          "careerLong": 59,
+          "ceiling": "51-53 yds in 30 mph rain",
+          "note": "Hit 59 yds in Week 2 vs. LAC, but managing a hip issue as LV worked out veteran kickers in case Lake Erie winds flare up."
+        }
+      },
+      "home": {
+        "abbr": "CLE",
+        "name": "Cleveland Browns",
+        "record": "6-4",
+        "color": "#FF3C00",
+        "avgAge": 25.8,
+        "qb": "Deshaun Watson (primary starter guiding Todd Monken's 6-4 Browns in the AFC #6 Wild Card seed)",
+        "kicker": {
+          "name": "Andre Szmyt",
+          "careerLong": 56,
+          "ceiling": "52-54 yds in Lake Erie gusts",
+          "note": "Drilled a game-winning career-long 56-yd FG vs. PIT on TNF (Oct 1), giving Cleveland crucial home-wind confidence."
+        }
+      },
+      "kickoffUtc": "2026-11-30T01:20:00Z",
+      "broadcast": "NBC / Peacock",
+      "venue": {
+        "stadium": "Huntington Bank Field",
+        "city": "Cleveland, OH",
+        "surface": "Outdoor Grass",
+        "elevationFt": 583,
+        "quirk": "Exposed Lake Erie waterfront stadium produces nasty swirling S/SW rain-wind pockets at night, turning kicks and deep balls sideways."
+      },
+      "odds": {
+        "spread": "Browns -4.5",
+        "moneyline": "LV +183 / CLE -220",
+        "total": "40.5"
+      },
+      "divisionContext": {
+        "isDivisional": false,
+        "division": "AFC Non-Divisional (AFC West vs AFC North)",
+        "note": "Flexed into Sunday Night Football: 6-4 Browns protecting AFC #6 Wild Card positioning before facing Cincinnati vs. 4-7 Raiders giving rookie Heisman winner Fernando Mendoza his primetime debut."
+      },
+      "weather": {
+        "summary": "44-46\u00b0F dropping, 99% steady rain/drizzle, 12-21 mph S/SW gusts to 30 mph",
+        "tempF": 45,
+        "wind": "12-21 mph S/SW (gusts 30 mph)",
+        "precipChance": "99% rain/drizzle",
+        "physicsNote": "Near-certain driving rain and 30 mph gusts chop 5-7 yds off outdoor field goals, punish wet ball-handling, and compress throws toward the line of scrimmage."
+      },
+      "injuries": {
+        "away": [
+          "LG Jackson Powers-Johnson OUT (Achilles injury suffered Friday); DTs Adam Butler, Tonka Hemingway & Tim Keenan III all OUT.",
+          "TE Brock Bowers QUESTIONABLE (right ankle \u2014 DNP Friday after missing Week 11); K Matt Gay managing hip injury."
+        ],
+        "home": [
+          "DE Derek Barnett OUT (hamstring); DE Isaiah McGuire CLEARED (calf).",
+          "WR Denzel Boston QUESTIONABLE (quad \u2014 DNP all week), RG Austin Barber Q (knee), RB Raheim Sanders Q (hip)."
+        ]
+      },
+      "referee": {
+        "headRef": "Craig Wrolstad",
+        "flagsPerGame": "~12.1 multi-year / 17.4 2026 accepted penalties/gm",
+        "yardsPerGame": "~98-115 yds/gm",
+        "tendencies": [
+          "Moderately balanced crew that allows more physical interior trench play and hand-fighting unless contact is blatant.",
+          "Conservative on borderline deep-ball DPI flags compared to high-flag crews.",
+          "Keeps offensive rhythm moving unless sloppy pre-snap procedural errors pile up in loud night rain."
+        ],
+        "tonightImpact": "Craig Wrolstad letting physical DBs and rushers battle in 99% rain favors Cleveland's home pass rush over Raiders backup interior blockers."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "Rookie QB Fernando Mendoza owns natural poise and off-script mobility for bad-weather chaos if Brock Bowers (Questionable) suits up as a safety valve.",
+            "Cleveland could be missing top rookie WR Denzel Boston (Questionable, DNP all week) and RG Austin Barber in driving Lake Erie rain.",
+            "Second-youngest NFL defense/roster in Cleveland (~25.8 yrs) faces a spoiler team with nothing to lose on flexed primetime."
+          ],
+          "how": [
+            "Lean on Rick Dennison's quick-hitting run concepts and short screens to protect rookie LG replacements for Jackson Powers-Johnson.",
+            "Turn Fernando Mendoza's mobility into third-down scrambles against over-pursuing Cleveland pass rushers.",
+            "Force a wet-ball Deshaun Watson fumble on Lake Erie turf and capitalize with a short field."
+          ]
+        },
+        "home": {
+          "why": [
+            "6-4 Browns hold the clear edge against a 4-7 Raiders defense missing three defensive tackles (Adam Butler, Tonka Hemingway, Tim Keenan III) and an offensive line missing LG Jackson Powers-Johnson.",
+            "Cleveland's defensive staff (DC Mike Rutenberg + Sr. Def. Asst. Dom Capers + DL Jacques Cesaire) thrives disguising pressures against 3rd-start rookie QBs at night.",
+            "Andre Szmyt (56-yd game-winner vs. PIT) is battle-tested in Cleveland winds while Raiders kicker Matt Gay is managing a hip."
+          ],
+          "how": [
+            "Hammer Cleveland's run game straight at a Las Vegas front missing three DTs.",
+            "Dial up Dom Capers/Mike Rutenberg A-gap pressure looks to confuse Fernando Mendoza behind an emergency left guard.",
+            "Play mistake-free field-position football in 99% rain and cash in via Andre Szmyt or red-zone efficiency."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": -1.5,
+        "homeScore": 3.0,
+        "awayTrajectory": "Rookie QB Reset / MASH Unit",
+        "homeTrajectory": "Playoff Surge / Primetime Flex",
+        "awayVibe": "Cautious optimism around Fernando Mendoza taking the reins post-Cousins trade, dampened by Friday's Achilles injury to Powers-Johnson and Bowers' DNP.",
+        "homeVibe": "Energized after NBC flexed 6-4 Cleveland into Sunday Night Football ahead of next week's AFC North showdown with Cincinnati.",
+        "awayBeat": "Vegas beat tracks Brock Bowers' Friday DNP, emergency LG plans after Powers-Johnson's Achilles injury, and Matt Gay's kicker workouts.",
+        "homeBeat": "Cleveland beat highlights Todd Monken's 6-4 AFC #6 seed push, Isaiah McGuire's return, and Andre Szmyt handling Lake Erie wind.",
+        "marketSplit": "Browns -4.5 holds steady despite soggy 40.5 total; sharp interest eyes CLE defense & Under if Brock Bowers sits.",
+        "contrarianTakeaway": "If 99% rain and 30 mph gusts drag the game into a single-score mud-fight, LV +4.5 catches heavy late-afternoon wind volatility."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "John Spytek (GM)",
+            "homeStaff": "Andrew Berry (GM)",
+            "edge": "CLE",
+            "impact": "Andrew Berry's young 6-4 core holds up at home, whereas Vegas is scrambling with three DTs ruled out and kicker tryouts."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Klint Kubiak (HC), Andrew Janocko (OC), Rob Leonard (DC)",
+            "homeStaff": "Todd Monken (HC), Travis Switzer (OC), Mike Rutenberg (DC)",
+            "edge": "CLE",
+            "impact": "Todd Monken + Mike Rutenberg control tempo well in home AFC North weather spots."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Mike Sullivan (QB), Rick Dennison (OL), Nick Holz (Pass Game), Mario Jeberaeel (Run Game), Omar Young (RB), Zach Azzanni (WR), Luke Steckel (TE)",
+            "homeStaff": "Jacques Cesaire (DL), Jason Tarver (Run/LB), Ephraim Banda (Pass Game), Brandon Lynch (DB)",
+            "edge": "CLE",
+            "impact": "Jacques Cesaire's DL and Jason Tarver's LB unit directly exploit Friday's loss of Raiders LG Jackson Powers-Johnson."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Ben Wilkerson (Asst. OL), John Wozniak (Asst. WR)",
+            "homeStaff": "Dom Capers (Sr. Def. Asst.), Ralph Street (Asst. DL), Jeff Anderson (Nickels), Keith Tandy (ST Asst.)",
+            "edge": "CLE",
+            "impact": "Veteran blitz architect Dom Capers mentoring Rutenberg's young defense gives rookie Fernando Mendoza a tough night."
+          }
+        ],
+        "crossStaffTells": [
+          "Veteran defensive strategist Dom Capers brings decades of bad-weather zone-blitz disguises against rookie QBs making their first primetime road start.",
+          "Raiders OC Andrew Janocko & OL coach Rick Dennison must rebuild interior protection on 48 hours notice after Friday's Powers-Johnson Achilles injury."
+        ],
+        "hiddenMismatch": "CLE DL Coach Jacques Cesaire & Sr. Def. Asst. Dom Capers vs. LV OL Coach Rick Dennison & Asst. OL Ben Wilkerson \u2014 attacking an emergency interior OL (Powers-Johnson OUT) in 99% Lake Erie rain."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini-3-flash-preview",
+          "modelLabel": "Gemini 3 Flash Preview",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-3-flash-preview",
+            "exactModelId": "gemini-3-flash-preview",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "e4d8d670fda36d91d37d551efb324aeacd20a2a21678e53869eee821f3da973b",
+            "runAtUtc": "2026-11-27T22:46:55Z",
+            "latencySec": 13.03,
+            "usage": {
+              "inputTokens": 3080,
+              "outputTokens": 465,
+              "totalTokens": 5685
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:46:55Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CLE",
+          "projectedScore": {
+            "away": 13,
+            "home": 20
+          },
+          "spreadLean": "CLE -4.5 \u2014 the Browns' defensive front will dominate a depleted Raiders interior",
+          "totalLean": "Under 40.5 \u2014 99% rain and 30 mph gusts will compress both passing games",
+          "primaryKey": "Cleveland's defensive front, orchestrated by Dom Capers, will overwhelm a Raiders interior missing LG Jackson Powers-Johnson and three defensive tackles in driving rain.",
+          "refCall": "Craig Wrolstad \u2014 His crew's tendency to permit physical trench play and ignore borderline DPI favors Cleveland's aggressive pass rush and physical secondary in a low-visibility rainstorm.",
+          "sentimentEdge": "AWAY -1.5 vs HOME +3.0 \u2014 The market underestimates the impact of LV losing three DTs and their LG simultaneously in a 'mud-bowl' environment.",
+          "hiddenMismatch": "CLE DL Coach Jacques Cesaire vs. LV Asst OL Ben Wilkerson \u2014 Cesaire's unit will exploit the communication gaps between LV's emergency interior linemen.",
+          "surpriseCall": {
+            "title": "The Lake Erie Special Teams Disaster",
+            "detail": "A high-snap safety or a blocked punt occurs in the 2nd half as 30 mph gusts and a wet ball combine with Matt Gay's hip injury to compromise the Raiders' kicking operation.",
+            "ingredients": [
+              "99% steady rain and 30 mph S/SW gusts",
+              "Raiders LG Jackson Powers-Johnson OUT (Achilles)",
+              "Kicker Matt Gay managing a hip injury with Lake Erie wind physics"
+            ],
+            "probability": "~25%"
+          },
+          "bonusSleeper": {
+            "title": "The Andre Szmyt Show",
+            "detail": "Browns kicker Andre Szmyt outscores the Raiders' total offensive touchdowns by himself via three field goals in the wind.",
+            "probability": "~40%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "gemini-2-5-flash",
+          "modelLabel": "Gemini 2.5 Flash",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-2.5-flash",
+            "exactModelId": "gemini-2.5-flash",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "e4d8d670fda36d91d37d551efb324aeacd20a2a21678e53869eee821f3da973b",
+            "runAtUtc": "2026-11-27T22:46:56Z",
+            "latencySec": 13.43,
+            "usage": {
+              "inputTokens": 3080,
+              "outputTokens": 637,
+              "totalTokens": 6183
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:46:56Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CLE",
+          "projectedScore": {
+            "away": 10,
+            "home": 20
+          },
+          "spreadLean": "CLE -4.5",
+          "totalLean": "Under 40.5",
+          "primaryKey": "Cleveland's elite defensive staff, coupled with severe Lake Erie weather and critical Raiders injuries on the offensive and defensive lines, will overwhelm rookie QB Fernando Mendoza.",
+          "refCall": "Craig Wrolstad's crew will allow physical trench play and be conservative on deep DPI, directly benefiting Cleveland's pass rush against the Raiders' emergency interior OL and limiting big plays for Mendoza in the rain.",
+          "sentimentEdge": "AWAY -1.5 (Rookie QB Reset / MASH Unit) vs HOME +3.0 (Playoff Surge / Primetime Flex) \u2014 Cleveland's energized home crowd and playoff push will be a stark contrast to the Raiders' injury-riddled, rookie-led squad, but the heavy rain could still make it a grind.",
+          "hiddenMismatch": "CLE DL Coach Jacques Cesaire & Sr. Def. Asst. Dom Capers vs. LV OL Coach Rick Dennison & Asst. OL Ben Wilkerson \u2014 directly exploiting the Raiders' emergency interior OL after Jackson Powers-Johnson's Achilles injury in severe weather.",
+          "surpriseCall": {
+            "title": "Botched Raiders Field Goal Attempt Leads to Turnover",
+            "detail": "In the 4th quarter, with the Raiders attempting a crucial field goal to cut the Browns' lead, the combination of 30 mph swirling Lake Erie winds, a wet ball, and Matt Gay's hip issue leads to a high snap that the holder cannot secure, resulting in a turnover on downs at the Cleveland 30-yard line.",
+            "ingredients": [
+              "99% steady rain/drizzle, 12-21 mph S/SW gusts to 30 mph, turning kicks sideways (Lake Erie quirk).",
+              "Raiders K Matt Gay managing a hip issue, leading to instability in his kicking mechanics and potential for a rushed operation.",
+              "Craig Wrolstad's crew keeps offensive rhythm moving unless sloppy pre-snap procedural errors pile up in loud night rain, which could rush the snap/hold.",
+              "Raiders' rookie QB Fernando Mendoza's first primetime appearance could lead to overall team jitters and communication issues in critical moments."
+            ],
+            "probability": "~25%"
+          },
+          "bonusSleeper": {
+            "title": "Jerome Ford Explodes in the Rain",
+            "detail": "Browns RB Jerome Ford, benefiting from a heavy run script against a Raiders defense missing three DTs and the driving rain limiting passing, breaks a long touchdown run in the second half.",
+            "probability": "~35%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude-sonnet-5-5",
+          "modelLabel": "Claude Sonnet 5.5",
+          "modelMeta": {
+            "provider": "anthropic",
+            "requestedModel": "sonnet",
+            "exactModelId": "claude-sonnet-5-5",
+            "harness": "arena-cli-claude-cli",
+            "webSearchEnabled": false,
+            "promptSha256": "e4d8d670fda36d91d37d551efb324aeacd20a2a21678e53869eee821f3da973b",
+            "runAtUtc": "2026-11-27T22:46:56Z",
+            "latencySec": 13.59,
+            "usage": {
+              "inputTokens": 2,
+              "outputTokens": 1057,
+              "cacheReadInputTokens": 11842,
+              "cacheCreationInputTokens": 50558,
+              "costUsd": 0.21399
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:46:56Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CLE",
+          "projectedScore": {
+            "away": 10,
+            "home": 20
+          },
+          "spreadLean": "CLE -4.5 \u2014 Browns cover; a depleted Raiders interior line and rookie QB in 99% rain makes a double-digit home win the likeliest result",
+          "totalLean": "Under 40.5 \u2014 99% rain, 30 mph gusts and a wet-ball, short-field passing game suppress scoring; both kickers are capped near 50 yards",
+          "primaryKey": "With LG Jackson Powers-Johnson out and DTs Butler, Hemingway and Keenan all out, Cleveland's Cesaire/Capers-designed interior pressure against an emergency left guard will wreck rookie Mendoza's timing in the Lake Erie rain.",
+          "refCall": "Craig Wrolstad's crew lets hand-fighting and interior contact go and is conservative on deep DPI, so Cleveland's rushers can play physical against Las Vegas's backup interior linemen and deep shots get no flag bailouts, which pushes the game toward a low-scoring grind.",
+          "sentimentEdge": "AWAY -1.5 vs HOME +3.0 \u2014 Cleveland's momentum and home-weather familiarity outweigh Mendoza's poise, and the market's quiet lean toward the Under fits the mud-fight script.",
+          "hiddenMismatch": "CLE DL coach Jacques Cesaire and Sr. Def. Asst. Dom Capers vs. LV OL coach Rick Dennison and Asst. OL Ben Wilkerson, with the Raiders rebuilding the left guard spot on short notice in 99% rain.",
+          "surpriseCall": {
+            "title": "Rookie Mendoza's first primetime game ends with a Browns defensive touchdown on a rain-slicked A-gap pressure",
+            "detail": "Dom Capers and Mike Rutenberg send a disguised A-gap zone-blitz at the emergency left guard, and Mendoza, hurried on a wet ball, has the pass tipped or stripped. A Cleveland defender scoops it up and scores, which accounts for the Browns' only touchdown margin in a 20-10 slugfest.",
+            "ingredients": [
+              "LG Jackson Powers-Johnson OUT (Achilles) forces an emergency left guard against Capers/Rutenberg A-gap pressure",
+              "99% rain with 30 mph gusts makes the ball slick and shortens the passing game",
+              "Mendoza is a rookie making his 3rd NFL start and 1st primetime game, facing a veteran blitz architect in Dom Capers",
+              "Wrolstad's crew lets physical interior play go, so there is little holding-flag protection for the Raiders' blockers"
+            ],
+            "probability": "~14% \u2014 my own estimate"
+          },
+          "bonusSleeper": {
+            "title": "Matt Gay misses a kick from beyond 45 yards",
+            "detail": "With his hip issue and 30 mph Lake Erie gusts shaving 5-7 yards off kicks, Gay misses a field goal or extra point and Szmyt's home-wind experience gives Cleveland the special-teams edge.",
+            "probability": "~30% \u2014 my own estimate"
+          },
+          "grade": null
+        }
+      ],
+      "studioShortUrl": "https://youtube.com/shorts/vo-DxYcADoE"
+    },
+    {
+      "id": "panthers-at-buccaneers",
+      "label": "Monday Night Football \u00b7 8:15 PM ET (ESPN)",
+      "away": {
+        "abbr": "CAR",
+        "name": "Carolina Panthers",
+        "record": "5-5",
+        "color": "#0085CA",
+        "avgAge": 26.4,
+        "qb": "Bryce Young (full participant post-foot; riding a surge after Carolina's 35-33 thriller over Baltimore)",
+        "kicker": {
+          "name": "Ryan Fitzgerald",
+          "careerLong": 57,
+          "ceiling": "56-58 yds in calm humid air",
+          "note": "NFL career long 57 yds; mild 3-5 mph wind in Tampa gives clean kicking geometry."
+        }
+      },
+      "home": {
+        "abbr": "TB",
+        "name": "Tampa Bay Buccaneers",
+        "record": "3-7",
+        "color": "#D50A0A",
+        "avgAge": 26.4,
+        "qb": "Baker Mayfield (healthy, coming off losses to CHI & DET after crushing Carolina 43-13 in Week 7)",
+        "kicker": {
+          "name": "Chase McLaughlin",
+          "careerLong": 65,
+          "ceiling": "62-65 yds in calm Tampa night air",
+          "note": "Holds NFL outdoor record (65 yds vs. PHI in Sept 2025) and owns deep range at Raymond James."
+        }
+      },
+      "kickoffUtc": "2026-12-01T01:15:00Z",
+      "broadcast": "ESPN / ESPN+",
+      "venue": {
+        "stadium": "Raymond James Stadium",
+        "city": "Tampa, FL",
+        "surface": "Outdoor Grass",
+        "elevationFt": 40,
+        "quirk": "Pirate-ship north end zone and calm humid late-November Tampa night air create pristine offensive and long-range kicking conditions."
+      },
+      "odds": {
+        "spread": "Buccaneers -2.5",
+        "moneyline": "CAR +135 / TB -150",
+        "total": "43.5"
+      },
+      "divisionContext": {
+        "isDivisional": true,
+        "division": "NFC South",
+        "awayDivRecord": "2-1",
+        "homeDivRecord": "1-2 (beat CAR 43-13 Wk 7)",
+        "note": "NFC South primetime grudge match: 5-5 Carolina leads the division by 2 games and seeks revenge for Week 7's 43-13 beatdown in Charlotte; 3-7 Tampa Bay sweeps the head-to-head and cuts the gap to 1 game with a win."
+      },
+      "weather": {
+        "summary": "66-67\u00b0F, cloudy, ~24% light shower chance, calm 3-5 mph wind (gusts 8-9 mph)",
+        "tempF": 66,
+        "wind": "3-5 mph (gusts 8-9 mph)",
+        "precipChance": "24%",
+        "physicsNote": "Mild 66\u00b0F air and negligible wind keep deep passing lanes and 60+ yard field goals (Chase McLaughlin 65-yd record) wide open."
+      },
+      "injuries": {
+        "away": [
+          "QB Bryce Young (foot) & RB Jonathon Brooks (groin) full participants; TEs Darren Waller (knee) & Tommy Tremble (knee) and LB Jaelan Phillips (ankle) limited.",
+          "WR Tetairoa McMillan (foot), LB Bobby Okereke (foot), OLB Patrick Jones II (ankle), TE Mitchell Evans (Achilles) monitored closely on Week 12 report."
+        ],
+        "home": [
+          "S Antoine Winfield Jr. (ankle), CB Benjamin Morrison (hamstring/back), WR Tez Johnson (illness) DNP Friday.",
+          "CB Jacob Parrish (back) & LB Josiah Trotter (oblique) returned to practice Friday."
+        ]
+      },
+      "referee": {
+        "headRef": "Clete Blakeman",
+        "flagsPerGame": "12.8-18.1 flags/gm (flag-happy, top tier)",
+        "yardsPerGame": "~115-130 yds/gm",
+        "tendencies": [
+          "Top-tier deep-ball DPI and defensive holding trigger when depleted secondaries grab downfield.",
+          "Strict trench holding enforcement tilts close games on third-and-long conversions.",
+          "Frequently extends scoring drives with yellow laundry in primetime windows."
+        ],
+        "tonightImpact": "If S Antoine Winfield Jr. and CB Benjamin Morrison miss time, Clete Blakeman's trigger-happy DPI whistle gives Carolina vertical explosive-play upside."
+      },
+      "winScripts": {
+        "away": {
+          "why": [
+            "5-5 Carolina enters surging off a 35-33 shootout win over Baltimore, holds a 2-game NFC South lead (2-1 div), and carries pure revenge motivation from Week 7's 43-13 embarrassment.",
+            "HC Dave Canales & OC Brad Idzik know Tampa Bay's roster and Todd Bowles' blitz rules firsthand from their Buccaneers tenure.",
+            "Tampa's secondary is bruised (Antoine Winfield Jr. & Benjamin Morrison DNP Friday) in front of flag-heavy ref Clete Blakeman."
+          ],
+          "how": [
+            "Move the pocket for Bryce Young with Harold Goodwin/Brad Idzik play-action to neutralize Todd Bowles' A-gap blitzes that wrecked Week 7.",
+            "Test Tampa's banged-up safety/corner depth with Tetairoa McMillan and Darren Waller down the seams to draw Clete Blakeman DPI flags.",
+            "Match Week 11's Baltimore scoring pace rather than playing conservative."
+          ]
+        },
+        "home": {
+          "why": [
+            "Tampa Bay obliterated Carolina 43-13 in Week 7 (258 rushing yds, 5 sacks, 4 takeaways) and has won 11 of the last 13 meetings in this rivalry.",
+            "Todd Bowles + Zac Robinson face a Panthers defense adjusting under Interim DC Todd Wash after mid-season staff turnover and linebacker injuries (Okereke/Phillips).",
+            "Season survival spot at 3-7: winning sweeps Carolina head-to-head and brings Tampa within one game of first place with Chase McLaughlin boasting 65-yd range."
+          ],
+          "how": [
+            "Attack Interim DC Todd Wash's patched-up front with Zach Robinson's run game and Skip Peete's RBs just like Week 7's 258-yard eruption.",
+            "Dial up Todd Bowles' exotic overload pressures on Bryce Young to force mistakes and short fields.",
+            "Finish drives with Baker Mayfield red-zone efficiency or let Chase McLaughlin swing deep range if stalls happen past midfield."
+          ]
+        }
+      },
+      "sentiment30d": {
+        "awayScore": 2.5,
+        "homeScore": -2.0,
+        "awayTrajectory": "Surging / Division Leaders",
+        "homeTrajectory": "2-Game Skid / Must-Win Desperation",
+        "awayVibe": "Galvanized locker room after upsetting Baltimore 35-33 to open a two-game NFC South cushion behind Bryce Young's sharp stretch.",
+        "homeVibe": "Urgency after consecutive losses to Chicago and Detroit put 3-7 Tampa in must-win territory to stay alive via head-to-head sweep.",
+        "awayBeat": "Charlotte beat praises Bryce Young's poise, Interim DC Todd Wash's structural tweaks post-Week 7, and monitoring Tetairoa McMillan/Bobby Okereke.",
+        "homeBeat": "Tampa beat spotlights desperation to sweep Carolina, Baker Mayfield leaning into Week 7 tape, and Antoine Winfield Jr.'s ankle status.",
+        "marketSplit": "3-7 Bucs sit surprisingly favored at -2.5 (O/U 43.5) strictly off Week 7's 43-13 blowout and desperation spot, split against public Panther support.",
+        "contrarianTakeaway": "Books laying -2.5 with a 3-7 team over a 5-5 division leader signals strong oddsmaker belief in Todd Bowles' schematic edge over Bryce Young."
+      },
+      "orgChart": {
+        "tiers": [
+          {
+            "tier": "1. GM / Front Office",
+            "awayStaff": "Dan Morgan (GM)",
+            "homeStaff": "Jason Licht (GM)",
+            "edge": "TB",
+            "impact": "Jason Licht's veteran roster depth faces urgency, though secondary injuries test corner/safety depth."
+          },
+          {
+            "tier": "2. HC & Coordinators",
+            "awayStaff": "Dave Canales (HC), Brad Idzik (OC), Todd Wash (Interim DC), Tracy Smith (STC)",
+            "homeStaff": "Todd Bowles (HC/Def. Play-Caller), Zac Robinson (OC), Danny Smith (STC)",
+            "edge": "Even",
+            "impact": "Canales & Idzik coaching against their old Tampa Bay staff balances Todd Bowles' schematic mastery of Week 7's 43-13 rout."
+          },
+          {
+            "tier": "3. Position Coaches",
+            "awayStaff": "Harold Goodwin (AHC/Run), Darrell Bevell (Assoc. HC), Mike Bercovici (Pass), Will Harriger (QB), Joe Gilbert (OL), Rob Moore (WR), Bernie Parmalee (RB), Peter Hansen (Asst DC/LB), Renaldo Hill (Sec), DeAngelo Hall (CB), A.C. Carter (DL/OLB)",
+            "homeStaff": "T.J. Yates (Pass), Kevin Carberry (OL/Run), Chandler Whitmer (QB), Skip Peete (RB), Bryan McClendon (WR), Justin Peelle (TE), George Edwards (Def Pass), Larry Foote (Def Run/OLB), Mike Caldwell (ILB), Rashad Johnson (CB), Tim Atkins (S), Marcus West (DL)",
+            "edge": "TB",
+            "impact": "Kevin Carberry's OL/run group vs. Carolina's restructured LB/DL room under Interim DC Todd Wash favors Tampa's trench continuity."
+          },
+          {
+            "tier": "4. Asst. Coaches & QC",
+            "awayStaff": "Panthers restructured defensive staff under Interim DC Todd Wash",
+            "homeStaff": "Ken Zampese (Sr. Off. Asst. / Pass Game Spec.) & Bowles defensive assistants",
+            "edge": "TB",
+            "impact": "Ken Zampese and Zac Robinson give Tampa extra pass-game wrinkles if Winfield/Morrison force a shootout."
+          }
+        ],
+        "crossStaffTells": [
+          "Panthers HC Dave Canales and OC Brad Idzik both previously coached Baker Mayfield and know Tampa Bay's offensive/defensive DNA.",
+          "Todd Bowles dialed up 5 sacks and 4 takeaways against Bryce Young in Week 7's 43-13 blowout."
+        ],
+        "hiddenMismatch": "TB Def. Pass Coord. George Edwards & Safeties Coach Tim Atkins (possibly missing Antoine Winfield Jr.) vs. CAR Pass Coord. Mike Bercovici & WR Coach Rob Moore (Tetairoa McMillan / Darren Waller) under flag-happy Clete Blakeman."
+      },
+      "predictions": [
+        {
+          "modelId": "gemini-3-flash-preview",
+          "modelLabel": "Gemini 3 Flash Preview",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-3-flash-preview",
+            "exactModelId": "gemini-3-flash-preview",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "4a851dee897daec22f7556d7944b00be19f3f29a02d2ae2fae51b9315c584496",
+            "runAtUtc": "2026-11-27T22:47:04Z",
+            "latencySec": 8.24,
+            "usage": {
+              "inputTokens": 3255,
+              "outputTokens": 526,
+              "totalTokens": 4810
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:47:04Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CAR",
+          "projectedScore": {
+            "away": 27,
+            "home": 24
+          },
+          "spreadLean": "CAR +2.5 \u2014 the surging momentum and TB secondary injuries create a high-value underdog spot",
+          "totalLean": "Over 43.5 \u2014 pristine Tampa air and Clete Blakeman's flag-happy tendencies favor offensive efficiency",
+          "primaryKey": "The combination of Tampa Bay's depleted secondary (Winfield Jr./Morrison DNPs) and Clete Blakeman's high DPI rate allows Bryce Young to sustain drives through vertical shots and penalties.",
+          "refCall": "Clete Blakeman \u2014 Expect a high-volume flag night (12.8-18.1 range) where defensive holding and DPI calls disproportionately punish Tampa's backup corners against Tetairoa McMillan.",
+          "sentimentEdge": "AWAY +2.5 vs HOME -2.0 \u2014 Carolina is galvanized by a 35-33 upset of Baltimore, while Tampa Bay is spiraling despite the Week 7 blowout history.",
+          "hiddenMismatch": "CAR WR Coach Rob Moore vs. TB CB Coach Rashad Johnson \u2014 Moore's physical receivers (McMillan/Waller) will exploit the lack of experience and height in TB's depth chart with Winfield out.",
+          "surpriseCall": {
+            "title": "The 60-Yard Kicking Duel",
+            "detail": "Both kickers combine for four field goals of 50+ yards, including a 60-yarder by Chase McLaughlin, as Clete Blakeman's trench-holding calls stall drives in the 'dead zone' under pristine 66-degree conditions.",
+            "ingredients": [
+              "Chase McLaughlin's 65-yard NFL outdoor record at Raymond James",
+              "Calm 3-5 mph Tampa night air maximizing ball flight physics",
+              "Clete Blakeman's strict trench-holding enforcement stalling red-zone entries"
+            ],
+            "probability": "~35%"
+          },
+          "bonusSleeper": {
+            "title": "The Waller Seam Attack",
+            "edit": "Darren Waller exploits the deep middle vacated by Antoine Winfield Jr. for 85+ yards and a score.",
+            "probability": "~45%"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "gemini-2-5-flash",
+          "modelLabel": "Gemini 2.5 Flash",
+          "modelMeta": {
+            "provider": "gemini",
+            "requestedModel": "gemini-2.5-flash",
+            "exactModelId": "gemini-2.5-flash",
+            "harness": "arena-cli-gemini-api",
+            "webSearchEnabled": false,
+            "promptSha256": "4a851dee897daec22f7556d7944b00be19f3f29a02d2ae2fae51b9315c584496",
+            "runAtUtc": "2026-11-27T22:47:08Z",
+            "latencySec": 11.61,
+            "usage": {
+              "inputTokens": 3255,
+              "outputTokens": 654,
+              "totalTokens": 5637
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:47:08Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CAR",
+          "projectedScore": {
+            "away": 27,
+            "home": 24
+          },
+          "spreadLean": "CAR +2.5 \u2014 the side you take against the listed spread",
+          "totalLean": "Over 43.5 \u2014 against the listed total",
+          "primaryKey": "Carolina's ability to exploit Tampa's injured secondary with deep shots and draw DPI flags from Clete Blakeman will dictate the game's flow and scoring.",
+          "refCall": "Clete Blakeman \u2014 Top-tier deep-ball DPI and defensive holding trigger when depleted secondaries grab downfield, frequently extending scoring drives with yellow laundry in primetime windows, directly benefiting Carolina's vertical passing game against Tampa's injured defensive backs.",
+          "sentimentEdge": "Market favors 3-7 TB -2.5 based on Week 7 blowout and Todd Bowles' schematic edge, contrasting public support for 5-5 surging CAR's galvanized locker room and revenge motivation.",
+          "hiddenMismatch": "TB Def. Pass Coord. George Edwards & Safeties Coach Tim Atkins (possibly missing Antoine Winfield Jr.) vs. CAR Pass Coord. Mike Bercovici & WR Coach Rob Moore (Tetairoa McMillan / Darren Waller) under flag-happy Clete Blakeman.",
+          "surpriseCall": {
+            "title": "McLaughlin's Record-Setting Game-Winner After Blakeman Bailout",
+            "detail": "With the game tied in the final seconds, Tampa Bay's drive stalls just past midfield. Clete Blakeman throws a ticky-tack defensive holding flag on Carolina, extending the drive by 10 yards and giving Chase McLaughlin a chance to attempt a 60+ yard field goal, which he nails for the win, leveraging his record-setting range in the calm Tampa air.",
+            "ingredients": [
+              "Chase McLaughlin's 65-yard NFL outdoor record and deep range at Raymond James.",
+              "Calm 66\u00b0F Tampa air and negligible wind creating pristine kicking conditions.",
+              "Clete Blakeman's tendency to \"frequently extend scoring drives with yellow laundry in primetime windows.\"",
+              "Tampa Bay's 3-7 \"must-win desperation\" to stay alive in the division."
+            ],
+            "probability": "~15% \u2014 your own estimate"
+          },
+          "bonusSleeper": {
+            "title": "Tetairoa McMillan's Breakout Night",
+            "detail": "With Tampa's secondary depleted and Clete Blakeman's DPI flags flying, Tetairoa McMillan, even if not 100%, exploits coverage for 80+ yards and a touchdown, leveraging his size against backup corners.",
+            "probability": "~20% \u2014 your own estimate"
+          },
+          "grade": null
+        },
+        {
+          "modelId": "claude-sonnet-5-5",
+          "modelLabel": "Claude Sonnet 5.5",
+          "modelMeta": {
+            "provider": "anthropic",
+            "requestedModel": "sonnet",
+            "exactModelId": "claude-sonnet-5-5",
+            "harness": "arena-cli-claude-cli",
+            "webSearchEnabled": false,
+            "promptSha256": "4a851dee897daec22f7556d7944b00be19f3f29a02d2ae2fae51b9315c584496",
+            "runAtUtc": "2026-11-27T22:47:09Z",
+            "latencySec": 12.87,
+            "usage": {
+              "inputTokens": 2,
+              "outputTokens": 1034,
+              "cacheReadInputTokens": 13706,
+              "cacheCreationInputTokens": 46655,
+              "costUsd": 0.198335
+            }
+          },
+          "status": "locked",
+          "publishedAtUtc": "2026-11-27T22:47:09Z",
+          "receiptUrl": "https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/2026-week12-marquee.json",
+          "winnerAbbr": "CAR",
+          "projectedScore": {
+            "away": 27,
+            "home": 24
+          },
+          "spreadLean": "CAR +2.5 \u2014 take the points, and Carolina wins outright",
+          "totalLean": "Over 43.5 \u2014 both offenses score in clean, calm conditions and Blakeman's flags extend drives",
+          "primaryKey": "Carolina's play-action and bootlegs for Bryce Young blunt Todd Bowles' A-gap pressure, which wrecked Week 7. A thin Tampa secondary without Winfield and Morrison can't hold up against McMillan and Waller on the seams.",
+          "refCall": "Clete Blakeman \u2014 his crew's high flag rate (12.8-18.1/gm) and deep-ball DPI emphasis favor the vertical attack. Expect 2-3 defensive pass interference or holding calls on Tampa's depleted secondary that extend Carolina drives or set up short fields. His strict trench holding enforcement also adds third-and-long penalty swings for both sides.",
+          "sentimentEdge": "AWAY +2.5 vs HOME -2.0 \u2014 the market is anchored on the Week 7 blowout, while Carolina is the surging division leader with revenge motivation. The 3-7 favorite is a contrarian fade.",
+          "hiddenMismatch": "CAR Pass Coordinator Mike Bercovici and WR coach Rob Moore (McMillan/Waller seam routes) vs. TB Def Pass Coordinator George Edwards and Safeties coach Tim Atkins, who may be without Antoine Winfield Jr. under Blakeman's DPI-heavy whistle.",
+          "surpriseCall": {
+            "title": "Blakeman's DPI flag sets up a Carolina goal-line sneak to win the game late",
+            "detail": "With Winfield out and Morrison limited, Tampa's backups grab McMillan on a fourth-quarter seam route. Blakeman throws a deep DPI flag that spots the ball at the 1-yard line. Carolina's Brooks punches it in on the next snap, putting the Panthers ahead for good. McLaughlin's 65-yard range doesn't help Tampa, because the late touchdown leaves them needing a TD, not a field goal.",
+            "ingredients": [
+              "Antoine Winfield Jr. (ankle) and Benjamin Morrison (hamstring/back) DNP Friday, leaving Tampa's secondary thin",
+              "Clete Blakeman's top-tier deep-ball DPI rate (12.8-18.1 flags/gm)",
+              "Tetairoa McMillan (foot) and Darren Waller on seam routes, with Canales and Idzik knowing Tampa's coverage rules from their time there"
+            ],
+            "probability": "~12% \u2014 my own estimate"
+          },
+          "bonusSleeper": {
+            "title": "Tampa special teams swing: McLaughlin hits a 60+ yard field goal in the first half",
+            "detail": "Calm 66\u00b0F air and Tampa's drive stalls past midfield make a 60+ yard McLaughlin attempt likely, and he makes it.",
+            "probability": "~18% \u2014 my own estimate"
+          },
+          "grade": null
+        }
+      ],
+      "studioShortUrl": "https://youtube.com/shorts/7sIT-8-0MC8"
+    }
+  ],
+  "studioShortUrl": "https://youtube.com/shorts/F8XrUW2DrjI"
+}
