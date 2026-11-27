@@ -265,6 +265,9 @@ function renderModelCard(game, pred) {
     if (pred.modelMeta.exactModelId) {
       metaRow.append(el("span", "meta-chip", `Model: ${pred.modelMeta.exactModelId}`));
     }
+    if (pred.modelMeta.afterKickoff === true) {
+      metaRow.append(el("span", "meta-chip", "Run after kickoff"));
+    }
     if (pred.modelMeta.provider || pred.modelMeta.harness) {
       const via = [pred.modelMeta.provider, pred.modelMeta.harness].filter(Boolean).join(" / ");
       metaRow.append(el("span", "meta-chip", via));

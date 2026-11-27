@@ -1,5 +1,6 @@
 import base64
 import hashlib
+import io
 import json
 import re
 import shutil
@@ -7,7 +8,10 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.error
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
@@ -459,6 +463,185 @@ class TestArenaAndShorts(unittest.TestCase):
         )
         errs = render_studio_short.validate_cut_models(bad_cut, synthetic)
         self.assertTrue(any("grok" in e.lower() for e in errs))
+
+
+SLATE_ID = "2026-black-friday"
+
+
+def _fake_pick(**overrides):
+    pick = {
+        "winnerAbbr": "DEN",
+        "projectedScore": {"away": 23, "home": 16},
+        "spreadLean": "DEN -4.5",
+        "totalLean": "Over 37.5",
+        "primaryKey": "key",
+        "refCall": "ref",
+        "sentimentEdge": "edge",
+        "hiddenMismatch": "mismatch",
+        "surpriseCall": {"title": "T", "detail": "D", "ingredients": ["a", "b", "c"], "probability": "~4%"},
+        "bonusSleeper": {"title": "B", "detail": "D", "probability": "~11%"},
+    }
+    pick.update(overrides)
+    return pick
+
+
+class TestArenaRun(unittest.TestCase):
+    """`arena_cli.py run` against a temp copy of the slate, with the model call faked."""
+
+    def _slate_dir(self, kickoff_utc: str) -> Path:
+        tmp = Path(tempfile.mkdtemp(prefix="arena-run-"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        slate = json.loads((DOCS_DIR / "data" / f"{SLATE_ID}.json").read_text(encoding="utf-8"))
+        slate["games"][0]["kickoffUtc"] = kickoff_utc
+        (tmp / f"{SLATE_ID}.json").write_text(json.dumps(slate, indent=2) + "\n", encoding="utf-8")
+        return tmp
+
+    @staticmethod
+    def _saved_predictions(data_dir: Path) -> list:
+        slate = json.loads((data_dir / f"{SLATE_ID}.json").read_text(encoding="utf-8"))
+        return slate["games"][0]["predictions"]
+
+    def test_run_refuses_a_game_that_has_kicked_off(self):
+        data_dir = self._slate_dir("2020-01-01T00:00:00Z")
+        slate_file = data_dir / f"{SLATE_ID}.json"
+        before = slate_file.read_text(encoding="utf-8")
+        calls = []
+
+        def fake(provider, model, prompt, timeout_sec):
+            calls.append(model)
+            return _fake_pick(), "test-model-a", {}, "test-harness"
+
+        with mock.patch.object(arena_cli, "_invoke_provider", side_effect=fake):
+            with self.assertRaisesRegex(ValueError, "Kickoff has passed"):
+                arena_cli.run_models_for_slate(SLATE_ID, ["gemini:test-model-a"], data_dir=data_dir)
+            self.assertEqual(calls, [], "no model may be called for a game that has started")
+            self.assertEqual(slate_file.read_text(encoding="utf-8"), before)
+
+            dry = arena_cli.run_models_for_slate(SLATE_ID, ["gemini:test-model-a"], dry_run=True, data_dir=data_dir)
+            self.assertTrue(dry[0]["dryRun"])
+            self.assertEqual(calls, [])
+
+            arena_cli.run_models_for_slate(SLATE_ID, ["gemini:test-model-a"], data_dir=data_dir, allow_late=True)
+
+        late = next(p for p in self._saved_predictions(data_dir) if p["modelId"] == "test-model-a")
+        self.assertIs(late["modelMeta"]["afterKickoff"], True)
+
+    def test_run_keeps_other_models_when_one_fails(self):
+        kickoff = (datetime.now(timezone.utc) + timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        data_dir = self._slate_dir(kickoff)
+        slate_file = data_dir / f"{SLATE_ID}.json"
+        ids_before = [p["modelId"] for p in self._saved_predictions(data_dir)]
+
+        def fake(provider, model, prompt, timeout_sec):
+            if model == "boom":
+                raise RuntimeError("Gemini API HTTP 503 for boom: overloaded")
+            if model == "bad-winner":
+                return _fake_pick(winnerAbbr="Denver"), "bad-winner", {}, "test-harness"
+            return _fake_pick(), "test-model-a", {"inputTokens": 1}, "test-harness"
+
+        with mock.patch.object(arena_cli, "_invoke_provider", side_effect=fake):
+            out = arena_cli.run_models_for_slate(
+                SLATE_ID,
+                ["gemini:test-model-a", "gemini:boom", "gemini:bad-winner"],
+                data_dir=data_dir,
+            )
+            failed = [s for s in out if "error" in s]
+            recorded = [s for s in out if "error" not in s]
+            self.assertEqual([s["requestedModel"] for s in failed], ["boom", "bad-winner"])
+            self.assertIn("503", failed[0]["error"])
+            self.assertEqual([s["modelId"] for s in recorded], ["test-model-a"])
+
+            saved = self._saved_predictions(data_dir)
+            self.assertEqual([p["modelId"] for p in saved], ids_before + ["test-model-a"])
+            self.assertNotIn("afterKickoff", saved[-1]["modelMeta"])
+
+            # Every model failing leaves the slate file untouched.
+            after_first_run = slate_file.read_text(encoding="utf-8")
+            all_failed = arena_cli.run_models_for_slate(SLATE_ID, ["gemini:boom"], data_dir=data_dir)
+            self.assertEqual(len(all_failed), 1)
+            self.assertIn("error", all_failed[0])
+            self.assertEqual(slate_file.read_text(encoding="utf-8"), after_first_run)
+
+    def test_prompts_show_placeholders_not_sample_values(self):
+        slate = json.loads((DOCS_DIR / "data" / f"{SLATE_ID}.json").read_text(encoding="utf-8"))
+        game = slate["games"][0]
+        hint = arena_cli._prediction_schema_hint(game)
+        hint_text = json.dumps(hint)
+        # A sample probability, line, total or score gets echoed back as the model's own call.
+        self.assertNotRegex(hint_text, r"~\d")
+        self.assertNotRegex(hint_text, r"\d+\.\d")
+        self.assertTrue(all(isinstance(v, str) for v in hint["projectedScore"].values()))
+        self.assertIn(arena_cli.PLACEHOLDER_NOTE, arena_cli.build_game_prediction_prompt(slate, game))
+
+        paste_prompt = arena_cli.build_multi_model_prompt(SLATE_ID)
+        self.assertIn(arena_cli.PLACEHOLDER_NOTE, paste_prompt)
+        example = paste_prompt.split("```json", 1)[1]
+        self.assertNotRegex(example, r"~\d")
+        self.assertNotRegex(example, r'"(away|home)": \d')
+
+    def test_post_json_retries_transient_failures_only(self):
+        class _Reply:
+            def __init__(self, body):
+                self._raw = json.dumps(body).encode("utf-8")
+
+            def read(self):
+                return self._raw
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *exc_info):
+                return False
+
+        def http_error(code, text):
+            return urllib.error.HTTPError("https://example.invalid", code, "err", {}, io.BytesIO(text.encode("utf-8")))
+
+        def run_with(replies):
+            sleeps = []
+            queue = list(replies)
+
+            def fake_urlopen(req, timeout):
+                item = queue.pop(0)
+                if isinstance(item, Exception):
+                    raise item
+                return item
+
+            with mock.patch.object(arena_cli.urllib.request, "urlopen", side_effect=fake_urlopen), mock.patch.object(
+                arena_cli.time, "sleep", side_effect=sleeps.append
+            ):
+                try:
+                    return arena_cli._post_json_with_retry("https://example.invalid", {}, {}, 5, "Test API", "m"), sleeps
+                except RuntimeError as exc:
+                    return exc, sleeps
+
+        body, sleeps = run_with([http_error(503, "overloaded"), http_error(429, "slow down"), _Reply({"ok": True})])
+        self.assertEqual(body, {"ok": True})
+        self.assertEqual(sleeps, [2, 5])
+
+        err, sleeps = run_with([http_error(429, "Quota exceeded, limit: 0"), _Reply({"ok": True})])
+        self.assertIsInstance(err, RuntimeError)
+        self.assertIn("HTTP 429", str(err))
+        self.assertEqual(sleeps, [], "a zero daily quota is not retried")
+
+        err, sleeps = run_with([http_error(400, "bad request"), _Reply({"ok": True})])
+        self.assertIn("HTTP 400", str(err))
+        self.assertEqual(sleeps, [])
+
+        err, sleeps = run_with([http_error(503, "down") for _ in range(4)])
+        self.assertIn("HTTP 503", str(err))
+        self.assertEqual(sleeps, [2, 5, 10])
+
+    def test_claude_usage_names_the_model_that_answered(self):
+        key, usage = arena_cli._primary_model_usage(
+            {
+                "helper-model": {"inputTokens": 400, "outputTokens": 12},
+                "answering-model": {"inputTokens": 2, "outputTokens": 926},
+            }
+        )
+        self.assertEqual(key, "answering-model")
+        self.assertEqual(usage["outputTokens"], 926)
+        self.assertEqual(arena_cli._primary_model_usage(None), (None, {}))
+        self.assertEqual(arena_cli._primary_model_usage({}), (None, {}))
 
 
 if __name__ == "__main__":

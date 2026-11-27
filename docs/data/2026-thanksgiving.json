@@ -4,7 +4,7 @@
   "subtitle": "All 3 Thursday matchups scouted pre-kickoff and graded post-game (plus Thanksgiving Eve GB @ LAR missed-game receipt).",
   "season": 2026,
   "week": "Week 12 (Thanksgiving)",
-  "updatedAtUtc": "2026-11-27T17:52:00Z",
+  "updatedAtUtc": "2026-11-27T18:46:00Z",
   "studioShortUrl": "https://youtube.com/shorts/jLTHaBAOj44",
   "games": [
     {
@@ -212,14 +212,14 @@
               "orgSentiment": 12,
               "surpriseBonus": 2
             },
-            "notes": "Nailed Over 55.5 (74 pts) and Hank Fraley OL/Gibbs 205-yd run edge + Campbell 4th-down aggression flipping late momentum, but missed CHI outright win (39-35), over-indexed on Hochuli flags (only 8 total), had zero trick plays, and missed intra-division record weighting."
+            "notes": "Nailed Over 55.5 (74 pts) and Hank Fraley OL/Gibbs 205-yd run edge + Campbell 4th-down aggression flipping late momentum, but missed CHI outright win (39-35), had zero trick plays, and missed intra-division record weighting. Correction 27 Nov: Hochuli's crew called 13 accepted penalties (CHI 4/25, DET 9/70), in line with the 13.2-14.5 forecast, not 8 as first graded; points not yet re-scored."
           }
         }
       ],
       "result": {
         "finalScore": { "away": 39, "home": 35 },
         "winnerAbbr": "CHI",
-        "summary": "Caleb Williams (30/44, 345 yds, 2 TDs + 2-pt run) hit Rome Odunze for a 6-yd GW TD with 0:03 left after Detroit failed a late 4th-and-4. Jahmyr Gibbs rushed for 205 yds & 3 TDs, while Shawn Hochuli called only 8 total penalties (CHI 5/25, DET 3/20) with zero trick plays.",
+        "summary": "Caleb Williams (30/44, 345 yds, 2 TDs + 2-pt run) hit Rome Odunze for a 6-yd GW TD with 0:03 left after Detroit failed a late 4th-and-4. Jahmyr Gibbs rushed for 205 yds & 3 TDs, while Shawn Hochuli's crew called 13 accepted penalties (CHI 4/25, DET 9/70) with zero trick plays.",
         "freakPlayOutcome": "First-half Derrick Moore strip-sack ended in an illegal-bat safety in the end zone; zero eligible-tackle or trick plays occurred."
       }
     },
@@ -642,15 +642,15 @@
               "orgSentiment": 9,
               "surpriseBonus": 13
             },
-            "notes": "Nailed BUF -2.5 & exact 3-pt winning margin (13-10 vs 27-24) AND near-bullseye on Reverse 13 Seconds (late Alex Kemp catch overturn + partial punt block with 4s left -> Tyler Bass 57-yd walk-off FG in driving rain/wind). Docked on Over 50.5 miss & stale Kenneth Walker III inactive (groin)."
+            "notes": "Nailed BUF -2.5 & exact 3-pt winning margin (13-10 vs 27-24) AND near-bullseye on Reverse 13 Seconds (late Alex Kemp catch overturn + partial punt tip with 15s left -> Tyler Bass 57-yd walk-off FG in driving rain/wind). Docked on Over 50.5 miss & stale Kenneth Walker III inactive (groin)."
           }
         }
       ],
       "result": {
         "finalScore": { "away": 10, "home": 13 },
         "winnerAbbr": "BUF",
-        "summary": "Driving rain & heavy wind turned Highmark into a 13-10 slugfest (Allen 10/21, 81 yds, 2 INTs; Cook 117 rush yds & TD; Mahomes 174 yds, 0 TDs; Kenneth Walker III OUT groin, rookie Emmett Johnson scored KC's TD; Butker missed 46-yd FG). After Alex Kemp's crew overturned a 3rd-down Rashee Rice catch on replay, Joe Andreessen partially blocked KC's punt with 0:04 left and Tyler Bass drilled a 57-yd walk-off FG at 0:00.",
-        "freakPlayOutcome": "Near-bullseye on Reverse 13 Seconds: late Alex Kemp officiating overturn + partial punt block with 4 seconds left set up Tyler Bass's 57-yd cold-weather walk-off FG."
+        "summary": "Driving rain & heavy wind turned Highmark into a 13-10 slugfest (Allen 10/21, 81 yds, 2 INTs; Cook 117 rush yds & TD; Mahomes 174 yds, 0 TDs; Kenneth Walker III OUT groin, rookie Emmett Johnson scored KC's TD; Butker missed 46-yd FG). After Alex Kemp's crew overturned a 3rd-down Rashee Rice catch on replay, Joe Andreessen partially tipped KC's punt with 0:15 left and Tyler Bass drilled a 57-yd walk-off FG as time expired (snapped with 0:04 left).",
+        "freakPlayOutcome": "Near-bullseye on Reverse 13 Seconds: late Alex Kemp officiating overturn + partial punt tip with 15 seconds left set up Tyler Bass's 57-yd cold-weather walk-off FG."
       }
     }
   ],
@@ -664,7 +664,7 @@
       "finalScore": { "away": 13, "home": 26 },
       "winnerAbbr": "LAR",
       "reasonMissed": "2026-thanksgiving only queried Thursday's traditional tripleheader, omitting the NFL's first-ever Wednesday Thanksgiving Eve game. Fixed by adding Wed-Mon full-window schedule discovery to SKILL.md.",
-      "recapSummary": "Tied 13-13 at half before LA dominated 2nd half (40:40 TOP; GB ran just 16 plays after intermission). RB Blake Corum erupted on his 26th birthday for 184 rush yds & TD on 32 carries without Puka Nacua or Davante Adams; Micah Parsons logged a sack in his Packers ACL-return debut; Rams S Kamren Kinchens was ejected on the hit that concussed Christian Watson."
+      "recapSummary": "Tied 13-13 at half before LA dominated 2nd half (40:40 TOP; GB ran just 16 plays after intermission). RB Blake Corum erupted on his 26th birthday for 184 rush yds & TD on 32 carries without Puka Nacua or Davante Adams; Micah Parsons logged a sack in his season debut after a torn ACL; Rams S Kamren Kinchens was ejected on the hit that concussed Christian Watson."
     }
   ]
 }

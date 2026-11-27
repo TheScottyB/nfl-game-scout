@@ -30,6 +30,19 @@ SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 SUPPORTED_PROVIDERS = {"gemini", "claude-cli", "anthropic", "openai"}
 
+# Example prediction objects shown to models carry placeholders, never sample values:
+# a sample score, line or probability gets echoed back as if it were the model's own call.
+PROBABILITY_HINT = "~N% — your own estimate"
+SPREAD_LEAN_HINT = "<TEAM abbr> <line> — the side you take against the listed spread"
+TOTAL_LEAN_HINT = "<Over or Under> <total> — against the listed total"
+PLACEHOLDER_NOTE = (
+    "Angle-bracket placeholders and N show each field's type only, not a suggested value: "
+    "replace every one with your own call. projectedScore.away and projectedScore.home must be JSON integers."
+)
+
+RETRYABLE_HTTP_CODES = (429, 500, 502, 503, 504, 529)
+RETRY_BACKOFFS_SEC = (2, 5, 10)
+
 RUBRIC_CAPS = {
     "winner": 20,
     "scoreMargin": 20,
@@ -77,6 +90,12 @@ def _parse_iso8601(value: Any, context: str) -> None:
         datetime.fromisoformat(normalized)
     except ValueError as exc:
         raise ValueError(f"{context}: invalid ISO-8601 timestamp {value!r}") from exc
+
+
+def _iso_to_datetime(value: str) -> datetime:
+    normalized = value[:-1] + "+00:00" if value.endswith("Z") else value
+    parsed = datetime.fromisoformat(normalized)
+    return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
 
 
 def _resolve_slate_path(slate_id: str, data_dir: Path = DOCS_DATA_DIR) -> Path:
@@ -231,6 +250,8 @@ def validate_slate_dict(slate: dict[str, Any], source_name: str = "<slate>") -> 
                             )
                     if "usage" in meta and meta["usage"] is not None and not isinstance(meta["usage"], dict):
                         errors.append(f"{gid}.predictions[{model_id}].modelMeta.usage: must be an object")
+                    if "afterKickoff" in meta and not isinstance(meta["afterKickoff"], bool):
+                        errors.append(f"{gid}.predictions[{model_id}].modelMeta.afterKickoff: must be a boolean")
 
             receipt = pred.get("receiptUrl")
             if receipt is not None and not _is_https_url(receipt):
@@ -342,6 +363,7 @@ def build_multi_model_prompt(slate_id: str, data_dir: Path = DOCS_DATA_DIR) -> s
             "For each game, verify who started last week at QB and current official depth charts/inactives, intra-division record (if divisional), betting lines, weather/altitude physics, kicker career longs, roster ages, assigned referee crew tendencies, last-30-day social media & locker-room sentiment (-5 to +5), full 4-tier GM-to-assistant-position-coach org chart, and one grounded Crazy Surprise Call.",
             "",
             "Then return a JSON array (one object per game) matching this exact schema so I can run `python3 scripts/arena_cli.py ingest`:",
+            PLACEHOLDER_NOTE,
             "```json",
             json.dumps(
                 [
@@ -355,10 +377,10 @@ def build_multi_model_prompt(slate_id: str, data_dir: Path = DOCS_DATA_DIR) -> s
                             "harness": "claude-desktop",
                             "webSearchEnabled": True,
                         },
-                        "winnerAbbr": "TEAM",
-                        "projectedScore": {"away": 24, "home": 27},
-                        "spreadLean": "TEAM -2.5",
-                        "totalLean": "Over 50.5",
+                        "winnerAbbr": "<TEAM abbr>",
+                        "projectedScore": {"away": "<integer>", "home": "<integer>"},
+                        "spreadLean": SPREAD_LEAN_HINT,
+                        "totalLean": TOTAL_LEAN_HINT,
                         "primaryKey": "One-sentence decisive tactical factor",
                         "refCall": "Assigned Head Ref — expected impact",
                         "sentimentEdge": "AWAY +X vs HOME +Y — contrarian note",
@@ -367,12 +389,12 @@ def build_multi_model_prompt(slate_id: str, data_dir: Path = DOCS_DATA_DIR) -> s
                             "title": "Headline Crazy Surprise Call",
                             "detail": "Exact rule/play mechanic and why tonight's physics/refs/coaches make it live",
                             "ingredients": ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-                            "probability": "~8%",
+                            "probability": PROBABILITY_HINT,
                         },
                         "bonusSleeper": {
                             "title": "Secondary sleeper",
                             "detail": "1-sentence sleeper projection",
-                            "probability": "~6%",
+                            "probability": PROBABILITY_HINT,
                         },
                     }
                 ],
@@ -603,6 +625,30 @@ def _extract_json_object(raw_text: str) -> dict[str, Any]:
     return parsed
 
 
+def _prediction_schema_hint(game: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "winnerAbbr": f"{game['away']['abbr']} or {game['home']['abbr']}",
+        "projectedScore": {"away": "<integer>", "home": "<integer>"},
+        "spreadLean": SPREAD_LEAN_HINT,
+        "totalLean": TOTAL_LEAN_HINT,
+        "primaryKey": "One-sentence decisive tactical factor grounded in the verified snapshot",
+        "refCall": "Assigned Head Ref — specific expected impact on tonight's matchup",
+        "sentimentEdge": "AWAY +X vs HOME +Y — contrarian or locker-room takeaway",
+        "hiddenMismatch": "Specific Tier 3/4 position or assistant coach duel",
+        "surpriseCall": {
+            "title": "Headline Crazy Surprise Call",
+            "detail": "Exact play/rule mechanic grounded in 3+ verified ingredients",
+            "ingredients": ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
+            "probability": PROBABILITY_HINT,
+        },
+        "bonusSleeper": {
+            "title": "Secondary sleeper",
+            "detail": "1-sentence sleeper projection",
+            "probability": PROBABILITY_HINT,
+        },
+    }
+
+
 def build_game_prediction_prompt(slate: dict[str, Any], game: dict[str, Any]) -> str:
     snapshot = {
         "slateId": slate.get("slateId"),
@@ -623,27 +669,7 @@ def build_game_prediction_prompt(slate: dict[str, Any], game: dict[str, Any]) ->
         "sentiment30d": game["sentiment30d"],
         "orgChart": game["orgChart"],
     }
-    schema_hint = {
-        "winnerAbbr": f"{game['away']['abbr']} or {game['home']['abbr']}",
-        "projectedScore": {"away": 20, "home": 17},
-        "spreadLean": "TEAM -4.5",
-        "totalLean": "Under 37.5",
-        "primaryKey": "One-sentence decisive tactical factor grounded in the verified snapshot",
-        "refCall": "Assigned Head Ref — specific expected impact on tonight's matchup",
-        "sentimentEdge": "AWAY +X vs HOME +Y — contrarian or locker-room takeaway",
-        "hiddenMismatch": "Specific Tier 3/4 position or assistant coach duel",
-        "surpriseCall": {
-            "title": "Headline Crazy Surprise Call",
-            "detail": "Exact play/rule mechanic grounded in 3+ verified ingredients",
-            "ingredients": ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-            "probability": "~9%",
-        },
-        "bonusSleeper": {
-            "title": "Secondary sleeper",
-            "detail": "1-sentence sleeper projection",
-            "probability": "~7%",
-        },
-    }
+    schema_hint = _prediction_schema_hint(game)
     return (
         "You are an independent NFL Game Scout analyst competing in the 100-point Multi-Model Arena.\n"
         "All current-season rosters, starting QBs, depth-chart updates, injuries, weather, odds, referee tendencies, "
@@ -654,8 +680,68 @@ def build_game_prediction_prompt(slate: dict[str, Any], game: dict[str, Any]) ->
         "VERIFIED MATCHUP SNAPSHOT:\n"
         f"{json.dumps(snapshot, indent=2)}\n\n"
         "Return STRICTLY one raw JSON object (no markdown prose outside JSON) matching this exact structure:\n"
-        f"{json.dumps(schema_hint, indent=2)}\n"
+        f"{json.dumps(schema_hint, indent=2)}\n\n"
+        f"{PLACEHOLDER_NOTE}\n"
     )
+
+
+def _post_json_with_retry(
+    url: str,
+    payload: dict[str, Any],
+    headers: dict[str, str],
+    timeout_sec: int,
+    label: str,
+    model: str,
+) -> dict[str, Any]:
+    """POST a JSON body and return the decoded reply, retrying transient HTTP and network failures."""
+    body_bytes = json.dumps(payload).encode("utf-8")
+    last_err: Exception | None = None
+    for attempt in range(len(RETRY_BACKOFFS_SEC) + 1):
+        req = urllib.request.Request(
+            url,
+            data=body_bytes,
+            headers={**headers, "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            err_text = exc.read().decode("utf-8", errors="replace")[:500]
+            exc.close()
+            last_err = RuntimeError(f"{label} HTTP {exc.code} for {model}: {err_text}")
+            # A zero or spent daily quota does not clear inside a retry window.
+            quota_spent = exc.code == 429 and ("limit: 0" in err_text or "requests per day" in err_text)
+            if exc.code in RETRYABLE_HTTP_CODES and not quota_spent and attempt < len(RETRY_BACKOFFS_SEC):
+                time.sleep(RETRY_BACKOFFS_SEC[attempt])
+                continue
+            raise last_err from None
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_err = RuntimeError(f"{label} network error for {model}: {exc}")
+            if attempt < len(RETRY_BACKOFFS_SEC):
+                time.sleep(RETRY_BACKOFFS_SEC[attempt])
+                continue
+            raise last_err from None
+    assert last_err is not None
+    raise last_err
+
+
+def _primary_model_usage(model_usage: Any) -> tuple[str | None, dict[str, Any]]:
+    """Return the modelUsage entry that wrote the answer: the one with the most output tokens.
+
+    The claude CLI can list a helper model beside the requested one, and key order is not a promise.
+    """
+    if not isinstance(model_usage, dict):
+        return None, {}
+    entries = [(key, val) for key, val in model_usage.items() if isinstance(val, dict)]
+    if not entries:
+        return None, {}
+
+    def _output_tokens(entry: tuple[str, dict[str, Any]]) -> int:
+        tokens = entry[1].get("outputTokens")
+        return tokens if isinstance(tokens, int) and not isinstance(tokens, bool) else 0
+
+    return max(entries, key=_output_tokens)
 
 
 def _call_gemini_generate_content(model: str, prompt: str, timeout_sec: int) -> tuple[dict[str, Any], str, dict[str, Any]]:
@@ -672,39 +758,7 @@ def _call_gemini_generate_content(model: str, prompt: str, timeout_sec: int) -> 
             "responseMimeType": "application/json",
         },
     }
-    body_bytes = json.dumps(payload).encode("utf-8")
-    backoffs = (2, 5, 10)
-    body: dict[str, Any] | None = None
-    last_err: Exception | None = None
-    for attempt in range(len(backoffs) + 1):
-        req = urllib.request.Request(
-            url,
-            data=body_bytes,
-            headers={"x-goog-api-key": api_key, "Content-Type": "application/json"},
-            method="POST",
-        )
-        try:
-            with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
-                body = json.loads(resp.read().decode("utf-8"))
-                break
-        except urllib.error.HTTPError as exc:
-            err_text = exc.read().decode("utf-8", errors="replace")[:500]
-            last_err = RuntimeError(f"Gemini API HTTP {exc.code} for {model}: {err_text}")
-            if exc.code == 429 and ("limit: 0" in err_text or "requests per day" in err_text):
-                raise last_err from None
-            if exc.code in (429, 500, 502, 503, 504) and attempt < len(backoffs):
-                time.sleep(backoffs[attempt])
-                continue
-            raise last_err from None
-        except (urllib.error.URLError, TimeoutError) as exc:
-            last_err = RuntimeError(f"Gemini API network error for {model}: {exc}")
-            if attempt < len(backoffs):
-                time.sleep(backoffs[attempt])
-                continue
-            raise last_err from None
-    if body is None:
-        assert last_err is not None
-        raise last_err
+    body = _post_json_with_retry(url, payload, {"x-goog-api-key": api_key}, timeout_sec, "Gemini API", model)
 
     candidates = body.get("candidates") or []
     if not candidates:
@@ -761,20 +815,14 @@ def _call_claude_cli(model: str, prompt: str, timeout_sec: int) -> tuple[dict[st
     else:
         raise RuntimeError(f"claude-cli envelope missing 'result': {res.stdout[:300]}")
 
-    model_usage = env.get("modelUsage") or {}
     exact_model = model
     usage: dict[str, Any] = {}
-    if isinstance(model_usage, dict) and model_usage:
-        first_key = next(iter(model_usage.keys()))
-        mu = model_usage[first_key] or {}
-        exact_model = str(mu.get("canonicalModel") or first_key or model)
-        for uk, mk in (
-            ("inputTokens", "inputTokens"),
-            ("outputTokens", "outputTokens"),
-            ("cacheReadInputTokens", "cacheReadInputTokens"),
-        ):
-            if isinstance(mu.get(mk), int):
-                usage[uk] = mu[mk]
+    usage_key, mu = _primary_model_usage(env.get("modelUsage"))
+    if usage_key is not None:
+        exact_model = str(mu.get("canonicalModel") or usage_key or model)
+        for uk in ("inputTokens", "outputTokens", "cacheReadInputTokens", "cacheCreationInputTokens"):
+            if isinstance(mu.get(uk), int):
+                usage[uk] = mu[uk]
     if isinstance(env.get("total_cost_usd"), (int, float)):
         usage["costUsd"] = round(float(env["total_cost_usd"]), 6)
     return parsed, exact_model, usage
@@ -791,22 +839,14 @@ def _call_anthropic_api(model: str, prompt: str, timeout_sec: int) -> tuple[dict
         "temperature": 0.35,
         "messages": [{"role": "user", "content": prompt}],
     }
-    req = urllib.request.Request(
+    body = _post_json_with_retry(
         "https://api.anthropic.com/v1/messages",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "x-api-key": api_key,
-            "anthropic-version": "2023-06-01",
-            "Content-Type": "application/json",
-        },
-        method="POST",
+        payload,
+        {"x-api-key": api_key, "anthropic-version": "2023-06-01"},
+        timeout_sec,
+        "Anthropic API",
+        model,
     )
-    try:
-        with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        err_text = exc.read().decode("utf-8", errors="replace")[:500]
-        raise RuntimeError(f"Anthropic API HTTP {exc.code} for {model}: {err_text}") from None
 
     chunks = [b["text"] for b in body.get("content", []) if isinstance(b, dict) and b.get("type") == "text"]
     if not chunks:
@@ -836,18 +876,14 @@ def _call_openai_api(model: str, prompt: str, timeout_sec: int) -> tuple[dict[st
         "response_format": {"type": "json_object"},
         "messages": [{"role": "user", "content": prompt}],
     }
-    req = urllib.request.Request(
+    body = _post_json_with_retry(
         "https://api.openai.com/v1/chat/completions",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
-        method="POST",
+        payload,
+        {"Authorization": f"Bearer {api_key}"},
+        timeout_sec,
+        "OpenAI API",
+        model,
     )
-    try:
-        with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
-            body = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        err_text = exc.read().decode("utf-8", errors="replace")[:500]
-        raise RuntimeError(f"OpenAI API HTTP {exc.code} for {model}: {err_text}") from None
 
     msg = body["choices"][0]["message"]["content"]
     parsed = _extract_json_object(msg)
@@ -888,7 +924,14 @@ def run_models_for_slate(
     timeout_sec: int = 180,
     dry_run: bool = False,
     data_dir: Path = DOCS_DATA_DIR,
+    allow_late: bool = False,
 ) -> list[dict[str, Any]]:
+    """Run each model spec against each target game and record the picks that came back.
+
+    A model that fails is reported in the returned list (an item with an "error" key) and
+    does not discard the other models' picks. A game whose kickoff has passed is refused
+    unless allow_late is set, and then its picks are marked modelMeta.afterKickoff.
+    """
     slate_path = _resolve_slate_path(slate_id, data_dir)
     if not slate_path.is_file():
         raise FileNotFoundError(f"Slate file not found: {slate_path}")
@@ -921,10 +964,22 @@ def run_models_for_slate(
                 )
         return summaries
 
-    now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now_dt = datetime.now(timezone.utc)
+    now_utc = now_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    started_ids = {g["id"] for g in target_games if _iso_to_datetime(g["kickoffUtc"]) <= now_dt}
+    if started_ids and not allow_late:
+        raise ValueError(
+            f"Kickoff has passed for {sorted(started_ids)} in slate {slate_id!r}: a pick made now is not a pre-game pick. "
+            "Use --game for a game still ahead, or --allow-late to record it marked afterKickoff."
+        )
+
+    failures: list[dict[str, Any]] = []
+    wrote_any = False
     for game in target_games:
         prompt = build_game_prediction_prompt(slate, game)
         prompt_sha = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+        team_abbrs = {game["away"]["abbr"], game["home"]["abbr"]}
+        after_kickoff = game["id"] in started_ids
 
         def _run_one(spec: tuple[str, str]) -> dict[str, Any]:
             provider, req_model = spec
@@ -940,25 +995,32 @@ def run_models_for_slate(
             sc = pred_obj.get("surpriseCall")
             if not isinstance(sc, dict) or not sc.get("title") or not sc.get("detail"):
                 raise ValueError(f"{exact_model} returned invalid surpriseCall: {sc!r}")
+            winner = str(pred_obj.get("winnerAbbr", "")).strip().upper()
+            if winner not in team_abbrs:
+                raise ValueError(f"{exact_model} returned winnerAbbr {winner!r}; expected one of {sorted(team_abbrs)}")
+
+            meta: dict[str, Any] = {
+                "provider": "anthropic" if provider == "claude-cli" else provider,
+                "requestedModel": req_model,
+                "exactModelId": exact_model,
+                "harness": harness,
+                "webSearchEnabled": False,
+                "promptSha256": prompt_sha,
+                "runAtUtc": run_utc,
+                "latencySec": latency,
+                "usage": usage,
+            }
+            if after_kickoff:
+                meta["afterKickoff"] = True
 
             return {
                 "modelId": model_id,
                 "modelLabel": model_label,
-                "modelMeta": {
-                    "provider": "anthropic" if provider == "claude-cli" else provider,
-                    "requestedModel": req_model,
-                    "exactModelId": exact_model,
-                    "harness": harness,
-                    "webSearchEnabled": False,
-                    "promptSha256": prompt_sha,
-                    "runAtUtc": run_utc,
-                    "latencySec": latency,
-                    "usage": usage,
-                },
+                "modelMeta": meta,
                 "status": "locked",
                 "publishedAtUtc": run_utc,
                 "receiptUrl": f"https://github.com/TheScottyB/nfl-game-scout/commits/main/docs/data/{slate_id}.json",
-                "winnerAbbr": str(pred_obj["winnerAbbr"]),
+                "winnerAbbr": winner,
                 "projectedScore": {"away": int(proj["away"]), "home": int(proj["home"])},
                 "spreadLean": str(pred_obj["spreadLean"]),
                 "totalLean": str(pred_obj["totalLean"]),
@@ -973,12 +1035,23 @@ def run_models_for_slate(
 
         results_by_order: list[dict[str, Any]] = []
         with ThreadPoolExecutor(max_workers=min(4, len(parsed_specs))) as pool:
-            futs = [pool.submit(_run_one, spec) for spec in parsed_specs]
-            for fut in futs:
-                results_by_order.append(fut.result())
+            futs = [(spec, pool.submit(_run_one, spec)) for spec in parsed_specs]
+            for (provider, req_model), fut in futs:
+                try:
+                    results_by_order.append(fut.result())
+                except Exception as exc:  # noqa: BLE001 - one model failing must not discard the others' picks
+                    failures.append(
+                        {
+                            "gameId": game["id"],
+                            "provider": provider,
+                            "requestedModel": req_model,
+                            "error": f"{type(exc).__name__}: {exc}"[:600],
+                        }
+                    )
 
         preds = game.setdefault("predictions", [])
         for entry in results_by_order:
+            wrote_any = True
             replaced = False
             for idx, existing in enumerate(preds):
                 if existing.get("modelId") == entry["modelId"]:
@@ -1000,12 +1073,13 @@ def run_models_for_slate(
                 }
             )
 
-    slate["updatedAtUtc"] = now_utc
-    errors = validate_slate_dict(slate, slate_path.name)
-    if errors:
-        raise ValueError("Validation failed prior to write:\n" + "\n".join(errors))
-    _atomic_write_json(slate_path, slate)
-    return summaries
+    if wrote_any:
+        slate["updatedAtUtc"] = now_utc
+        errors = validate_slate_dict(slate, slate_path.name)
+        if errors:
+            raise ValueError("Validation failed prior to write:\n" + "\n".join(errors))
+        _atomic_write_json(slate_path, slate)
+    return summaries + failures
 
 
 def main() -> int:
@@ -1027,6 +1101,11 @@ def main() -> int:
     p_run.add_argument("--game", default=None, help="Optional single gameId to run")
     p_run.add_argument("--timeout", type=int, default=180, help="Per-model request timeout in seconds")
     p_run.add_argument("--dry-run", action="store_true", help="Print resolved specs and promptSha256 without calling APIs")
+    p_run.add_argument(
+        "--allow-late",
+        action="store_true",
+        help="Run a game whose kickoff has passed; its picks are recorded with modelMeta.afterKickoff",
+    )
 
     p_ingest = sub.add_parser("ingest", help="Ingest a model prediction JSON object or list into a slate")
     p_ingest.add_argument("--slate", required=True)
@@ -1070,8 +1149,13 @@ def main() -> int:
             game_id=args.game,
             timeout_sec=args.timeout,
             dry_run=args.dry_run,
+            allow_late=args.allow_late,
         )
         print(json.dumps(summaries, indent=2))
+        failed = [s for s in summaries if "error" in s]
+        if failed:
+            print(f"ERROR: {len(failed)} model run(s) failed; the rest were recorded.", file=sys.stderr)
+            return 1
         return 0
 
     if args.cmd == "ingest":
