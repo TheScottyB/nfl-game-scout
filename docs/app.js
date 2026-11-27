@@ -268,6 +268,9 @@ function renderModelCard(game, pred) {
     if (pred.modelMeta.afterKickoff === true) {
       metaRow.append(el("span", "meta-chip", "Run after kickoff"));
     }
+    if (pred.modelMeta.excludeFromStandings === true) {
+      metaRow.append(el("span", "meta-chip", "Origin Demo · Excluded from Standings"));
+    }
     if (pred.modelMeta.provider || pred.modelMeta.harness) {
       const via = [pred.modelMeta.provider, pred.modelMeta.harness].filter(Boolean).join(" / ");
       metaRow.append(el("span", "meta-chip", via));
@@ -656,6 +659,9 @@ function renderStandingsTable(slates) {
   for (const slate of slates) {
     for (const game of slate.games) {
       for (const pred of game.predictions) {
+        if (pred.modelMeta?.excludeFromStandings === true || pred.modelMeta?.afterKickoff === true) {
+          continue;
+        }
         const exactId = pred.modelMeta?.exactModelId || pred.modelId;
         const via = [pred.modelMeta?.provider, pred.modelMeta?.harness].filter(Boolean).join(" / ") || "manual";
         const current = byModel.get(exactId) ?? {
@@ -689,7 +695,7 @@ function renderStandingsTable(slates) {
   wrapper.setAttribute("aria-labelledby", capId);
 
   const table = el("table", "standings-table");
-  const cap = el("caption", "", "Cumulative Model Standings (Grouped by Recorded Exact Model ID)");
+  const cap = el("caption", "", "Cumulative Model Standings (Pre-Kickoff Receipts Only, Grouped by Recorded Exact Model ID)");
   cap.id = capId;
   table.append(cap);
 

@@ -4,7 +4,7 @@
   "subtitle": "Origin slate that sparked NFL Game Scout: SNF Mexico City (35-10 + 71-yard Fair-Catch Free Kick!) and MNF Bengals at Commanders.",
   "season": 2026,
   "week": "Week 11 (SNF & MNF)",
-  "updatedAtUtc": "2026-11-27T17:52:00Z",
+  "updatedAtUtc": "2026-11-27T19:15:00Z",
   "games": [
     {
       "id": "vikings-at-49ers-mexico",
@@ -153,7 +153,9 @@
             "exactModelId": "gemini-antigravity",
             "harness": "antigravity",
             "webSearchEnabled": true,
-            "runAtUtc": "2026-11-23T01:07:00Z"
+            "runAtUtc": "2026-11-23T01:07:00Z",
+            "excludeFromStandings": true,
+            "exclusionReason": "Origin demo — 35-10 score was refined at halftime rather than locked pre-kickoff"
           },
           "status": "graded",
           "publishedAtUtc": "2026-11-23T01:07:00Z",

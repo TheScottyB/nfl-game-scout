@@ -4,11 +4,13 @@
   "subtitle": "Denver Broncos (8-2) at Pittsburgh Steelers (6-4) \u2014 live pre-kickoff multi-model predictions with exact recorded model provenance.",
   "season": 2026,
   "week": "Week 12 (Black Friday)",
-  "updatedAtUtc": "2026-11-27T17:59:31Z",
+  "updatedAtUtc": "2026-11-27T19:21:00Z",
+  "studioShortUrl": "https://youtube.com/shorts/VHVyai__PDQ",
   "games": [
     {
       "id": "broncos-at-steelers",
       "label": "Black Friday \u00b7 3:00 PM ET",
+      "studioShortUrl": "https://youtube.com/shorts/VHVyai__PDQ",
       "away": {
         "abbr": "DEN",
         "name": "Denver Broncos",

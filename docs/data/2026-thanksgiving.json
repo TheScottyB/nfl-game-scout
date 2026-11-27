@@ -4,7 +4,7 @@
   "subtitle": "All 3 Thursday matchups scouted pre-kickoff and graded post-game (plus Thanksgiving Eve GB @ LAR missed-game receipt).",
   "season": 2026,
   "week": "Week 12 (Thanksgiving)",
-  "updatedAtUtc": "2026-11-27T18:46:00Z",
+  "updatedAtUtc": "2026-11-27T19:15:00Z",
   "studioShortUrl": "https://youtube.com/shorts/jLTHaBAOj44",
   "games": [
     {
@@ -202,17 +202,17 @@
             "probability": "~11%"
           },
           "grade": {
-            "total": 40,
+            "total": 43,
             "max": 100,
             "breakdown": {
               "winner": 0,
               "scoreMargin": 8,
               "spreadTotal": 8,
-              "winScriptRef": 10,
+              "winScriptRef": 13,
               "orgSentiment": 12,
               "surpriseBonus": 2
             },
-            "notes": "Nailed Over 55.5 (74 pts) and Hank Fraley OL/Gibbs 205-yd run edge + Campbell 4th-down aggression flipping late momentum, but missed CHI outright win (39-35), had zero trick plays, and missed intra-division record weighting. Correction 27 Nov: Hochuli's crew called 13 accepted penalties (CHI 4/25, DET 9/70), in line with the 13.2-14.5 forecast, not 8 as first graded; points not yet re-scored."
+            "notes": "Nailed Over 55.5 (74 pts) and Hank Fraley OL/Gibbs 205-yd run edge + Campbell 4th-down aggression flipping late momentum, but missed CHI outright win (39-35), had zero trick plays, and missed intra-division record weighting. Correction 27 Nov: Hochuli's crew called 13 accepted penalties (CHI 4/25, DET 9/70), in line with the 13.2-14.5 forecast, not 8 as first graded; re-scored winScriptRef 10->13 (+3, total 40->43/100)."
           }
         }
       ],

@@ -252,6 +252,16 @@ def validate_slate_dict(slate: dict[str, Any], source_name: str = "<slate>") -> 
                         errors.append(f"{gid}.predictions[{model_id}].modelMeta.usage: must be an object")
                     if "afterKickoff" in meta and not isinstance(meta["afterKickoff"], bool):
                         errors.append(f"{gid}.predictions[{model_id}].modelMeta.afterKickoff: must be a boolean")
+                    if "excludeFromStandings" in meta and not isinstance(meta["excludeFromStandings"], bool):
+                        errors.append(
+                            f"{gid}.predictions[{model_id}].modelMeta.excludeFromStandings: must be a boolean"
+                        )
+                    if "exclusionReason" in meta and meta["exclusionReason"] is not None:
+                        er = meta["exclusionReason"]
+                        if not isinstance(er, str) or not er.strip():
+                            errors.append(
+                                f"{gid}.predictions[{model_id}].modelMeta.exclusionReason: must be non-empty string"
+                            )
 
             receipt = pred.get("receiptUrl")
             if receipt is not None and not _is_https_url(receipt):

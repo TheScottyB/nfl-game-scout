@@ -71,6 +71,14 @@ class TestArenaAndShorts(unittest.TestCase):
         missed = tg.get("missedGames", [])
         self.assertTrue(any(m.get("id") == "packers-at-rams" for m in missed))
 
+        bears_lions = games[0]["predictions"][0]
+        self.assertEqual(bears_lions["grade"]["total"], 43)
+        self.assertEqual(bears_lions["grade"]["breakdown"]["winScriptRef"], 13)
+
+        w11 = json.loads((DOCS_DIR / "data" / "2026-week11-archive.json").read_text(encoding="utf-8"))
+        snf_pred = w11["games"][0]["predictions"][0]
+        self.assertIs(snf_pred["modelMeta"]["excludeFromStandings"], True)
+
     def test_arena_cli_ingest_and_grade_on_temp_copy(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_data = Path(tmp) / "data"
@@ -393,6 +401,11 @@ class TestArenaAndShorts(unittest.TestCase):
             bf_bad_meta["games"][0]["predictions"][0]["modelMeta"] = {"provider": "google"}
             errs = arena_cli.validate_slate_dict(bf_bad_meta, "bad-meta.json")
             self.assertTrue(any("exactModelId" in e for e in errs))
+
+            bf_bad_excl = json.loads(json.dumps(bf))
+            bf_bad_excl["games"][0]["predictions"][0]["modelMeta"]["excludeFromStandings"] = "yes"
+            excl_errs = arena_cli.validate_slate_dict(bf_bad_excl, "bad-excl.json")
+            self.assertTrue(any("excludeFromStandings" in e for e in excl_errs))
 
         bf_bad_missed = json.loads(json.dumps(bf))
         bf_bad_missed["missedGames"] = [{"id": "../evil", "label": "X"}]

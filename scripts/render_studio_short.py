@@ -804,6 +804,15 @@ def _short_model_name(pred: dict[str, Any]) -> str:
     return label.split(" (", 1)[0].strip()
 
 
+def _compact_pill_name(pred: dict[str, Any]) -> str:
+    raw = _short_model_name(pred).upper()
+    raw = raw.replace(" PREVIEW", "")
+    raw = re.sub(r"\bGEMINI\s+", "G", raw)
+    raw = re.sub(r"\s+FLASH\b", "F", raw)
+    raw = re.sub(r"\bCLAUDE\s+SONNET\s+", "CLAUDE ", raw)
+    return raw
+
+
 def _build_arena_faceoff_copy(active: list[dict[str, Any]], away_abbr: str, home_abbr: str) -> tuple[str, str, str, str, str]:
     """Return (top_badge, headline, call_pill, caption, dialogue_summary) for Scene 5."""
     if not active:
@@ -841,7 +850,7 @@ def _build_arena_faceoff_copy(active: list[dict[str, Any]], away_abbr: str, home
         top_w = max(counts, key=lambda w: counts[w])
         headline = f"MODELS SPLIT!<br>EDGE: {top_w} ({counts[top_w]}/{len(active)})"
 
-    pill_parts = [f"{_short_model_name(p).upper()}: {p.get('winnerAbbr', '?')}" for p in active[:3]]
+    pill_parts = [f"{_compact_pill_name(p)}: {p.get('winnerAbbr', '?')}" for p in active[:3]]
     score_parts = []
     spoken_parts = []
     for p in active[:3]:
@@ -852,7 +861,7 @@ def _build_arena_faceoff_copy(active: list[dict[str, Any]], away_abbr: str, home
         spoken_parts.append(f"{name} takes {w}, {proj['away']} to {proj['home']}")
 
     top_badge = f"{len(active)}-MODEL ARENA • 100-PT RECEIPTS"
-    call_pill = " • ".join(pill_parts)[:46]
+    call_pill = " • ".join(pill_parts)[:52]
     caption = " | ".join(score_parts)[:115]
     dialogue = ". ".join(spoken_parts) + "."
     return top_badge, headline, call_pill, caption, dialogue
@@ -2509,7 +2518,16 @@ def main() -> int:
 
     write_studio_upload_kit(list(cuts_map.values()), args.upload_kit, qa_reports=qa_reports)
     DEFAULT_MANIFEST.parent.mkdir(parents=True, exist_ok=True)
-    DEFAULT_MANIFEST.write_text(json.dumps(qa_reports, indent=2) + "\n", encoding="utf-8")
+    merged_manifest: dict[str, Any] = {}
+    if DEFAULT_MANIFEST.is_file():
+        try:
+            existing_manifest = json.loads(DEFAULT_MANIFEST.read_text(encoding="utf-8"))
+            if isinstance(existing_manifest, dict):
+                merged_manifest.update(existing_manifest)
+        except json.JSONDecodeError:
+            pass
+    merged_manifest.update(qa_reports)
+    DEFAULT_MANIFEST.write_text(json.dumps(merged_manifest, indent=2) + "\n", encoding="utf-8")
     print(f"\n[kit]   Wrote Studio upload kit -> {args.upload_kit}")
     print(f"[qa]    Wrote QA manifest       -> {DEFAULT_MANIFEST}")
     return 0
